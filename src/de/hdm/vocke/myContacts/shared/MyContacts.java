@@ -1,5 +1,7 @@
 package de.hdm.vocke.myContacts.shared;
 
-public interface MyContacts {
+import com.google.gwt.user.client.rpc.RemoteService;
+
+public interface MyContacts extends RemoteService {
 
 }
