@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Vector;
+
+import de.hdm.vocke.myContacts.shared.bo.ContactList;
 
 public class ContactListMapper {
 
@@ -100,10 +103,10 @@ public class ContactListMapper {
 			stmt.executeUpdate("UPDATE contactList " + " SET name =\"" c.getNameID() + "\" "
 					+ "WHERE id=" c.getID());
 		}
-		catch (SQLExecption e2){
+		catch (SQLExcecption e2){
 			e2.printStackTrace();
 		}
-		return c; 
+		return cl; 
 	}
 	
 	/**
@@ -120,7 +123,7 @@ public class ContactListMapper {
 			stmt.executeUpdate("DELETE FROM contactList " + "WHERE id=" c.getId());
 		}
 		
-		catch (SQLExeption e2){
+		catch (SQLException e2){
 			e2.printStackTrace();			
 		}
 	}
@@ -130,20 +133,20 @@ public class ContactListMapper {
 	 * @return Vektor mit allen Contact-Objekten, die einen Kontakt repräsentieren 
 	 */
 	
-	public Vektor<ContactList> findAll(){
+	public Vector<ContactList> findAll(){
 		// Ergebnisvektor vorbereiten 
-		Vektor<ContactList> result = new Vektor<ContactList>();
+		Vector<ContactList> result = new Vector<ContactList>();
 		
 		Connection con = DBConnection.connection();
 		
 		try{
 			Statement stmt = con.createStatement();
 			
-			RestultSet rs = stmt.executeQuery("SELECT id, name " + "FROM contactList" + "ORDER BY name");
+			ResultSet rs = stmt.executeQuery("SELECT id, name " + "FROM contactList" + "ORDER BY name");
 			
 			// für jeden Eintrag im Suchergebnis wird nun ein Contact Objekt erstellt
 			while (rs.next()){
-				contactList cl = new ContactList();
+				ContactList cl = new ContactList();
 				cl.setId(rs.getInt("id"));
 				cl.setName(rs.getString("name"));
 				
@@ -152,7 +155,7 @@ public class ContactListMapper {
 			}
 		}
 		
-		catch (SQLExeption e2){
+		catch (SQLException e2){
 			e2.printStackTrace();
 		}
 		

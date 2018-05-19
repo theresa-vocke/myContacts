@@ -92,6 +92,16 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 		return null;
 	}
 	
+	@Override
+	public void delete(Contact c) throws IllegalArgumentException {
+		cMapper.delete(c);
+	}
+	
+	@Override
+	public void save(Contact c) throws IllegalArgumentException {
+		cMapper.update(c);
+	}
+	
 	
 	
 	
@@ -112,14 +122,11 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	}
 
 	@Override
-	public ContactList createContactList(ContactList cl) throws IllegalArgumentException {
+	public ArrayList<ContactList> createContactList(ContactList cl) throws IllegalArgumentException {
 		return null;
 	}
 
 	
-
-	
-
 	@Override
 	public ContactList getContactListByName(String name) throws IllegalArgumentException {
 		return null;
@@ -130,24 +137,16 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 		return null;
 	}
 
-	@Override
-	public void save(Contact c) throws IllegalArgumentException {
-		
-	}
-
+	
 	@Override
 	public void save(ContactList cl) throws IllegalArgumentException {
-		
+		clMapper.update(cl);
 	}
 
-	@Override
-	public void delete(Contact c) throws IllegalArgumentException {
 	
-	}
-
 	@Override
 	public void delete(ContactList cl) throws IllegalArgumentException {
-		
+		clMapper.delete(cl);
 	}
 
 	
