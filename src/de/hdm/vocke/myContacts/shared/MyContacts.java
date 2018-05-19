@@ -1,5 +1,7 @@
 package de.hdm.vocke.myContacts.shared;
 
+import java.util.ArrayList;
+
 import com.google.gwt.user.client.rpc.RemoteService;
 
 import de.hdm.vocke.myContacts.shared.bo.Contact;
@@ -34,7 +36,50 @@ public interface MyContacts extends RemoteService {
 	 */
 	public ContactList createContactList (ContactList cl) throws IllegalArgumentException;
 	
+	/**
+	 * auslesen aller Kontakte in einer speziellen Kontaktliste
+	 */
+	public ArrayList<Contact> getContactsOfContactList (ContactList cl) throws IllegalArgumentException;
 	
+	/**
+	 * suchen eines Kontakt-Objektes nach Nachname 
+	 */
+	public Contact getContactByLastname (String lastname) throws IllegalArgumentException;
+	
+	/**
+	 * suchen eines Kontakt-Objektes nach Vorname
+	 */
+	public Contact getContactByFirstname (String firstname) throws IllegalArgumentException;
+	
+	/**
+	 * suchen einer Kontaktliste nach Name
+	 */
+	public ContactList getContactListByName (String name) throws IllegalArgumentException;
+	
+	/**
+	 * sämtliche Kontaktlisten ausgeben
+	 */
+	public ContactList getAllContactLists (ContactList cl) throws IllegalArgumentException;
+	
+	/**
+	 * speichern eines Kontakt-Objektes in der Datenbank
+	 */
+	public void save (Contact c) throws IllegalArgumentException;
+	
+	/**
+	 * speichern eines Kontaktlisten-Objektes in der Datenbank 
+	 */
+	public void save (ContactList cl) throws IllegalArgumentException;
+	
+	/**
+	 * löschen des übergebenen Kontakt-Objektes
+	 */
+	public void delete (Contact c) throws IllegalArgumentException;
+	
+	/**
+	 * löschen des übergebenen Kontaktlisten-Objektes
+	 */
+	public void delete (ContactList cl) throws IllegalArgumentException;
 	
 	
 }
