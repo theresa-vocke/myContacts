@@ -1,6 +1,7 @@
 package de.hdm.vocke.myContacts.shared;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -15,13 +16,13 @@ public interface MyContactsAsync {
 
 	void addToContactList(Contact c, AsyncCallback<ContactList> callback);
 
-	void createContactList(ContactList cl, AsyncCallback<ContactList> callback);
+	void createContactList(ContactList cl, AsyncCallback<ArrayList<ContactList>> callback);
 
 	void getContactsOfContactList(ContactList cl, AsyncCallback<ArrayList<Contact>> callback);
 
-	void getContactByLastname(String lastname, AsyncCallback<Contact> callback);
+	void getContactByLastname(String lastname, AsyncCallback<Vector<Contact>> callback);
 
-	void getContactByFirstname(String firstname, AsyncCallback<Contact> callback);
+	void getContactByFirstname(String firstname, AsyncCallback<Vector<Contact>> callback);
 
 	void getContactListByName(String name, AsyncCallback<ContactList> callback);
 

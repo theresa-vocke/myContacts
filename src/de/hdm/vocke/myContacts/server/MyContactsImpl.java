@@ -1,6 +1,7 @@
 package de.hdm.vocke.myContacts.server;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -45,13 +46,66 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 		this.clMapper = ContactListMapper.contactListMapper();
 	}
 	
-	
+	/*
+	 * Ende Initialisierung 
+	 * Anfang Methoden für Contact-Objekte
+	 */
 	
 	@Override
 	public Contact createContact(String first, String last) throws IllegalArgumentException {
-		return null;
+		Contact c = new Contact();
+		c.setFirstName(first);
+		c.setLastName(last);
+		
+		// setzen der vorläufigen contact-Nummer, insert-Aufruf liefert dann Objekt, dessen 
+		// Nummer mit der DB konsistent ist 
+		c.setId(1);
+		
+		// Objekt in der DB speichern
+		return this.cMapper.insert(c);
 	}
 
+	
+	/**
+	 * Auslesen aller Kontakte, die den übergebenen Nachnamen besitzen 
+	 */
+	@Override
+	public Vector<Contact> getContactByLastname(String lastname) throws IllegalArgumentException {
+		return this.cMapper.findByLastname(lastname);
+	}
+
+	
+	/**
+	 * Auslesen aller Kontakte, die den übergebenen Vornamen besitzen 
+	 */
+	@Override
+	public Vector<Contact> getContactByFirstname(String firstname) throws IllegalArgumentException {
+		return this.cMapper.findByFirstname(firstname);
+	}
+	
+	/**
+	 * Auslesen aller Kontakte in einer Kontaktliste 
+	 */
+	@Override
+	public ArrayList<Contact> getContactsOfContactList(ContactList cl) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	public ContactList addToContactList(Contact c) throws IllegalArgumentException {
 		return null;
@@ -62,21 +116,9 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 		return null;
 	}
 
-	@Override
-	public ArrayList<Contact> getContactsOfContactList(ContactList cl) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
-	@Override
-	public Contact getContactByLastname(String lastname) throws IllegalArgumentException {
-		return null;
-	}
-
-	@Override
-	public Contact getContactByFirstname(String firstname) throws IllegalArgumentException {
-		return null;
-	}
+	
 
 	@Override
 	public ContactList getContactListByName(String name) throws IllegalArgumentException {

@@ -4,18 +4,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Vector;
 
-import server.db.Contact;
-import server.db.ContactMapper;
-import server.db.Contacts;
-import server.db.DBConnection;
-import server.db.RestultSet;
-import server.db.SQLExecption;
-import server.db.SQLExeption;
-import server.db.Vector;
-import server.db.Vektor;
-import server.db.contact;
-import server.db.contactMapper;
+import de.hdm.thies.bankProjekt.server.db.AccountMapper;
+import de.hdm.vocke.myContacts.shared.bo.Contact;
+import de.hdm.vocke.myContacts.shared.bo.ContactList;
 
 public class ContactMapper {
 
@@ -112,7 +105,7 @@ public class ContactMapper {
 			stmt.executeUpdate("UPDATE contacts " + " SET lastname =\"" c.getLastnameID() + "\" "
 					+ "WHERE id=" c.getID());
 		}
-		catch (SQLExecption e2){
+		catch (SQLExcecption e2){
 			e2.printStackTrace();
 		}
 		return c; 
@@ -132,7 +125,7 @@ public class ContactMapper {
 			stmt.executeUpdate("DELETE FROM contacts " + "WHERE id=" c.getId());
 		}
 		
-		catch (SQLExeption e2){
+		catch (SQLException e2){
 			e2.printStackTrace();			
 		}
 	}
@@ -142,30 +135,30 @@ public class ContactMapper {
 	 * @return Vektor mit allen Contact-Objekten, die einen Kontakt repräsentieren 
 	 */
 	
-	public Vektor<Contacts> findAll(){
+	public Vector<Contact> findAll(){
 		// Ergebnisvektor vorbereiten 
-		Vektor<Contacts> result = new Vektor<Contacts>();
+		Vector<Contact> result = new Vector<Contact>();
 		
 		Connection con = DBConnection.connection();
 		
 		try{
 			Statement stmt = con.createStatement();
 			
-			RestultSet rs = stmt.executeQuery("SELECT id, firstname, lastname " + "FROM contacts" + "ORDER BY lastname");
+			ResultSet rs = stmt.executeQuery("SELECT id, firstname, lastname " + "FROM contacts" + "ORDER BY lastname");
 			
 			// für jeden Eintrag im Suchergebnis wird nun ein Contact Objekt erstellt
 			while (rs.next()){
-				contact c = new Contact();
+				Contact c = new Contact();
 				c.setId(rs.getInt("id"));
-				c.setLastname(rs.getString("lastname"));
-				c.setFirstname(rs.getString("firstname"));
+				c.setFirstName(rs.getString("firstname"));
+				c.setLastName(rs.getString("lastname"));
 				
 				// Hinzufügen eines neuen Objektes zum Ergebnisvektor
 				result.addElement(c);
 			}
 		}
 		
-		catch (SQLExeption e2){
+		catch (SQLException e2){
 			e2.printStackTrace();
 		}
 		
@@ -174,36 +167,82 @@ public class ContactMapper {
 	
 	/**
 	 * Auslesen aller Kontakt-Objekten mit gegebenem Nachname
-	 * @param name
+	 * @param lastname
 	 * @return Vektor mit allen Contact-Objekten mit gesuchtem Nachname
 	 */
 	
-	public Vector<Contacts> findByLastname(String name){
+	public Vector<Contact> findByLastname(String lastname){
 			Connection con = DBConnection.connection();
-			Vector<Contacts> result = new Vector<Contacts>();
+			Vector<Contact> result = new Vector<Contact>();
 			
 			try{
 				Statement stmt = con.createStatement();
 				
 				ResultSet rs = stmt.executeQuery("SELECT id, lastname, firstname " + "FROM contacts" 
-				+ "WHERE lastname LIKE '" + name + "ORDER BY lastname");
+				+ "WHERE lastname LIKE '" + lastname + "ORDER BY lastname");
 				// für jeden Eintrag im Suchergebnis wird jetzt ein Contact-Objekt erzeugt
 				while (rs.next()){
 					Contact c = new Contact();
 					c.setId(rs.getInt("id"));
-					c.setFirstname(rs.getString("firstname"));
-					c.setLastname(rs.getString("lastname"));
+					c.setFirstName(rs.getString("firstname"));
+					c.setFirstName(rs.getString("lastname"));
 					
 					//hinzufügen des neuen Objektes zum Ergebnisvektor
 					result.addElement(c);
 				}
 			}
-			catch (SQLExeption e2){
+			catch (SQLException e2){
 				e2.printStackTrace();
 			}
 			return result;
 
 			
+	}
+	
+	/**
+	 * Auslesen aller Kontakt-Objekten mit gegebenem Vornamen
+	 * @param firstname
+	 * @return Vektor mit allen Contact-Objekten mit gesuchtem Vornamen
+	 */
+	
+	public Vector<Contact> findByFirstname(String firstname){
+			Connection con = DBConnection.connection();
+			Vector<Contact> result = new Vector<Contact>();
+			
+			try{
+				Statement stmt = con.createStatement();
+				
+				ResultSet rs = stmt.executeQuery("SELECT id, lastname, firstname " + "FROM contacts" 
+				+ "WHERE firstname LIKE '" + firstname + "ORDER BY firstname");
+				// für jeden Eintrag im Suchergebnis wird jetzt ein Contact-Objekt erzeugt
+				while (rs.next()){
+					Contact c = new Contact();
+					c.setId(rs.getInt("id"));
+					c.setFirstName(rs.getString("firstname"));
+					c.setFirstName(rs.getString("lastname"));
+					
+					//hinzufügen des neuen Objektes zum Ergebnisvektor
+					result.addElement(c);
+				}
+			}
+			catch (SQLException e2){
+				e2.printStackTrace();
+			}
+			return result;
+		
+	}
+	
+	/**
+	 * Auslesen aller Kontakte in der übergebenen Kontaktliste
+	 */
+	public Vector<Contact> getContactsOf(ContactList cl){
+		/*
+		 * Wir bedienen uns hier einfach des ContactListMapper. Diesem geben wir
+		 * einfach den in dem Contact-Objekt enthaltenen Primärschlüssel.Der
+		 * ContactMapper löst uns dann diese ID in eine Reihe von
+		 * Kontaktlisten-Objekten auf.
+		 */
+		return ContactListMapper.ContactListMapper().findByContacts(c);
 	}
 	
 	
