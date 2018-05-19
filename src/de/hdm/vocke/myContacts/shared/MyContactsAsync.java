@@ -13,4 +13,6 @@ public interface MyContactsAsync {
 
 	void addToContactList(Contact c, AsyncCallback<ContactList> callback);
 
+	void createContactList(ContactList cl, AsyncCallback<ContactList> callback);
+
 }

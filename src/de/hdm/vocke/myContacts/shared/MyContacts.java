@@ -2,7 +2,6 @@ package de.hdm.vocke.myContacts.shared;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 
-import de.hdm.vocke.myContacts.server.MyContactsImpl;
 import de.hdm.vocke.myContacts.shared.bo.Contact;
 import de.hdm.vocke.myContacts.shared.bo.ContactList;
 /**
@@ -29,6 +28,11 @@ public interface MyContacts extends RemoteService {
 	 * einen Kontakt zu einer Kontaktliste hinzufügen 
 	 */
 	public ContactList addToContactList (Contact c) throws IllegalArgumentException;
+	
+	/**
+	 * eine Kontaktliste erstellen
+	 */
+	public ContactList createContactList (ContactList cl) throws IllegalArgumentException;
 	
 	
 	
