@@ -92,11 +92,17 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 		return null;
 	}
 	
+	/** 
+	 * löschen eines Kontakt-Objektes
+	 */
 	@Override
 	public void delete(Contact c) throws IllegalArgumentException {
 		cMapper.delete(c);
 	}
 	
+	/**
+	 * speichern eines Kontakt-Objektes 
+	 */
 	@Override
 	public void save(Contact c) throws IllegalArgumentException {
 		cMapper.update(c);
@@ -109,41 +115,55 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	
 	
 	
+	/*
+	 * Methoden für Kontaktlisten-Objekte
+	 */
 	
-	
-	
-	
-	
-	
-	
+	/**
+	 * 	einen Kontakt zu einer Kontaktliste hinzufügen 
+	 */
 	@Override
 	public ContactList addToContactList(Contact c) throws IllegalArgumentException {
-		return null;
+				
+		// Objekt in der DB speichern
+		return this.clMapper.insert(cc);
 	}
 
+	/**
+	 * erstellen einer Kontaktliste
+	 */
 	@Override
 	public ArrayList<ContactList> createContactList(ContactList cl) throws IllegalArgumentException {
 		return null;
 	}
 
-	
+	/**
+	 * ausgeben der Kontaktlsiten nach übergebenem Name
+	 */
 	@Override
 	public ContactList getContactListByName(String name) throws IllegalArgumentException {
 		return null;
 	}
 
+	/**
+	 * auslesen aller Kontaktlisten 
+	 */
 	@Override
 	public ContactList getAllContactLists(ContactList cl) throws IllegalArgumentException {
 		return null;
 	}
 
-	
+	/**
+	 * speichern eines Kontaktlisten-Objektes
+	 */
 	@Override
 	public void save(ContactList cl) throws IllegalArgumentException {
 		clMapper.update(cl);
 	}
 
-	
+	/**
+	 * löschen eines Kontaktlisten-Objektes 
+	 */
 	@Override
 	public void delete(ContactList cl) throws IllegalArgumentException {
 		clMapper.delete(cl);
