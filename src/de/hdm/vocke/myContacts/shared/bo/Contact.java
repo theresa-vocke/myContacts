@@ -1,5 +1,7 @@
 package de.hdm.vocke.myContacts.shared.bo;
 
+import java.util.Date;
+
 public class Contact extends BusinessObject {
 	
 	private static final long serialVersionUID = 1L;
@@ -17,7 +19,7 @@ public class Contact extends BusinessObject {
 	/**
 	 * Geburtstag des Kontaktes
 	 */
-	private date Birthdate = 0;
+	private Date Birthdate = 0;
 
 	/**
 	 * Stadt des Kontaktes
@@ -48,10 +50,10 @@ public class Contact extends BusinessObject {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public date getBirthdate() {
+	public Date getBirthdate() {
 		return Birthdate;
 	}
-	public void setBirthdate(date birthdate) {
+	public void setBirthdate(Date birthdate) {
 		Birthdate = birthdate;
 	}
 	public String getCity() {

@@ -126,7 +126,7 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	public ContactList addToContactList(Contact c) throws IllegalArgumentException {
 				
 		// Objekt in der DB speichern
-		return this.clMapper.insert(cc);
+		return this.clMapper.insert(cl);
 	}
 
 	/**
