@@ -55,12 +55,12 @@ public interface MyContacts extends RemoteService {
 	/**
 	 * auslesen aller Kontaktlisten nach Name  einer Kontaktliste nach Name
 	 */
-	public ContactList getContactListByName (String name) throws IllegalArgumentException;
+	public Vector<ContactList> getContactListByName (String name) throws IllegalArgumentException;
 	
 	/**
 	 * sämtliche Kontaktlisten ausgeben
 	 */
-	public ContactList getAllContactLists (ContactList cl) throws IllegalArgumentException;
+	public Vector<ContactList> getAllContactLists (ContactList cl) throws IllegalArgumentException;
 	
 	/**
 	 * speichern eines Kontakt-Objektes in der Datenbank

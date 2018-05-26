@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Vector;
 
+import de.hdm.vocke.myContacts.shared.bo.Contact;
 import de.hdm.vocke.myContacts.shared.bo.ContactList;
 
 public class ContactListMapper {
@@ -87,6 +89,26 @@ public class ContactListMapper {
 		}
 		return cl;
 	}
+	
+	
+	public ContactList insertContactInList (Contact c){
+		// neue Verbindung mit DB aufnehmen 
+		Connection con = DBConnection.connection();
+		
+		try{
+			Statement stmt = con.createStatement();
+			
+			// CODE EINFÜGEN
+			
+		}
+		
+		catch (SQLException e2){
+			e2.printStackTrace();
+		}
+		return c;
+	}
+	
+	
 
 	/**
 	   * Wiederholtes Schreiben eines Objekts in die Datenbank.
@@ -191,8 +213,20 @@ public class ContactListMapper {
 				e2.printStackTrace();
 			}
 			return result;
-
-			
+		
+	}
+	
+	/**
+	 * Auslesen aller Kontakte in der übergebenen Kontaktliste
+	 */
+	public Vector<Contact> getContactsOf(ContactList cl){
+		/*
+		 * Wir bedienen uns hier einfach des ContactListMapper. Diesem geben wir
+		 * einfach den in dem Contact-Objekt enthaltenen Primärschlüssel.Der
+		 * ContactMapper löst uns dann diese ID in eine Reihe von
+		 * Kontaktlisten-Objekten auf.
+		 */
+		return ContactListMapper.contactListMapper().getContactsOf(cl);
 	}
 	
 }

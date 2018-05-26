@@ -108,6 +108,13 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 		cMapper.update(c);
 	}
 	
+	/**
+	 * Liste mit allen darin enthaltenen Kontakten auslesen
+	 */
+	public Vector<Contact> getContactsFor (ContactList cl) throws IllegalArgumentException{
+		return this.cMapper.getContactsOf(cl);
+	}
+	
 	
 	
 	
@@ -134,23 +141,29 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	 */
 	@Override
 	public ArrayList<ContactList> createContactList(ContactList cl) throws IllegalArgumentException {
-		return null;
+		ContactList cl = new ContactList();
+		cl.setName(name);
+	 
+		cl.setContactListId(1);
+		
+		return this.clMapper.insert(cl);
 	}
 
+	
 	/**
 	 * ausgeben der Kontaktlsiten nach übergebenem Name
 	 */
 	@Override
-	public ContactList getContactListByName(String name) throws IllegalArgumentException {
-		return null;
+	public Vector<ContactList> getContactListByName(String name) throws IllegalArgumentException {
+		return this.clMapper.findByName(name);
 	}
 
 	/**
 	 * auslesen aller Kontaktlisten 
 	 */
 	@Override
-	public ContactList getAllContactLists(ContactList cl) throws IllegalArgumentException {
-		return null;
+	public Vector<ContactList> getAllContactLists(ContactList cl) throws IllegalArgumentException {
+		return this.clMapper.findAll();
 	}
 
 	/**
