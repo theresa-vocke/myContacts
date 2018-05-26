@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 
 import com.google.appengine.api.utils.SystemProperty;
 
-import de.hdm.vocke.myContacts.server.db.con;
 
 public class DBConnection {
 
@@ -30,7 +29,7 @@ public class DBConnection {
      * Software neu komilieren zu müssen.
      */
     private static String googleUrl = " ";
-    private static String localUrl = " ";
+    private static String localUrl = "jdbc:mysql//localhost: 3306/myContacts?user=root&password=root";
 
     /**
      * Diese statische Methode kann aufgrufen werden durch

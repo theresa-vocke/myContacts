@@ -10,8 +10,30 @@ public class ContactList {
 	/**
 	 * Größe der Kontaktliste
 	 */
-	private float = 100;
+	private float size = 100;
 	
+
+	private int contactListId = 0;
+	
+	
+	public float getSize() {
+		return size;
+	}
+
+
+	public void setSize(float size) {
+		this.size = size;
+	}
+	
+	public int getContactListId() {
+		return contactListId;
+	}
+
+
+	public void setContactListId(int contactListId) {
+		this.contactListId = contactListId;
+	}
+
 	
 	public String getName() {
 		return name;

@@ -6,6 +6,14 @@ public class Contact extends BusinessObject {
 	
 	private static final long serialVersionUID = 1L;
 	
+	private int contactId = 0;
+	
+	public int getContactId() {
+		return contactId;
+	}
+	public void setContactId(int contactId) {
+		this.contactId = contactId;
+	}
 	/**
 	 * Vorname des Kontakts
 	 */
@@ -19,7 +27,7 @@ public class Contact extends BusinessObject {
 	/**
 	 * Geburtstag des Kontaktes
 	 */
-	private Date Birthdate = 0;
+	private Date birthdate = 0;
 
 	/**
 	 * Stadt des Kontaktes
@@ -51,10 +59,10 @@ public class Contact extends BusinessObject {
 		this.lastName = lastName;
 	}
 	public Date getBirthdate() {
-		return Birthdate;
+		return birthdate;
 	}
 	public void setBirthdate(Date birthdate) {
-		Birthdate = birthdate;
+		this.birthdate = birthdate;
 	}
 	public String getCity() {
 		return city;
