@@ -37,7 +37,7 @@ public class ContactListMapper {
 	   * @see contactMapper
 	   */
 	
-	private static ContactListMapper contactListMapper(){
+	public static ContactListMapper contactListMapper(){
 		if (contactListMapper == null){
 			contactListMapper = new ContactListMapper();
 		}

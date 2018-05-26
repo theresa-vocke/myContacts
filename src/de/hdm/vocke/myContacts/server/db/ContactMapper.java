@@ -39,7 +39,7 @@ public class ContactMapper {
 	   * @see contactMapper
 	   */
 	
-	private static ContactMapper contactMapper(){
+	public static ContactMapper contactMapper(){
 		if (contactMapper == null){
 			contactMapper = new ContactMapper();
 		}

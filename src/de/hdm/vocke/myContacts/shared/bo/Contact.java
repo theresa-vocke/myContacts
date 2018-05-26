@@ -7,7 +7,7 @@ public class Contact extends BusinessObject {
 	private static final long serialVersionUID = 1L;
 	
 	private int contactId = 0;
-	
+	 
 	public int getContactId() {
 		return contactId;
 	}
