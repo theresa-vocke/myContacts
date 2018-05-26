@@ -8,12 +8,7 @@ public class Contact extends BusinessObject {
 	
 	private int contactId = 0;
 	 
-	public int getContactId() {
-		return contactId;
-	}
-	public void setContactId(int contactId) {
-		this.contactId = contactId;
-	}
+	
 	/**
 	 * Vorname des Kontakts
 	 */
@@ -88,5 +83,12 @@ public class Contact extends BusinessObject {
 	public void setZip(int zip) {
 		this.zip = zip;
 	}
-
+	
+	public int getContactId() {
+		return contactId;
+	}
+	public void setContactId(int contactId) {
+		this.contactId = contactId;
+	}
+	
 }

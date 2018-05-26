@@ -53,7 +53,7 @@ public class ContactListMapper {
 	   *         <code>id</code>.
 	   */
 	
-	public Contact insert (Contact c){
+	public ContactList insert (ContactList cl){
 		// neue Verbindung mit DB aufnehmen 
 		Connection con = DBConnection.connection();
 		
@@ -70,7 +70,7 @@ public class ContactListMapper {
 				/**
 				 * c erhält den bisher maximalen Primärschlüsselwert um 1 erhöht 
 				 */
-				c.setId(rs.getInt("maxid") +1);
+				cl.setContactListId(rs.getInt("maxid") +1);
 				
 				stmt = con.createStatement();
 				
@@ -78,14 +78,14 @@ public class ContactListMapper {
 				 * jetzt erfolgt das tatsächliche Einfügen des Contact-Objektes in die DB
 				 */
 				stmt.executeUpdate("INSERT INTO contactlist (id, name) " + "VALUES" 
-				 c.getId() + "," + c.getName ()+ ")" );
+				 cl.getContactListId() + "," + cl.getName ()+ ")" );
 			}
 		}
 		
 		catch (SQLException e2){
 			e2.printStackTrace();
 		}
-		return c;
+		return cl;
 	}
 
 	/**
@@ -100,10 +100,10 @@ public class ContactListMapper {
 		try{
 			Statement stmt = con.createStatement();
 			
-			stmt.executeUpdate("UPDATE contactList " + " SET name =\"" c.getNameID() + "\" "
-					+ "WHERE id=" c.getID());
+			stmt.executeUpdate("UPDATE contactList " + " SET name =\"" cl.getName() + "\" "
+					+ "WHERE id=" cl.getContactListId());
 		}
-		catch (SQLExcecption e2){
+		catch (SQLException e2){
 			e2.printStackTrace();
 		}
 		return cl; 
@@ -120,7 +120,7 @@ public class ContactListMapper {
 		try{
 			Statement stmt = con.createStatement();
 			
-			stmt.executeUpdate("DELETE FROM contactList " + "WHERE id=" c.getId());
+			stmt.executeUpdate("DELETE FROM contactList " + "WHERE id=" cl.getContactListId());
 		}
 		
 		catch (SQLException e2){
@@ -147,7 +147,7 @@ public class ContactListMapper {
 			// für jeden Eintrag im Suchergebnis wird nun ein Contact Objekt erstellt
 			while (rs.next()){
 				ContactList cl = new ContactList();
-				cl.setId(rs.getInt("id"));
+				cl.setContactListId(rs.getInt("id"));
 				cl.setName(rs.getString("name"));
 				
 				// Hinzufügen eines neuen Objektes zum Ergebnisvektor
@@ -180,14 +180,14 @@ public class ContactListMapper {
 				// für jeden Eintrag im Suchergebnis wird jetzt ein Contact-Objekt erzeugt
 				while (rs.next()){
 					ContactList cl = new ContactList();
-					cl.setId(rs.getInt("id"));
+					cl.setContactListId(rs.getInt("id"));
 					cl.setName(rs.getString("name"));
 					
 					//hinzufügen des neuen Objektes zum Ergebnisvektor
 					result.addElement(cl);
 				}
 			}
-			catch (SQLExeption e2){
+			catch (SQLException e2){
 				e2.printStackTrace();
 			}
 			return result;

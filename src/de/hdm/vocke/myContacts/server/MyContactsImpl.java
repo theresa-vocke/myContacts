@@ -59,7 +59,7 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 		
 		// setzen der vorläufigen contact-Nummer, insert-Aufruf liefert dann Objekt, dessen 
 		// Nummer mit der DB konsistent ist 
-		c.setId(1);
+		c.setContactId(1);
 		
 		// Objekt in der DB speichern
 		return this.cMapper.insert(c);
@@ -126,7 +126,7 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	public ContactList addToContactList(Contact c) throws IllegalArgumentException {
 				
 		// Objekt in der DB speichern
-		return this.clMapper.insert(cl);
+		return this.clMapper.insert(c);
 	}
 
 	/**
