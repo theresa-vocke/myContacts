@@ -6,40 +6,45 @@ public class Contact extends BusinessObject {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private int contactId = 0;
+	private int contactId;
 	 
 	
 	/**
 	 * Vorname des Kontakts
 	 */
-	private String firstName = " ";
+	private String firstName;
 	
 	/**
 	 * Nachname des Kontaktes 
 	 */
-	private String lastName = " ";
+	private String lastName;
+	
+	/**
+	 * Telefonnummer des Kontaktes
+	 */
+	private int phonenumber; 
 	
 	/**
 	 * Geburtstag des Kontaktes
 	 */
-	private Date birthdate = 0;
+	private Date birthdate;
 
 	/**
 	 * Stadt des Kontaktes
 	 */
-	private String city = " ";
+	private String city;
 	/**
 	 * Straﬂe des Kontaktes 
 	 */
-	private String street = " ";
+	private String street;
 	/**
 	 * Hausnummer des Kontaktes 
 	 */
-	private int number = 0; 
+	private int number; 
 	/**
 	 * PLZ des Kontaktes 
 	 */
-	private int zip = 0;
+	private int zip;
 	
 	public String getFirstName() {
 		return firstName;
