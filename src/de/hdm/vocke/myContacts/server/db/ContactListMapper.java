@@ -216,17 +216,30 @@ public class ContactListMapper {
 		
 	}
 	
-	/**
-	 * Auslesen aller Kontakte in der übergebenen Kontaktliste
-	 */
-	public Vector<Contact> getContactsOf(ContactList cl){
-		/*
-		 * Wir bedienen uns hier einfach des ContactListMapper. Diesem geben wir
-		 * einfach den in dem Contact-Objekt enthaltenen Primärschlüssel.Der
-		 * ContactMapper löst uns dann diese ID in eine Reihe von
-		 * Kontaktlisten-Objekten auf.
-		 */
-		return ContactListMapper.contactListMapper().getContactsOf(cl);
+	public Vector<Contact> findAllContactsFrom (ContactList cl){
+		Connection con = DBConnection.connection();
+		Vector<ContactList> result = new Vector<ContactList>();
+		
+		try{
+			Statement stmt = con.createStatement();
+			
+			ResultSet rs = stmt.executeQuery("SELECT id" + "FROM contactListContacts"
+			+ "WHERE name LIKE '" + name );
+			// für jeden Eintrag im Suchergebnis wird jetzt ein Contact-Objekt erzeugt
+			while (rs.next()){
+				ContactList cl = new ContactList();
+				cl.setContactListId(rs.getInt("id"));
+				cl.setName(rs.getString("name"));
+				
+				//hinzufügen des neuen Objektes zum Ergebnisvektor
+				result.addElement(cl);
+			}
+		}
+		catch (SQLException e2){
+			e2.printStackTrace();
+		}
+		return null;
+		
 	}
 	
 }

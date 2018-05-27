@@ -231,5 +231,17 @@ public class ContactMapper {
 		
 	}
 	
+	/**
+	 * Auslesen aller Kontakte in der übergebenen Kontaktliste
+	 */
+	public Vector<Contact> getContactsOf(ContactList cl){
+		/*
+		 * Wir bedienen uns hier einfach des ContactListMapper. Diesem geben wir
+		 * einfach den in dem Contact-Objekt enthaltenen Primärschlüssel.Der
+		 * ContactMapper löst uns dann diese ID in eine Reihe von
+		 * Kontaktlisten-Objekten auf.
+		 */
+		return ContactListMapper.contactListMapper().findAllContactsFrom(cl);
+	}
 		
 }
