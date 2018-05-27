@@ -23,7 +23,7 @@ public class Contact extends BusinessObject {
 	 * Telefonnummer des Kontaktes
 	 */
 	private int phonenumber; 
-	
+
 	/**
 	 * Geburtstag des Kontaktes
 	 */
@@ -94,6 +94,13 @@ public class Contact extends BusinessObject {
 	}
 	public void setContactId(int contactId) {
 		this.contactId = contactId;
+	}
+	
+	public int getPhonenumber() {
+		return phonenumber;
+	}
+	public void setPhonenumber(int phonenumber) {
+		this.phonenumber = phonenumber;
 	}
 	
 }
