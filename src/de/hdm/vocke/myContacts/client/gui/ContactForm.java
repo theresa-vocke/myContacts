@@ -32,34 +32,68 @@ public class ContactForm extends VerticalPanel {
 	
 	private VerticalPanel vpanel = new VerticalPanel();
 	
+	/*
+	 * Widgets, deren Inhalte variable sind, werden als Attribute angelegt.
+	 */
+	TextBox firstNameTextBox = new TextBox();
+	TextBox lastNameTextBox = new TextBox();
+	TextBox phoneNumberTextBox = new TextBox();
+	TextBox streetTextBox = new TextBox();
+	TextBox numberTextBox = new TextBox();
+	TextBox cityTextBox = new TextBox();
+	TextBox birthdayTextBox = new TextBox();
+	Label idValueLabel = new Label("Kontakt: ");
+	Button cancelButton = new Button("Abbrechen");
+	Button saveButton = new Button("Speichern");
+	
+
+	/*
+	 * Beim Anzeigen werden die anderen Widgets erzeugt. Alle werden in
+	 * einem Raster angeordnet, dessen Größe sich aus dem Platzbedarf
+	 * der enthaltenen Widgets bestimmt.
+	 */
+	
 	public void onLoad() {
 		super.onLoad();
 		
 		Grid contactGrid = new Grid(9, 2);
-		this.add(cotactGrid);
-
-
-		deleteButton.addClickHandler(new DeleteClickHandler());
-		deleteButton.setEnabled(false);
-		customerGrid.setWidget(0, 1, deleteButton);
-		
-		newButton.addClickHandler(new NewClickHandler());
-		newButton.setEnabled(false);
-		customerGrid.setWidget(1, 1, newButton);
+		this.add(contactGrid);
 
 		Label firstNameLabel = new Label("Vorname");
-		customerGrid.setWidget(2, 0, firstNameLabel);
-		customerGrid.setWidget(2, 1, firstNameTextBox);
-
+		contactGrid.setWidget(1, 0, firstNameLabel);
+		contactGrid.setWidget(1, 1, firstNameTextBox);
+		
 		Label lastNameLabel = new Label("Nachname");
-		customerGrid.setWidget(3, 0, lastNameLabel);
-		customerGrid.setWidget(3, 1, lastNameTextBox);
+		contactGrid.setWidget(2, 0, lastNameLabel);
+		contactGrid.setWidget(2, 1, lastNameTextBox);
 
-		HorizontalPanel customerButtonsPanel = new HorizontalPanel();
-		customerGrid.setWidget(4, 1, customerButtonsPanel);
-
-		Button changeButton = new Button("Name ändern");
-		changeButton.addClickHandler(new ChangeClickHandler());
-		customerButtonsPanel.add(changeButton);
-	  
+		Label phoneNumberLabel = new Label("Telefonnummer");
+		contactGrid.setWidget(3, 0, phoneNumberLabel);
+		contactGrid.setWidget(3, 1, phoneNumberTextBox);
+		
+		Label streetLabel = new Label("Straße");
+		contactGrid.setWidget(4, 0, streetLabel);
+		contactGrid.setWidget(4, 1, streetTextBox);
+		
+		Label numberLabel = new Label("Hausnummer");
+		contactGrid.setWidget(5, 0, numberLabel);
+		contactGrid.setWidget(5, 1, numberTextBox);
+		
+		Label cityLabel = new Label("Stadt");
+		contactGrid.setWidget(6, 0, cityLabel);
+		contactGrid.setWidget(6, 1, cityTextBox);
+		
+		Label birthdayLabel = new Label("Geburtstag");
+		contactGrid.setWidget(7, 0, birthdayLabel);
+		contactGrid.setWidget(7, 1, birthdayTextBox);
+		
+		cancelButton.addClickHandler(new CancelClickHandler());
+		cancelButton.setEnabled(false);
+		contactGrid.setWidget(8, 0, cancelButton);
+		
+		saveButton.addClickHandler(new SaveClickHandler());
+		saveButton.setEnabled(false);
+		contactGrid.setWidget(8, 1, saveButton);	
+		
+	}
 }
