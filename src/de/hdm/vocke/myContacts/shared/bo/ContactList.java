@@ -1,6 +1,11 @@
 package de.hdm.vocke.myContacts.shared.bo;
 
-public class ContactList {
+public class ContactList extends BusinessObject {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Name der Kontaktliste
