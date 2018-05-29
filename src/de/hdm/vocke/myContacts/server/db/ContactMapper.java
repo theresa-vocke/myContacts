@@ -78,8 +78,8 @@ public class ContactMapper {
 				/**
 				 * jetzt erfolgt das tatsächliche Einfügen des Contact-Objektes in die DB
 				 */
-				stmt.executeUpdate("INSERT INTO contacts (id, firstname, lastname) " + "VALUES" 
-				 c.getContactId() + "," + c.getLastname() + "," c.getFirstname ()+ ")" );
+				stmt.executeUpdate("INSERT INTO contacts (id, lastname, firstname)" + "VALUES" 
+				 c.getContactId() + "," + c.getLastName() + "," c.getFirstName()+ ")" );
 			}
 		}
 		
@@ -243,5 +243,7 @@ public class ContactMapper {
 		 */
 		return ContactListMapper.contactListMapper().findAllContactsFrom(cl);
 	}
+	
+	public Contact insertIntoContactList(Contact c)
 		
 }

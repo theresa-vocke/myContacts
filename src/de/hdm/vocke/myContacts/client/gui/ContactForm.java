@@ -9,7 +9,17 @@ import com.google.gwt.user.datepicker.client.DateBox;
 
 import de.hdm.vocke.myContacts.shared.bo.Contact;
 
-public class ContactForm extends AbstractCell<Contact> {
+public class ContactForm extends VerticalPanel {
+	
+	private Navigation navigation=null;
+	
+	/**
+	 * Konstruktor, dem ein Projekt und eine Instanz der navigation übergeben wird 
+	 * @param navigation
+	 */
+	public ContactForm (Navigation navigation) {
+		this.navigation=navigation;
+	}
 	
 	  TextBox firstNameBox;
 	  TextBox lastNameBox;  
