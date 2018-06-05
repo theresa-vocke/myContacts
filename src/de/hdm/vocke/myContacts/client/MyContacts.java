@@ -29,6 +29,7 @@ public class MyContacts implements EntryPoint {
 	    RootPanel.get("Navigator").add(navPanel);
 	    
 	    
+	    
 	
 	    
 	    

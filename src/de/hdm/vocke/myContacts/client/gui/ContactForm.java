@@ -1,7 +1,11 @@
 package de.hdm.vocke.myContacts.client.gui;
 
 import com.google.gwt.cell.client.AbstractCell;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -10,22 +14,11 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 
-import de.hdm.thies.bankProjekt.client.gui.CustomerForm.ChangeClickHandler;
-import de.hdm.thies.bankProjekt.client.gui.CustomerForm.DeleteClickHandler;
-import de.hdm.thies.bankProjekt.client.gui.CustomerForm.NewClickHandler;
+
 import de.hdm.vocke.myContacts.shared.bo.Contact;
 
 public class ContactForm extends VerticalPanel {
 	
-	private Navigation navigation=null;
-	
-	/**
-	 * Konstruktor, dem ein Projekt und eine Instanz der navigation übergeben wird 
-	 * @param navigation
-	 */
-	public ContactForm (Navigation navigation) {
-		this.navigation=navigation;
-	}
 	/**
 	 * Anlegen der GUI Elemente 
 	 */
@@ -94,6 +87,15 @@ public class ContactForm extends VerticalPanel {
 		saveButton.addClickHandler(new SaveClickHandler());
 		saveButton.setEnabled(false);
 		contactGrid.setWidget(8, 1, saveButton);	
-		
 	}
+	
+
+
+	
+	
+	
+	
+	
+	
+	
 }
