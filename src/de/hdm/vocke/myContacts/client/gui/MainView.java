@@ -10,7 +10,10 @@ public class MainView {
 	public MainView(){
 		initWidget(this.vPanel);
 		
-		this.contentPanel = new Vertical Panel ();
+		ContactForm Kontaktformular = new ContactForm();
+		this.vPanel.add(Kontaktformular);
+		
+		this.contentPanel = new VerticalPanel();
 		this.vPanel.add(contentPanel);
 		
 		

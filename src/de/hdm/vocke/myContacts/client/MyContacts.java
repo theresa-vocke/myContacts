@@ -4,6 +4,8 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.vocke.myContacts.client.gui.MainView;
+
 
 
 /**
@@ -16,21 +18,9 @@ public class MyContacts implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 		
-		/*
-	     * Der Navigator ist als einspaltige Aneinanderreihung von Buttons
-	     * realisiert. Daher bietet sich ein VerticalPanel als Container an.
-	     */
-	    VerticalPanel navPanel = new VerticalPanel();
-
-	    /*
-	     * Das VerticalPanel wird einem DIV-Element namens "Navigator" in der
-	     * zugehörigen HTML-Datei zugewiesen und erhält so seinen Darstellungsort.
-	     */
-	    RootPanel.get("Navigator").add(navPanel);
-	    
-	    
-	    
-	
+		//Instanz von MainView 
+		MainView mainView = new MainView();
+		RootPanel.get().add(mainView);
 	    
 	    
 	    

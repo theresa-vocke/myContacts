@@ -94,8 +94,7 @@ public class ContactForm extends VerticalPanel {
 	private class CancelClickHandler implements ClickHandler{
 		@Override
 		public void onClick(ClickEvent event) {
-			// TODO Auto-generated method stub
-			
+						
 		}
 	}
 
@@ -117,9 +116,3 @@ public class ContactForm extends VerticalPanel {
 	
 	
 }
-
-	@Override
-	public void onClick(ClickEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
