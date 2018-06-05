@@ -113,11 +113,8 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	 */
 	public Vector<Contact> getContactsFor (ContactList cl) throws IllegalArgumentException{
 		return this.cMapper.getContactsOf(cl);
+		// da muss irgendwie die array liste wieder gegeben werden 
 	}
-	
-	
-	
-	
 	
 	
 	
@@ -130,17 +127,18 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	 * 	einen Kontakt zu einer Kontaktliste hinzufügen 
 	 */
 	@Override
-	public ContactList addToContactList(Contact c) throws IllegalArgumentException {
+	public ContactList addContact (Contact c, int contactId) throws IllegalArgumentException {
 				
 		// Objekt in der DB speichern
-		return this.clMapper.insert(c);
+		// eigentlich dann hier die Methode mit contactlistcontactId die Kontakt und Kontaktliste zugeordnet wird 
+		return this.clMapper.insertContact();
 	}
 
 	/**
 	 * erstellen einer Kontaktliste
 	 */
 	@Override
-	public ArrayList<ContactList> createContactList(ContactList cl) throws IllegalArgumentException {
+	public ArrayList<ContactList> createContactList (String name) throws IllegalArgumentException {
 		ContactList cl = new ContactList();
 		cl.setName(name);
 	 

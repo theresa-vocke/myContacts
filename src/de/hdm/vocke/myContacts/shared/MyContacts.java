@@ -81,6 +81,12 @@ public interface MyContacts extends RemoteService {
 	 * löschen des übergebenen Kontaktlisten-Objektes
 	 */
 	public void delete (ContactList cl) throws IllegalArgumentException;
+
+	public ArrayList<ContactList> createContactList (String name) throws IllegalArgumentException;
+
+	public Contact addToContactList(ContactList contactlist, int contactId) throws IllegalArgumentException;
+
+
 	
 	
 }

@@ -1,5 +1,7 @@
 package de.hdm.vocke.myContacts.shared.bo;
 
+import java.util.Vector;
+
 public class ContactList extends BusinessObject {
 
 	/**
@@ -19,6 +21,8 @@ public class ContactList extends BusinessObject {
 	
 
 	private int contactListId = 0;
+	
+	private Vector<Contact> contactsInList;
 	
 	
 	public float getSize() {
@@ -47,6 +51,16 @@ public class ContactList extends BusinessObject {
 	
 	public void setName(String name) {
 		this.name = name;
+	}
+
+
+	public Vector<Contact> getContactsInList() {
+		return contactsInList;
+	}
+
+
+	public void setContactsInList(Vector<Contact> contactsInList) {
+		this.contactsInList = contactsInList;
 	}
 	
 	

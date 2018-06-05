@@ -14,9 +14,9 @@ public interface MyContactsAsync {
 
 	void createContact(String first, String last, AsyncCallback<Contact> callback);
 
-	void addToContactList(Contact c, AsyncCallback<ContactList> callback);
+	void addToContactList(ContactList contactlist, int contactId, AsyncCallback<Contact> callback);
 
-	void createContactList(ContactList cl, AsyncCallback<ArrayList<ContactList>> callback);
+	void createContactList(String name, AsyncCallback<ArrayList<ContactList>> callback);
 
 	void getContactsOfContactList(ContactList cl, AsyncCallback<ArrayList<Contact>> callback);
 

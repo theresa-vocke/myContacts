@@ -88,7 +88,7 @@ public class ContactMapper {
 		}
 		return c;
 	}
-
+	
 	/**
 	   * Wiederholtes Schreiben eines Objekts in die Datenbank.
 	   * 
@@ -245,5 +245,6 @@ public class ContactMapper {
 	}
 	
 	public Contact insertIntoContactList(Contact c)
+	
 		
 }

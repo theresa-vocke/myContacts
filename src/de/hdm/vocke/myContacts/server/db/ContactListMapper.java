@@ -99,6 +99,15 @@ public class ContactListMapper {
 			Statement stmt = con.createStatement();
 			
 			// CODE EINFÜGEN
+			/**
+			 * ein Kontakt muss zu einer Kontaktliste hinzugefügt werden, daher müssen beide Tabellen miteinander verbunden werden
+			 * KontaktListID und ContactID müssen übereinstimmen oder man benötigt eine contactlistcontact id 
+			 * wenn die übereinstimmt mit der id von contakt und der id von contaktliste dann einfügen 
+			 * irgendwo muss man dann die contactlistcontact id noch festlegen und dann eine mehtode schreiben, die 
+			 * einen kontakt zu einer liste zuordnet. 
+			 */
+			stmt.executeUpdate("UPDATE contactlist " +  "JOIN contact" + "FROM contactcontactlist " 
+					+ "WHERE id= " c.getContactId() );
 			
 		}
 		
