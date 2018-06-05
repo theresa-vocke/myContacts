@@ -3,6 +3,7 @@ package de.hdm.vocke.myContacts.client;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 import de.hdm.vocke.myContacts.client.gui.MainView;
 

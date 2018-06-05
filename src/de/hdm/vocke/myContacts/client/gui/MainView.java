@@ -19,4 +19,9 @@ public class MainView {
 		
 	}
 
+	private void initWidget(VerticalPanel vPanel2) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
