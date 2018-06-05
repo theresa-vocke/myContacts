@@ -83,15 +83,7 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 		return this.cMapper.findByFirstname(firstname);
 	}
 	
-	/**
-	 * Auslesen aller Kontakte in einer Kontaktliste 
-	 */
-	@Override
-	public ArrayList<Contact> getContactsOfContactList(ContactList cl) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
+		
 	/** 
 	 * löschen eines Kontakt-Objektes
 	 */
@@ -162,6 +154,13 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	@Override
 	public Vector<ContactList> getAllContactLists(ContactList cl) throws IllegalArgumentException {
 		return this.clMapper.findAll();
+		}
+	
+	/**
+	 * Alle kontakte einer Liste auslesen 
+	 */
+	public Vector<Contact> getAllContactsFrom(ContactList cl) throws IllegalArgumentException {
+		return this.clMapper.findAllContactsFrom(cl);
 	}
 
 	/**
