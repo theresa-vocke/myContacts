@@ -55,7 +55,7 @@ public class ContactListMapper {
 	   *         <code>id</code>.
 	   */
 	
-	public ContactList insert (ContactList cl){
+	public ArrayList<ContactList> insert (ContactList cl){
 		// neue Verbindung mit DB aufnehmen 
 		Connection con = DBConnection.connection();
 		
@@ -87,11 +87,11 @@ public class ContactListMapper {
 		catch (SQLException e2){
 			e2.printStackTrace();
 		}
-		return cl;
+		return cl>;
 	}
 	
 	
-	public ContactList insertContactInList (Contact c){
+	public ContactList insertContact (Contact c){
 		// neue Verbindung mit DB aufnehmen 
 		Connection con = DBConnection.connection();
 		
@@ -225,7 +225,7 @@ public class ContactListMapper {
 		
 	}
 	
-	public Vector<Contact> findAllContactsFrom (ContactList cl){
+	public ArrayList<Contact> findAllContactsFrom (ContactList cl){
 		Connection con = DBConnection.connection();
 		Vector<ContactList> result = new Vector<ContactList>();
 		
@@ -250,5 +250,7 @@ public class ContactListMapper {
 		return null;
 		
 	}
+
+	
 	
 }

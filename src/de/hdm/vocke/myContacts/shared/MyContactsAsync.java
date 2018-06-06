@@ -14,8 +14,6 @@ public interface MyContactsAsync {
 
 	void createContact(String first, String last, AsyncCallback<Contact> callback);
 
-	void addToContactList(ContactList contactlist, int contactId, AsyncCallback<Contact> callback);
-
 	void createContactList(String name, AsyncCallback<ArrayList<ContactList>> callback);
 
 	void getContactsOfContactList(ContactList cl, AsyncCallback<ArrayList<Contact>> callback);
@@ -35,6 +33,9 @@ public interface MyContactsAsync {
 	void delete(Contact c, AsyncCallback<Void> callback);
 
 	void delete(ContactList cl, AsyncCallback<Void> callback);
+
+	void addContact(ContactList cl, Contact c, AsyncCallback<ContactList> callback);
+
 
 
 }

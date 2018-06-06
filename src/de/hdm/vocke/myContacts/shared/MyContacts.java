@@ -26,16 +26,11 @@ public interface MyContacts extends RemoteService {
 	 * einen Kontakt anlegen 
 	 */
 	public Contact createContact (String first, String last) throws IllegalArgumentException;
-	
-	/**
-	 * einen Kontakt zu einer Kontaktliste hinzufügen 
-	 */
-	public ContactList addToContactList (Contact c) throws IllegalArgumentException;
-	
+		
 	/**
 	 * eine Kontaktliste erstellen
 	 */
-	public ArrayList<ContactList> createContactList (ContactList cl) throws IllegalArgumentException;
+	public ArrayList<ContactList> createContactList(String name) throws IllegalArgumentException;
 	
 	/**
 	 * auslesen aller Kontakte in einer speziellen Kontaktliste
@@ -81,10 +76,11 @@ public interface MyContacts extends RemoteService {
 	 * löschen des übergebenen Kontaktlisten-Objektes
 	 */
 	public void delete (ContactList cl) throws IllegalArgumentException;
-
-	public ArrayList<ContactList> createContactList (String name) throws IllegalArgumentException;
-
-	public Contact addToContactList(ContactList contactlist, int contactId) throws IllegalArgumentException;
+	
+	/**
+	 * einen Kontakt zu einer Kontaktliste hinzufügen 
+	 */
+	public ContactList addContact(ContactList cl, Contact c) throws IllegalArgumentException;
 
 
 	

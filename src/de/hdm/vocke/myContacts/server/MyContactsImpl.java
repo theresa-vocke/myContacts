@@ -119,11 +119,11 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	 * 	einen Kontakt zu einer Kontaktliste hinzufügen 
 	 */
 	@Override
-	public ContactList addContact (Contact c, int contactId) throws IllegalArgumentException {
+	public ContactList addContact (ContactList cl, Contact c) throws IllegalArgumentException {
 				
 		// Objekt in der DB speichern
 		// eigentlich dann hier die Methode mit contactlistcontactId die Kontakt und Kontaktliste zugeordnet wird 
-		return this.clMapper.insertContact();
+		return this.clMapper.insertContact(c);
 	}
 
 	/**
@@ -157,13 +157,6 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 		}
 	
 	/**
-	 * Alle kontakte einer Liste auslesen 
-	 */
-	public Vector<Contact> getAllContactsFrom(ContactList cl) throws IllegalArgumentException {
-		return this.clMapper.findAllContactsFrom(cl);
-	}
-
-	/**
 	 * speichern eines Kontaktlisten-Objektes
 	 */
 	@Override
@@ -177,6 +170,13 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	@Override
 	public void delete(ContactList cl) throws IllegalArgumentException {
 		clMapper.delete(cl);
+	}
+
+	/**
+	 * Alle kontakte einer Liste auslesen 
+	 */
+	public ArrayList<Contact> getContactsOfContactList(ContactList cl) throws IllegalArgumentException {
+		return this.clMapper.findAllContactsFrom(cl);
 	}
 
 	
