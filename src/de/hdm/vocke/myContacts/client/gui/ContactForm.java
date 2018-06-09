@@ -14,11 +14,15 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 
-
+import de.hdm.vocke.myContacts.client.ClientsideSettings;
+import de.hdm.vocke.myContacts.shared.MyContactsAsync;
 import de.hdm.vocke.myContacts.shared.bo.Contact;
 
 public class ContactForm extends VerticalPanel {
 	
+	MyContactsAsync myContacts = ClientsideSettings.getMyContacts();
+	Contact contactToDisplay = null;
+	ContactListTreeViewModel cltvm = null;	
 	/**
 	 * Anlegen der GUI Elemente 
 	 */
@@ -36,7 +40,7 @@ public class ContactForm extends VerticalPanel {
 	TextBox cityTextBox = new TextBox();
 	TextBox birthdayTextBox = new TextBox();
 	Label idValueLabel = new Label("Kontakt: ");
-	Button cancelButton = new Button("Abbrechen");
+	Button deleteButton = new Button("Löschen");
 	Button saveButton = new Button("Speichern");
 	
 
@@ -80,9 +84,9 @@ public class ContactForm extends VerticalPanel {
 		contactGrid.setWidget(7, 0, birthdayLabel);
 		contactGrid.setWidget(7, 1, birthdayTextBox);
 		
-		cancelButton.addClickHandler(new CancelClickHandler());
-		cancelButton.setEnabled(false);
-		contactGrid.setWidget(8, 0, cancelButton);
+		deleteButton.addClickHandler(new CancelClickHandler());
+		deleteButton.setEnabled(false);
+		contactGrid.setWidget(8, 0, deleteButton);
 		
 		saveButton.addClickHandler(new SaveClickHandler());
 		saveButton.setEnabled(false);
@@ -106,10 +110,43 @@ public class ContactForm extends VerticalPanel {
 		}
 	}
 
+	/*
+	 * Wenn der anzuzeigende Kontakt gesetzt bzw. gelöscht wird, werden die
+	 * zugehörenden Textfelder mit den Informationen aus dem Kontaktobjekt gefüllt
+	 * bzw. gelöscht. 
+	 */
 	
+	void setSelected(Contact c) {
+		if (c != null) {
+			contactToDisplay = c;
+			deleteButton.setEnabled(true);
+			saveButton.setEnabled(true);
+			firstNameTextBox.setText(contactToDisplay.getFirstName());
+			lastNameTextBox.setText(contactToDisplay.getLastName());
+			phoneNumberTextBox.setText(contactToDisplay.getPhonenumber());
+			streetTextBox.setText(contactToDisplay.getStreet());
+			numberTextBox.setText(contactToDisplay.getNumber());
+			cityTextBox.setText(contactToDisplay.getCity());
+			birthdayTextBox.setText(contactToDisplay.getBirthdate());
+			idValueLabel.setText("Kontakt: " + Integer.toString(contactToDisplay.getId()));
 
-	
-	
+		} else {
+			contactToDisplay = null;
+			deleteButton.setEnabled(false);
+			saveButton.setEnabled(false);
+			firstNameTextBox.setText("");
+			lastNameTextBox.setText("");
+			phoneNumberTextBox.setText("");
+			streetTextBox.setText("");
+			numberTextBox.setText("");
+			cityTextBox.setText("");
+			birthdayTextBox.setText("");
+			this.idValueLabel.setText("Kontakt: ");
+			
+		}
+	}
+
+
 	
 	
 	

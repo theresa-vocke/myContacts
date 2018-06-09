@@ -1,6 +1,8 @@
 package de.hdm.vocke.myContacts.client.gui;
 
 import java.util.Map;
+
+import com.google.gwt.dev.util.collect.HashMap;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.ProvidesKey;
 import com.google.gwt.view.client.SingleSelectionModel;
@@ -24,7 +26,7 @@ import de.hdm.vocke.myContacts.shared.MyContacts;
 public class ContactListTreeViewModel implements TreeViewModel {
 
 	private ContactForm contactForm;
-	private ContactListForm contactListform;
+	private ContactListForm contactListForm;
 	
 	private Contact selectedContact = null;
 	private ContactList selectedContactList = null;
@@ -102,11 +104,62 @@ public class ContactListTreeViewModel implements TreeViewModel {
 	public ContactListTreeViewModel(){
 		myContacts = ClientsideSettings.getMyContacts();
 		boKeyProvider = new BusinessObjectKeyProvider();
-		selectionModel = 
-		
-		
+		selectionModel = new SingleSelectionModel<BusinessObject>(boKeyProvider);
+		selectionModel.addSelectionChangeHandler(new SelectionChangeEventHandler());
+		contactDataProvider = new HashMap<ContactList, ListDataProvider<Contact>>();
+					
 	}
 	
+	void setCustomerForm(ContactListForm clf) {
+		contactListForm = clf;
+	}
+
+	void setAccountForm(ContactForm cf) {
+		contactForm = cf;
+	}
+
+	ContactList getSelectedCustomer() {
+		return selectedContactList;
+	}
+
+	void setSelectedCustomer(ContactList cl) {
+		selectedContactList = cl;
+		contactListForm.setSelected(cl);
+		selectedContact = null;
+		contactForm.setSelected(null);
+	}
+
+	Contact getSelectedContact() {
+		return selectedContact;
+	}
+	
+	/*
+	 * Wenn ein Kontakt ausgewählt wird, wird auch die ausgewählt Kontaktliste
+	 * angepasst.
+	 */
+	void setSelectedContakt(Contact c) {
+		selectedContact = c;
+		contactForm.setSelected(c);
+
+		if (k != null) {
+			myContacts.findContactListByID(k.getKontaktlisteID(), new AsyncCallback<Kontaktliste>() {
+
+				@Override
+				public void onFailure(Throwable caught) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void onSuccess(Kontaktliste result) {
+					selectedKontaktliste = result;
+					kontaktlisteForm.setSelected(result);
+
+				}
+
+			});
+		}
+	}
 	
 	
 	

@@ -251,6 +251,29 @@ public class ContactListMapper {
 		
 	}
 
+	public ContactList findContactListById(int id){
+		Connection con = DBConnection.connection();
+		
+		try{
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT ID, title FROM contactlist "
+          + "WHERE ID=" + id);
+			
+			if(rs.next()){
+				ContactList cl = new ContactList();
+				cl.setId(rs.getInt("ID"));
+				cl.setName(rs.getString("Titel"));
+				return cl;
+			}
+		}
+		catch(SQLException e2){
+			e2.printStackTrace();
+			return null;
+		}
+		return null;
+		
+	}
+	
 	
 	
 }
