@@ -36,6 +36,8 @@ public interface MyContactsAsync {
 
 	void addContact(ContactList cl, Contact c, AsyncCallback<ContactList> callback);
 
+	void findContactListById(Object getContactListId, AsyncCallback<ContactList> asyncCallback);
+
 
 
 }

@@ -1,8 +1,10 @@
 package de.hdm.vocke.myContacts.client.gui;
 
+import java.util.List;
 import java.util.Map;
 
 import com.google.gwt.dev.util.collect.HashMap;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.ProvidesKey;
 import com.google.gwt.view.client.SingleSelectionModel;
@@ -85,7 +87,7 @@ public class ContactListTreeViewModel implements TreeViewModel {
 			BusinessObject selection  = selectionModel.getSelectedObject();
 			
 			if (selection instanceof ContactList){
-				setSelectedContactList((contactList) selection);
+				setSelectedContactList((ContactList) selection);
 				//nochmal prüfen 
 			} else if (selection instanceof Contact){
 				setSelectedContact((Contact) selection);
@@ -122,7 +124,7 @@ public class ContactListTreeViewModel implements TreeViewModel {
 		return selectedContactList;
 	}
 
-	void setSelectedCustomer(ContactList cl) {
+	void setSelectedContactList(ContactList cl) {
 		selectedContactList = cl;
 		contactListForm.setSelected(cl);
 		selectedContact = null;
@@ -137,12 +139,12 @@ public class ContactListTreeViewModel implements TreeViewModel {
 	 * Wenn ein Kontakt ausgewählt wird, wird auch die ausgewählt Kontaktliste
 	 * angepasst.
 	 */
-	void setSelectedContakt(Contact c) {
+	void setSelectedContact(Contact c) {
 		selectedContact = c;
 		contactForm.setSelected(c);
 
-		if (k != null) {
-			myContacts.findContactListByID(k.getKontaktlisteID(), new AsyncCallback<Kontaktliste>() {
+		if (c != null) {
+			myContacts.findContactListById(c.getContactListId, new AsyncCallback<ContactList>() {
 
 				@Override
 				public void onFailure(Throwable caught) {
@@ -151,9 +153,9 @@ public class ContactListTreeViewModel implements TreeViewModel {
 				}
 
 				@Override
-				public void onSuccess(Kontaktliste result) {
-					selectedKontaktliste = result;
-					kontaktlisteForm.setSelected(result);
+				public void onSuccess(ContactList result) {
+					selectedContactList = result;
+					contactListForm.setSelected(result);
 
 				}
 
@@ -161,7 +163,53 @@ public class ContactListTreeViewModel implements TreeViewModel {
 		}
 	}
 	
+	/*
+	 * Wenn eine Kontaktliste neu erzeugt wurde, wird er selektiert.
+	 */
 	
+	void addContatList(ContactList contactList) {
+		contactListDataProvider.getList().add(contactList);
+		selectionModel.setSelected(contactList, true);
+	}
+	
+	void updateContactList(ContactList contactList){
+		List<ContactList> contactListList = contactListDataProvider.getList();
+		int i = 0;
+		for(ContactList cl : contactListList){
+			if(cl.getId() == cl.getId()){
+				contactListList.set(i, contactList);
+				break;
+			}else {
+				i++;
+			}
+		}
+		contactListDataProvider.refresh();
+	}
+	
+	
+	void removeKontaktliste(ContactList contactList){
+		contactListDataProvider.getList().remove(contactList);
+		contactDataProvider.remove(contactList);
+	}
+	
+	void addContactToContactList(Contact contact, ContactList contactList){
+		if(!contactDataProvider.containsKey(contactList)){
+			return;
+		}
+		ListDataProvider<Contact> contactProvider = contactDataProvider.get(contactList);
+		if(!contactProvider.getList().contains(contact)){
+			contactProvider.getList().add(contact);
+		}
+		selectionModel.setSelected(contact, true);
+	}
+	
+	void removeContactFromContactList(Contact contact, ContactList contactList){
+		if(!contactDataProvider.containsKey(contactList)){
+			return;
+		}
+		contactDataProvider.get(contactList).getList().remove(contact);
+		selectionModel.setSelected(contactList, true);
+	}
 	
 	
 	

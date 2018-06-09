@@ -45,6 +45,8 @@ public class Contact extends BusinessObject {
 	 * PLZ des Kontaktes 
 	 */
 	private int zip;
+
+	public Object getContactListId;
 	
 	public String getFirstName() {
 		return firstName;
