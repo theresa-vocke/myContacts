@@ -32,7 +32,7 @@ public class ClientsideSettings extends CommonSettings {
 	    // Gab es bislang noch keine BankAdministration-Instanz, dann...
 	    if (myContacts == null) {
 	      // Zunächst instantiieren wir BankAdministration
-	      myContacts = GWT.create(MyContacts.class);
+	      myContacts = GWT.create(MyContactsEntryPoint.class);
 	    }
 
 	    // So, nun brauchen wir die BankAdministration nur noch zurückzugeben.

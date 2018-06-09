@@ -2,6 +2,7 @@ package de.hdm.vocke.myContacts.client.gui;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import com.google.gwt.dev.util.collect.HashMap;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -10,6 +11,7 @@ import com.google.gwt.view.client.ProvidesKey;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.gwt.view.client.TreeViewModel;
 import com.google.gwt.view.client.SelectionChangeEvent;
+import com.google.gwt.cell.client.Cell;
 
 import de.hdm.vocke.myContacts.client.ClientsideSettings;
 import de.hdm.vocke.myContacts.shared.MyContactsAsync;
@@ -17,6 +19,8 @@ import de.hdm.vocke.myContacts.shared.bo.Contact;
 import de.hdm.vocke.myContacts.shared.bo.ContactList;
 import de.hdm.vocke.myContacts.shared.bo.BusinessObject;
 import de.hdm.vocke.myContacts.shared.MyContacts;
+import de.hdm.vocke.myContacts.client.gui.ContactCell;
+import de.hdm.vocke.myContacts.client.gui.ContactListCell;
 
 /**
  * Die Klasse <code>ContactListTreeViewModel</code> dient zur Verwaltung
@@ -211,27 +215,65 @@ public class ContactListTreeViewModel implements TreeViewModel {
 		selectionModel.setSelected(contactList, true);
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	// Get the NodeInfo that provides the children of the specified value.
 	
 	@Override
 	public <T> NodeInfo<?> getNodeInfo(T value) {
-		// TODO Auto-generated method stub
+		
+		if (value.equals("Root")) {
+
+			contactListDataProvider = new ListDataProvider<ContactList>();
+			myContacts.getAllContactLists(new AsyncCallback<Vector<ContactList>>() {
+
+						@Override
+						public void onFailure(Throwable caught) {
+						}
+
+						public void onSuccess(Vector<ContactList> result) {
+							for (ContactList cl : result) {
+								contactListDataProvider.getList().add(cl);
+							}
+
+						}
+
+					});
+
+			return new DefaultNodeInfo<ContactList>(contactListDataProvider, new ContactListCell(), selectionModel,
+					null);
+		}
+
+		if (value instanceof ContactList) {
+
+			final ListDataProvider<Contact> contactProvider = new ListDataProvider<Contact>();
+			contactDataProvider.put((ContactList) value, contactProvider);
+			int ContactListId = ((ContactList) value).getId();
+			myContacts.getContactsOfContactList(ContactListId, new AsyncCallback<Vector<Contact>>() {
+
+				@Override
+				public void onFailure(Throwable caught) {
+
+				}
+
+				@Override
+				public void onSuccess(Vector<Contact> result) {
+					for (Contact c : result) {
+						contactProvider.getList().add(c);
+					}
+
+				}
+
+			});
+
+			return new DefaultNodeInfo<Contact>(contactProvider, new ContactCell(), selectionModel, null);
+		}
+		
+		
 		return null;
 	}
-
+	
 	@Override
 	public boolean isLeaf(Object value) {
-		// TODO Auto-generated method stub
-		return false;
+		return (value instanceof Contact);
 	}
 	
 	

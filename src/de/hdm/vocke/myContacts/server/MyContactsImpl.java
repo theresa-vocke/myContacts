@@ -10,7 +10,6 @@ import de.hdm.vocke.myContacts.server.db.ContactMapper;
 import de.hdm.vocke.myContacts.shared.MyContacts;
 import de.hdm.vocke.myContacts.shared.bo.Contact;
 import de.hdm.vocke.myContacts.shared.bo.ContactList;
-import de.hdm.vocke.myContacts.shared.MyContactsAsync;
 
 public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 
@@ -152,7 +151,7 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	 * auslesen aller Kontaktlisten 
 	 */
 	@Override
-	public Vector<ContactList> getAllContactLists(ContactList cl) throws IllegalArgumentException {
+	public Vector<ContactList> getAllContactLists() throws IllegalArgumentException {
 		return this.clMapper.findAll();
 		}
 	
@@ -172,13 +171,18 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 		clMapper.delete(cl);
 	}
 
-	/**
-	 * Alle kontakte einer Liste auslesen 
-	 */
-	public ArrayList<Contact> getContactsOfContactList(ContactList cl) throws IllegalArgumentException {
-		return this.clMapper.findAllContactsFrom(cl);
+
+	@Override
+	public ArrayList<Contact> getContactsOfContactList(int contactListId) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
+	@Override
+	public ContactList findContactListById(Object getContactListId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

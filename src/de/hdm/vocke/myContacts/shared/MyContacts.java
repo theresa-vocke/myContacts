@@ -34,8 +34,6 @@ public interface MyContacts extends RemoteService {
 	
 	/**
 	 * auslesen aller Kontakte in einer speziellen Kontaktliste
-	 */
-	public ArrayList<Contact> getContactsOfContactList (ContactList cl) throws IllegalArgumentException;
 	
 	/**
 	 * Auslesen aller Kontakt-Objekte nach Nachname 
@@ -55,7 +53,7 @@ public interface MyContacts extends RemoteService {
 	/**
 	 * sämtliche Kontaktlisten ausgeben
 	 */
-	public Vector<ContactList> getAllContactLists (ContactList cl) throws IllegalArgumentException;
+	public Vector<ContactList> getAllContactLists () throws IllegalArgumentException;
 	
 	/**
 	 * speichern eines Kontakt-Objektes in der Datenbank
@@ -81,6 +79,11 @@ public interface MyContacts extends RemoteService {
 	 * einen Kontakt zu einer Kontaktliste hinzufügen 
 	 */
 	public ContactList addContact(ContactList cl, Contact c) throws IllegalArgumentException;
+
+	public ArrayList<Contact> getContactsOfContactList(int contactListId) throws IllegalArgumentException;
+
+	public ContactList findContactListById(Object getContactListId);
+
 
 
 	

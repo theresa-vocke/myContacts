@@ -12,7 +12,7 @@ import de.hdm.vocke.myContacts.client.gui.MainView;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-public class MyContacts implements EntryPoint {
+public class MyContactsEntryPoint implements EntryPoint {
 	
 	/**
 	 * This is the entry point method.
