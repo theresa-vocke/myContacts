@@ -16,7 +16,7 @@ public interface MyContactsAsync {
 
 	void createContactList(String name, AsyncCallback<ArrayList<ContactList>> callback);
 
-	void getContactsOfContactList(int contactListId, AsyncCallback<ArrayList<Contact>> asyncCallback);
+	void getContactsOfContactList(int contactListId, AsyncCallback<Vector<Contact>> asyncCallback);
 
 	void getContactByLastname(String lastname, AsyncCallback<Vector<Contact>> callback);
 
@@ -36,8 +36,5 @@ public interface MyContactsAsync {
 
 	void addContact(ContactList cl, Contact c, AsyncCallback<ContactList> callback);
 
-	void findContactListById(Object getContactListId, AsyncCallback<ContactList> asyncCallback);
-
-
-
+	void findContactListById(int contactListId, AsyncCallback<ContactList> callback);
 }

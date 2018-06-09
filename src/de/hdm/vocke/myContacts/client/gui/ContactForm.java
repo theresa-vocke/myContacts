@@ -95,6 +95,7 @@ public class ContactForm extends VerticalPanel {
 		this.vpanel.add(contactGrid);
 	}
 	
+	
 	private class CancelClickHandler implements ClickHandler{
 		@Override
 		public void onClick(ClickEvent event) {

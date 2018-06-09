@@ -148,7 +148,7 @@ public class ContactListTreeViewModel implements TreeViewModel {
 		contactForm.setSelected(c);
 
 		if (c != null) {
-			myContacts.findContactListById(c.getContactListId, new AsyncCallback<ContactList>() {
+			myContacts.findContactListById(c.getContactListId(), new AsyncCallback<ContactList>() {
 
 				@Override
 				public void onFailure(Throwable caught) {
@@ -246,8 +246,8 @@ public class ContactListTreeViewModel implements TreeViewModel {
 
 			final ListDataProvider<Contact> contactProvider = new ListDataProvider<Contact>();
 			contactDataProvider.put((ContactList) value, contactProvider);
-			int ContactListId = ((ContactList) value).getId();
-			myContacts.getContactsOfContactList(ContactListId, new AsyncCallback<Vector<Contact>>() {
+			int contactListId = ((ContactList) value).getId();
+			myContacts.getContactsOfContactList(contactListId, new AsyncCallback<Vector<Contact>>(){
 
 				@Override
 				public void onFailure(Throwable caught) {

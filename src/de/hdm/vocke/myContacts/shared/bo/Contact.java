@@ -2,11 +2,12 @@ package de.hdm.vocke.myContacts.shared.bo;
 
 import java.util.Date;
 
+
 public class Contact extends BusinessObject {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private int contactId;
+	private int contactListId;
 	 
 	
 	/**
@@ -44,7 +45,6 @@ public class Contact extends BusinessObject {
 	/**
 	 * PLZ des Kontaktes 
 	 */
-	private int zip;
 
 	public Object getContactListId;
 	
@@ -84,19 +84,22 @@ public class Contact extends BusinessObject {
 	public void setNumber(int number) {
 		this.number = number;
 	}
-	public int getZip() {
+	/**public int getZip() {
 		return zip;
 	}
 	public void setZip(int zip) {
 		this.zip = zip;
 	}
-	
-	public int getContactId() {
-		return contactId;
+	*/
+	public int getContactListId() {
+		return contactListId;
 	}
-	public void setContactId(int contactId) {
-		this.contactId = contactId;
+
+
+	public void setContactListId(int contactListId) {
+		this.contactListId = contactListId;
 	}
+
 	
 	public int getPhonenumber() {
 		return phonenumber;

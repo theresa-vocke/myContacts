@@ -80,9 +80,9 @@ public interface MyContacts extends RemoteService {
 	 */
 	public ContactList addContact(ContactList cl, Contact c) throws IllegalArgumentException;
 
-	public ArrayList<Contact> getContactsOfContactList(int contactListId) throws IllegalArgumentException;
+	public Vector<Contact> getContactsOfContactList(int contactListId) throws IllegalArgumentException;
 
-	public ContactList findContactListById(Object getContactListId);
+	public ContactList findContactListById(int contactListId);
 
 
 

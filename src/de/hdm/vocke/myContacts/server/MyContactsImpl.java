@@ -173,13 +173,13 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 
 
 	@Override
-	public ArrayList<Contact> getContactsOfContactList(int contactListId) throws IllegalArgumentException {
+	public Vector<Contact> getContactsOfContactList(int contactListId) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public ContactList findContactListById(Object getContactListId) {
+	
+	public ContactList findContactListById(int contactListId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

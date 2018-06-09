@@ -19,8 +19,9 @@ public class ContactList extends BusinessObject {
 	 */
 	private float size = 100;
 	
+	private int contactId;
+	
 
-	private int contactListId = 0;
 	
 	private Vector<Contact> contactsInList;
 	
@@ -34,15 +35,13 @@ public class ContactList extends BusinessObject {
 		this.size = size;
 	}
 	
-	public int getContactListId() {
-		return contactListId;
+	public int getContactId() {
+		return contactId;
 	}
-
-
-	public void setContactListId(int contactListId) {
-		this.contactListId = contactListId;
+	public void setContactId(int contactId) {
+		this.contactId = contactId;
 	}
-
+	
 	
 	public String getName() {
 		return name;
