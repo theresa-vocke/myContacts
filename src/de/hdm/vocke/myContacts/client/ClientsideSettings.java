@@ -27,10 +27,6 @@ public class ClientsideSettings extends CommonSettings {
 	   * <code>myContactsAsync myContacts = ClientSideSettings.getMyContacts()</code>
 	   * .
 	   * </p>
-	   * 
-	   * @return eindeutige Instanz des Typs <code>BankAdministrationAsync</code>
-	   * @author Peter Thies
-	   * @since 28.02.2012
 	   */
 	  public static MyContactsAsync getMyContacts() {
 	    // Gab es bislang noch keine BankAdministration-Instanz, dann...

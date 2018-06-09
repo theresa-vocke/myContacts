@@ -29,7 +29,7 @@ public class ContactListTreeViewModel implements TreeViewModel {
 	private Contact selectedContact = null;
 	private ContactList selectedContactList = null;
 	
-	private MyContactsAsync meineKontakte = null;
+	private MyContactsAsync myContacts = null;
 	
 		
 	// ListDataProvider gefüllt mit Kontaktlisten-Objekten
@@ -100,7 +100,11 @@ public class ContactListTreeViewModel implements TreeViewModel {
 	 */
 	
 	public ContactListTreeViewModel(){
-		MyContacts = ClientsideSettings.getMyContacts();
+		myContacts = ClientsideSettings.getMyContacts();
+		boKeyProvider = new BusinessObjectKeyProvider();
+		selectionModel = 
+		
+		
 	}
 	
 	
