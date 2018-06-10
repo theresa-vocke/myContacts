@@ -1,6 +1,7 @@
 package de.hdm.vocke.myContacts.shared;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -23,17 +24,20 @@ public interface MyContacts extends RemoteService {
 	public void init () throws IllegalArgumentException;
 	
 	/**
-	 * einen Kontakt anlegen 
+	 * ALLES ZU KONTAKT
 	 */
-	public Contact createContact (String first, String last) throws IllegalArgumentException;
+	
+	public Contact createContact(String first, String last, int phonenumber, String street, int number, String city,
+			Date birthdate);
 		
 	/**
-	 * eine Kontaktliste erstellen
+	 * speichern eines Kontakt-Objektes in der Datenbank
 	 */
-	public ContactList createContactList(String name) throws IllegalArgumentException;
+	public void save (Contact c) throws IllegalArgumentException;
 	
-	/**
-	 * auslesen aller Kontakte in einer speziellen Kontaktliste
+	public Contact findContactById(int contactId);
+	
+	public Vector<Contact> findAllContacts() throws IllegalArgumentException;
 	
 	/**
 	 * Auslesen aller Kontakt-Objekte nach Nachname 
@@ -45,10 +49,30 @@ public interface MyContacts extends RemoteService {
 	 */
 	public Vector<Contact> getContactByFirstname (String firstname) throws IllegalArgumentException;
 	
+	public Vector<Contact> findAllContactsByContactListId(int contactListId) throws IllegalArgumentException;
+	
+	/**
+	 * löschen des übergebenen Kontakt-Objektes
+	 */
+	public void delete (Contact c) throws IllegalArgumentException;
+	
+	
+	
+	/**
+	 * ALLES ZU KONTAKTLISTE 
+	 */
+	
+	/**
+	 * eine Kontaktliste erstellen
+	 */
+	public ContactList createContactList(String name) throws IllegalArgumentException;
+	
 	/**
 	 * auslesen aller Kontaktlisten nach Name  einer Kontaktliste nach Name
 	 */
 	public Vector<ContactList> getContactListByName (String name) throws IllegalArgumentException;
+	
+	public ContactList findContactListById(int contactListId);
 	
 	/**
 	 * sämtliche Kontaktlisten ausgeben
@@ -56,30 +80,26 @@ public interface MyContacts extends RemoteService {
 	public Vector<ContactList> getAllContactLists () throws IllegalArgumentException;
 	
 	/**
-	 * speichern eines Kontakt-Objektes in der Datenbank
+	 * löschen des übergebenen Kontaktlisten-Objektes
 	 */
-	public void save (Contact c) throws IllegalArgumentException;
+	public void delete (ContactList cl) throws IllegalArgumentException;
 	
 	/**
 	 * speichern eines Kontaktlisten-Objektes in der Datenbank 
 	 */
 	public void save (ContactList cl) throws IllegalArgumentException;
 	
-	/**
-	 * löschen des übergebenen Kontakt-Objektes
-	 */
-	public void delete (Contact c) throws IllegalArgumentException;
-	
-	/**
-	 * löschen des übergebenen Kontaktlisten-Objektes
-	 */
-	public void delete (ContactList cl) throws IllegalArgumentException;
-	
-	/**
-	 * einen Kontakt zu einer Kontaktliste hinzufügen 
-	 */
 
-	public ContactList findContactListById(int contactListId);
+	
+
+
+
+
+	/**
+	 * ALLES ZU KONTAKTLISTEKONTAKT
+	 */
+	
+
 
 
 

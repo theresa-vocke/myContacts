@@ -1,6 +1,7 @@
 package de.hdm.vocke.myContacts.server.db;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -280,5 +281,157 @@ public class ContactMapper {
 		
 	}
 	
+	public Contact findById (int contactId){
+		
+		/**
+		 * Verbindung zur DB Connection
+		 */
+		Connection con = DBConnection.connection();
+
+		try {
+
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM contact WHERE `id` = ?");
+
+			stmt.setInt(1, contactId);
+			ResultSet rs = stmt.executeQuery();
+
+			/**
+			 * Für jeden Eintrag im Suchergebnis wird nun ein Kontakt-Objekt
+			 * erstellt.
+			 */
+			if (rs.next()) {
+				Contact c = new Contact();
+				c.setId(rs.getInt("id"));
+				c.setFirstName(rs.getString("firstname"));
+				c.setFirstName(rs.getString("lastname"));
+				c.setPhonenumber(rs.getInt("phonenumber"));
+				c.setStreet(rs.getString("street"));
+				c.setNumber(rs.getInt("number"));
+				c.setCity(rs.getString("city"));
+				c.setBirthdate(rs.getDate("birthdate"));
+				
+				return c;
+			}
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+			return null;
+		}
+		return null;
+		
+	}
+	
+	
+		public Vector<Contact> findAllContacts (){
+			
+			/**
+			 * Verbindung zur DB Connection
+			 */		
+			Connection con = DBConnection.connection();
+			
+			Vector<Contact> result = new Vector<Contact>();
+					
+			try {
+				
+				PreparedStatement stmt = con.prepareStatement("SELECT * FROM contact ORDER BY name ");
+				
+				ResultSet rs = stmt.executeQuery();
+				
+				/**
+				 * Für jeden Eintrag im Suchergebnis wird nun ein Kontakt-Objekt erstellt.
+				 */			
+				while(rs.next()) {
+					Contact c = new Contact();
+					c.setId(rs.getInt("id"));
+					c.setFirstName(rs.getString("firstname"));
+					c.setFirstName(rs.getString("lastname"));
+					c.setPhonenumber(rs.getInt("phonenumber"));
+					c.setStreet(rs.getString("street"));
+					c.setNumber(rs.getInt("number"));
+					c.setCity(rs.getString("city"));
+					c.setBirthdate(rs.getDate("birthdate"));
+					/**
+					 * Hinzufügen des neuen Objektes zum Ergebnisvektor
+					 */				
+					result.addElement(c);				
+				}
+			}
+			catch(SQLException e2) {
+				e2.printStackTrace();
+			} 
+			
+			/**
+			 * Ergebnisvektor zurückgeben
+			 */		
+			finally {	
+				if (con!=null) 
+					try {
+						con.close();
+					}
+					catch(SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			return result;
+			
+		}
+		
+		
+		public Vector<Contact> findAllContactsByContactListId(int contactListId) {
+			
+			/**
+			 * Verbindung zur DB Connection
+			 */
+			Connection con = DBConnection.connection();
+			
+			Vector<Contact> result = new Vector<Contact>();
+
+			try {
+				PreparedStatement stmt = con.prepareStatement("SELECT `contact`.`id`, `contact`.`firstname`, `contact`.`lastname`, `contact`.`phonenumber`, `contact`.`street`, `contact`.`number`, `contact`.`city`, `contact`.`birthdate`, `contactList`.`id` "
+						+ "FROM `contactList` INNER JOIN `contactlistcontacts` "
+						+ "ON `contactlistcontacts`.`contactListId` = `contactList`.`id` INNER JOIN `contact` "
+						+ "ON `contactlistcontacts`.`contactId` = `contact`.`id` WHERE `contactList`.`id` = ?");
+				
+				stmt.setInt(1, contactListId);
+				ResultSet rs = stmt.executeQuery();
+				
+				/**
+				 * Für jeden Eintrag Kontakt ein Kontakt-Objekt erstellt.
+				 */
+				while(rs.next()) {
+					Contact c = new Contact();
+					c.setId(rs.getInt("id"));
+					c.setFirstName(rs.getString("firstname"));
+					c.setFirstName(rs.getString("lastname"));
+					c.setPhonenumber(rs.getInt("phonenumber"));
+					c.setStreet(rs.getString("street"));
+					c.setNumber(rs.getInt("number"));
+					c.setCity(rs.getString("city"));
+					c.setBirthdate(rs.getDate("birthdate"));
+					
+					/**
+					 * Hinzufügen des neuen Objekts zum Ergebnisvektor
+					 */
+					result.addElement(c);
+				}
+			}
+			catch(SQLException e2) {
+				e2.printStackTrace();
+			}
+			finally {	
+				if (con!=null) 
+					try {
+						con.close();
+					}
+					catch(SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			
+			/**
+			 * Ergebnisvektor zurückgeben
+			 */
+			return result;
+		}
+		
 		
 }
