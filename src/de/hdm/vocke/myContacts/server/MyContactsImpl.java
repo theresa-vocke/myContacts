@@ -184,7 +184,6 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	}
 	
 	
-	
 	/**
 	 * auslesen aller Kontaktlisten 
 	 */

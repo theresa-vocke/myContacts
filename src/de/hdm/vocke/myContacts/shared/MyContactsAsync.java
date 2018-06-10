@@ -8,6 +8,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import de.hdm.vocke.myContacts.shared.bo.Contact;
 import de.hdm.vocke.myContacts.shared.bo.ContactList;
+import de.hdm.vocke.myContacts.shared.bo.ContactListContact;
 
 public interface MyContactsAsync {
 
@@ -62,13 +63,15 @@ public interface MyContactsAsync {
 	 * ALLES ZU KONTAKTLISTEKONTAKT
 	 */
 	
-
-	void getContactsOfContactList(int contactListId, AsyncCallback<Vector<Contact>> asyncCallback);
-
-
-	void addContact(ContactList cl, Contact c, AsyncCallback<ContactList> callback);
+	void deleteContactListContact(ContactListContact clc, AsyncCallback<Void> callback);
 	
+	void  createContactToContactList(int contactId, int contactListId, AsyncCallback<ContactListContact> callback);
 	
+	void deleteContactListContactByContactId(int contactId, AsyncCallback<Void> callback);
+	
+	void deleteContactListContactByContactListId(int contactListId, AsyncCallback<Void> callback);
+	
+	void findContactListContactByContactListId (int contactListId, AsyncCallback<Vector<ContactListContact>> callback);
 	
 	
 }

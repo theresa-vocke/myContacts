@@ -8,6 +8,7 @@ import com.google.gwt.user.client.rpc.RemoteService;
 
 import de.hdm.vocke.myContacts.shared.bo.Contact;
 import de.hdm.vocke.myContacts.shared.bo.ContactList;
+import de.hdm.vocke.myContacts.shared.bo.ContactListContact;
 /**
  * synchrone Schnittstelle für eine RPC-fähige Klasse zur Verwatlung von Kontakten und Kontaktlisten
  * 
@@ -88,6 +89,8 @@ public interface MyContacts extends RemoteService {
 	 * speichern eines Kontaktlisten-Objektes in der Datenbank 
 	 */
 	public void save (ContactList cl) throws IllegalArgumentException;
+
+
 	
 
 	
@@ -99,7 +102,15 @@ public interface MyContacts extends RemoteService {
 	 * ALLES ZU KONTAKTLISTEKONTAKT
 	 */
 	
+	public void deleteContactListContact(ContactListContact clc) throws IllegalArgumentException;
 
+	public ContactListContact createContactToContactList(int contactId, int contactListId) throws IllegalArgumentException;
+
+	public void deleteContactListContactByContactId(int contactId) throws IllegalArgumentException;
+
+	public void deleteContactListContactByContactListId(int contactListId) throws IllegalArgumentException;
+
+	public Vector<ContactListContact> findContactListContactByContactListId(int contactListId) throws IllegalArgumentException;
 
 
 
