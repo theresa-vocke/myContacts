@@ -1,15 +1,19 @@
 package de.hdm.vocke.myContacts.server;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Vector;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
+import de.hdm.vocke.myContacts.server.db.ContactListContactMapper;
 import de.hdm.vocke.myContacts.server.db.ContactListMapper;
 import de.hdm.vocke.myContacts.server.db.ContactMapper;
 import de.hdm.vocke.myContacts.shared.MyContacts;
 import de.hdm.vocke.myContacts.shared.bo.Contact;
 import de.hdm.vocke.myContacts.shared.bo.ContactList;
+import de.hdm.vocke.myContacts.shared.bo.ContactListContact;
 
 public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 
@@ -26,6 +30,7 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	private ContactListMapper clMapper = null; 
 	
 	
+	private ContactListContactMapper clcMapper = null;
 	/*
 	 * Initialisierung 
 	 */
@@ -43,6 +48,7 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	public void init () throws IllegalArgumentException{
 		this.cMapper = ContactMapper.contactMapper();
 		this.clMapper = ContactListMapper.contactListMapper();
+		this.clcMapper = ContactListContactMapper.contactListContactmapper();
 	}
 	
 	/*
@@ -50,15 +56,20 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	 * Anfang Methoden für Contact-Objekte
 	 */
 	
-	@Override
-	public Contact createContact(String first, String last) throws IllegalArgumentException {
+	public Contact createContact(String firstname, String lastname, int phonenumber, String street, int number, String city, Date birthdate) 
+			throws IllegalArgumentException {
 		Contact c = new Contact();
-		c.setFirstName(first);
-		c.setLastName(last);
+		c.setFirstName(firstname);
+		c.setLastName(lastname);
+		c.setPhonenumber(phonenumber);
+		c.setStreet(street);
+		c.setNumber(number);
+		c.setCity(city);
+		c.setBirthdate(birthdate);
 		
 		// setzen der vorläufigen contact-Nummer, insert-Aufruf liefert dann Objekt, dessen 
 		// Nummer mit der DB konsistent ist 
-		c.setContactId(1);
+		c.setId(1);
 		
 		// Objekt in der DB speichern
 		return this.cMapper.insert(c);
@@ -86,9 +97,17 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	/** 
 	 * löschen eines Kontakt-Objektes
 	 */
-	@Override
 	public void delete(Contact c) throws IllegalArgumentException {
-		cMapper.delete(c);
+		
+		List<ContactListContact> contactListContact = ContactListContactMapper.findContactListContactByContactId(c.getId());
+		
+		if (contactListContact != null){ 
+			for (ContactListContact clcListe : contactListContact){
+				ContactListContactMapper.deleteContactListContactByContactId(clcListe.getContactId());
+			}
+		}
+		
+		this.cMapper.delete(c);
 	}
 	
 	/**
@@ -99,41 +118,20 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 		cMapper.update(c);
 	}
 	
-	/**
-	 * Liste mit allen darin enthaltenen Kontakten auslesen
-	 */
-	public Vector<Contact> getContactsFor (ContactList cl) throws IllegalArgumentException{
-		return this.cMapper.getContactsOf(cl);
-		// da muss irgendwie die array liste wieder gegeben werden 
-	}
-	
-	
-	
 	
 	/*
 	 * Methoden für Kontaktlisten-Objekte
 	 */
-	
-	/**
-	 * 	einen Kontakt zu einer Kontaktliste hinzufügen 
-	 */
-	@Override
-	public ContactList addContact (ContactList cl, Contact c) throws IllegalArgumentException {
-				
-		// Objekt in der DB speichern
-		// eigentlich dann hier die Methode mit contactlistcontactId die Kontakt und Kontaktliste zugeordnet wird 
-		return this.clMapper.insertContact(c);
-	}
 
 	/**
 	 * erstellen einer Kontaktliste
 	 */
-	@Override
-	public ArrayList<ContactList> createContactList (String name) throws IllegalArgumentException {
+
+	public ContactList createContactList (String name) throws IllegalArgumentException {
 		ContactList cl = new ContactList();
 		cl.setName(name);
 	 
-		cl.setContactListId(1);
+		cl.setId(1);
 		
 		return this.clMapper.insert(cl);
 	}
@@ -142,7 +140,6 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	/**
 	 * ausgeben der Kontaktlsiten nach übergebenem Name
 	 */
-	@Override
 	public Vector<ContactList> getContactListByName(String name) throws IllegalArgumentException {
 		return this.clMapper.findByName(name);
 	}
@@ -180,6 +177,12 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 
 	
 	public ContactList findContactListById(int contactListId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Contact createContact(String first, String last) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		return null;
 	}

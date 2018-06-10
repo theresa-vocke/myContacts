@@ -8,7 +8,6 @@ import java.util.Vector;
 
 import de.hdm.vocke.myContacts.server.db.DBConnection;
 import de.hdm.vocke.myContacts.shared.bo.Contact;
-import de.hdm.vocke.myContacts.shared.bo.ContactList;
 
 public class ContactMapper {
 

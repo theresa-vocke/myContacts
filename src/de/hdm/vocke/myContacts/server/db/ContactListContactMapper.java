@@ -59,6 +59,23 @@ private static ContactListContactMapper contactListContactMapper = null;
 		
 	}
 	
+	public void deleteContactListContact (ContactListContact clc){
+		Connection con = DBConnection.connection();
+		
+		try{
+			
+			Statement stmt = con.createStatement();
+			
+			stmt.executeUpdate("DELETE from contactlistcontacts " + "WHERE ID= " + clc.getId());
+			
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+			
+		}
+		
+	}
+	
 	public void deleteContactListContactByContactId (int contactId){
 		
 		Connection con = DBConnection.connection();
@@ -103,6 +120,33 @@ private static ContactListContactMapper contactListContactMapper = null;
 		Statement stmt = con.createStatement();
 			
 		ResultSet rs =	stmt.executeQuery("SELECT * FROM contactlistcontacts WHERE contactListId =" + contactListId);
+			
+		while (rs.next()){
+			ContactListContact clc = new ContactListContact();
+			clc.setId(rs.getInt("ID"));
+			clc.setContactId(rs.getInt("contactId"));
+			clc.setContactListId(rs.getInt("contactListId"));
+			
+			result.addElement(clc);
+		}
+			
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
+		return result;
+		
+	}
+	
+	public Vector<ContactListContact> findContactListContactByContactId (int contactId){
+		
+		Vector <ContactListContact> result = new Vector<ContactListContact>();
+		Connection con = DBConnection.connection();
+		
+		try{
+			
+		Statement stmt = con.createStatement();
+			
+		ResultSet rs =	stmt.executeQuery("SELECT * FROM contactlistcontacts WHERE contactId =" + contactId);
 			
 		while (rs.next()){
 			ContactListContact clc = new ContactListContact();

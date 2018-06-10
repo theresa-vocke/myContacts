@@ -30,7 +30,7 @@ public interface MyContacts extends RemoteService {
 	/**
 	 * eine Kontaktliste erstellen
 	 */
-	public ArrayList<ContactList> createContactList(String name) throws IllegalArgumentException;
+	public ContactList createContactList(String name) throws IllegalArgumentException;
 	
 	/**
 	 * auslesen aller Kontakte in einer speziellen Kontaktliste
@@ -78,9 +78,6 @@ public interface MyContacts extends RemoteService {
 	/**
 	 * einen Kontakt zu einer Kontaktliste hinzufügen 
 	 */
-	public ContactList addContact(ContactList cl, Contact c) throws IllegalArgumentException;
-
-	public Vector<Contact> getContactsOfContactList(int contactListId) throws IllegalArgumentException;
 
 	public ContactList findContactListById(int contactListId);
 
