@@ -4,10 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Vector;
 
-import de.hdm.vocke.myContacts.shared.bo.Contact;
 import de.hdm.vocke.myContacts.shared.bo.ContactList;
 
 public class ContactListMapper {
@@ -55,7 +53,7 @@ public class ContactListMapper {
 	   *         <code>id</code>.
 	   */
 	
-	public ArrayList<ContactList> insert (ContactList cl){
+	public ContactList insert (ContactList cl){
 		// neue Verbindung mit DB aufnehmen 
 		Connection con = DBConnection.connection();
 		
@@ -72,7 +70,7 @@ public class ContactListMapper {
 				/**
 				 * c erhält den bisher maximalen Primärschlüsselwert um 1 erhöht 
 				 */
-				cl.setContactListId(rs.getInt("maxid") +1);
+				cl.setId(rs.getInt("maxid") +1);
 				
 				stmt = con.createStatement();
 				
@@ -80,45 +78,16 @@ public class ContactListMapper {
 				 * jetzt erfolgt das tatsächliche Einfügen des Contact-Objektes in die DB
 				 */
 				stmt.executeUpdate("INSERT INTO contactlist (id, name) " + "VALUES" 
-				 cl.getContactListId() + "," + cl.getName ()+ ")" );
+				 + cl.getId() + "," + cl.getName ()+ ")" );
 			}
 		}
 		
 		catch (SQLException e2){
 			e2.printStackTrace();
 		}
-		return cl>;
+		return cl;
 	}
 	
-	
-	public ContactList insertContact (Contact c){
-		// neue Verbindung mit DB aufnehmen 
-		Connection con = DBConnection.connection();
-		
-		try{
-			Statement stmt = con.createStatement();
-			
-			// CODE EINFÜGEN
-			/**
-			 * ein Kontakt muss zu einer Kontaktliste hinzugefügt werden, daher müssen beide Tabellen miteinander verbunden werden
-			 * KontaktListID und ContactID müssen übereinstimmen oder man benötigt eine contactlistcontact id 
-			 * wenn die übereinstimmt mit der id von contakt und der id von contaktliste dann einfügen 
-			 * irgendwo muss man dann die contactlistcontact id noch festlegen und dann eine mehtode schreiben, die 
-			 * einen kontakt zu einer liste zuordnet. 
-			 */
-			stmt.executeUpdate("UPDATE contactlist " +  "JOIN contact" + "FROM contactcontactlist " 
-					+ "WHERE id= " c.getContactId() );
-			
-		}
-		
-		catch (SQLException e2){
-			e2.printStackTrace();
-		}
-		return c;
-	}
-	
-	
-
 	/**
 	   * Wiederholtes Schreiben eines Objekts in die Datenbank.
 	   * 
@@ -131,8 +100,8 @@ public class ContactListMapper {
 		try{
 			Statement stmt = con.createStatement();
 			
-			stmt.executeUpdate("UPDATE contactList " + " SET name =\"" cl.getName() + "\" "
-					+ "WHERE id=" cl.getContactListId());
+			stmt.executeUpdate("UPDATE contactList " + " SET name =\"" + cl.getName() + "\" "
+					+ "WHERE id=" + cl.getId());
 		}
 		catch (SQLException e2){
 			e2.printStackTrace();
@@ -151,7 +120,7 @@ public class ContactListMapper {
 		try{
 			Statement stmt = con.createStatement();
 			
-			stmt.executeUpdate("DELETE FROM contactList " + "WHERE id=" cl.getContactListId());
+			stmt.executeUpdate("DELETE FROM contactList " + "WHERE id=" + cl.getId());
 		}
 		
 		catch (SQLException e2){
@@ -178,7 +147,7 @@ public class ContactListMapper {
 			// für jeden Eintrag im Suchergebnis wird nun ein Contact Objekt erstellt
 			while (rs.next()){
 				ContactList cl = new ContactList();
-				cl.setContactListId(rs.getInt("id"));
+				cl.setId(rs.getInt("id"));
 				cl.setName(rs.getString("name"));
 				
 				// Hinzufügen eines neuen Objektes zum Ergebnisvektor
@@ -211,7 +180,7 @@ public class ContactListMapper {
 				// für jeden Eintrag im Suchergebnis wird jetzt ein Contact-Objekt erzeugt
 				while (rs.next()){
 					ContactList cl = new ContactList();
-					cl.setContactListId(rs.getInt("id"));
+					cl.setId(rs.getInt("id"));
 					cl.setName(rs.getString("name"));
 					
 					//hinzufügen des neuen Objektes zum Ergebnisvektor
@@ -225,31 +194,6 @@ public class ContactListMapper {
 		
 	}
 	
-	public ArrayList<Contact> findAllContactsFrom (ContactList cl){
-		Connection con = DBConnection.connection();
-		Vector<ContactList> result = new Vector<ContactList>();
-		
-		try{
-			Statement stmt = con.createStatement();
-			
-			ResultSet rs = stmt.executeQuery("SELECT id" + "FROM contactListContacts"
-			+ "WHERE name LIKE '" + name );
-			// für jeden Eintrag im Suchergebnis wird jetzt ein Contact-Objekt erzeugt
-			while (rs.next()){
-				ContactList cl = new ContactList();
-				cl.setContactListId(rs.getInt("id"));
-				cl.setName(rs.getString("name"));
-				
-				//hinzufügen des neuen Objektes zum Ergebnisvektor
-				result.addElement(cl);
-			}
-		}
-		catch (SQLException e2){
-			e2.printStackTrace();
-		}
-		return null;
-		
-	}
 
 	public ContactList findContactListById(int id){
 		Connection con = DBConnection.connection();
