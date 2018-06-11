@@ -60,7 +60,7 @@ import com.google.gwt.junit.client.GWTTestCase;
 		 * Anfang Methoden für Contact-Objekte
 		 */
 		
-		@Test
+		
 		public Contact createContact(String firstname, String lastname, int phonenumber, String street, int number, String city, Date birthdate) 
 				throws IllegalArgumentException {
 			Contact c = new Contact();
@@ -76,7 +76,7 @@ import com.google.gwt.junit.client.GWTTestCase;
 			// Nummer mit der DB konsistent ist 
 			c.setId(1);
 			
-			 init();
+			 
 			// Objekt in der DB speichern
 			return this.cMapper.insert(c);
 		}
@@ -91,6 +91,7 @@ import com.google.gwt.junit.client.GWTTestCase;
 			cMapper.update(c);
 		}
 		
+		@Test
 		public Contact findContactById(int contactId) throws IllegalArgumentException {
 			return this.cMapper.findById(contactId);
 		}
