@@ -127,11 +127,13 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	 */
 	public void delete(Contact c) throws IllegalArgumentException {
 		
-		List<ContactListContact> contactListContact = ContactListContactMapper.findContactListContactByContactId(c.getId());
+		List<ContactListContact> contactListContact = findContactListContactByContactId(c.getId());
+//				ContactListContactMapper.findContactListContactByContactId(c.getId());
 		
 		if (contactListContact != null){ 
 			for (ContactListContact clcListe : contactListContact){
-				ContactListContactMapper.deleteContactListContactByContactId(clcListe.getContactId());
+				deleteContactListContactByContactId(clcListe.getContactId());
+				//ContactListContactMapper.deleteContactListContactByContactId(clcListe.getContactId());
 			}
 		}
 		

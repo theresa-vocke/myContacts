@@ -11,14 +11,12 @@ import com.google.gwt.view.client.ProvidesKey;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.gwt.view.client.TreeViewModel;
 import com.google.gwt.view.client.SelectionChangeEvent;
-import com.google.gwt.cell.client.Cell;
 
 import de.hdm.vocke.myContacts.client.ClientsideSettings;
 import de.hdm.vocke.myContacts.shared.MyContactsAsync;
 import de.hdm.vocke.myContacts.shared.bo.Contact;
 import de.hdm.vocke.myContacts.shared.bo.ContactList;
 import de.hdm.vocke.myContacts.shared.bo.BusinessObject;
-import de.hdm.vocke.myContacts.shared.MyContacts;
 import de.hdm.vocke.myContacts.client.gui.ContactCell;
 import de.hdm.vocke.myContacts.client.gui.ContactListCell;
 
@@ -247,7 +245,7 @@ public class ContactListTreeViewModel implements TreeViewModel {
 			final ListDataProvider<Contact> contactProvider = new ListDataProvider<Contact>();
 			contactDataProvider.put((ContactList) value, contactProvider);
 			int contactListId = ((ContactList) value).getId();
-			myContacts.getContactsOfContactList(contactListId, new AsyncCallback<Vector<Contact>>(){
+			myContacts.findAllContactsByContactListId(contactListId, new AsyncCallback<Vector<Contact>>(){
 
 				@Override
 				public void onFailure(Throwable caught) {
