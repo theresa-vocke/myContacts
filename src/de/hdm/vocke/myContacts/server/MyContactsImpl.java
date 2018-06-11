@@ -1,10 +1,5 @@
 package de.hdm.vocke.myContacts.server;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
@@ -14,7 +9,6 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import de.hdm.vocke.myContacts.server.db.ContactListContactMapper;
 import de.hdm.vocke.myContacts.server.db.ContactListMapper;
 import de.hdm.vocke.myContacts.server.db.ContactMapper;
-import de.hdm.vocke.myContacts.server.db.DBConnection;
 import de.hdm.vocke.myContacts.shared.MyContacts;
 import de.hdm.vocke.myContacts.shared.bo.Contact;
 import de.hdm.vocke.myContacts.shared.bo.ContactList;

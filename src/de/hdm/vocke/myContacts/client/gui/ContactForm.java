@@ -1,18 +1,12 @@
 package de.hdm.vocke.myContacts.client.gui;
 
-import com.google.gwt.cell.client.AbstractCell;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.datepicker.client.DateBox;
 
 import de.hdm.vocke.myContacts.client.ClientsideSettings;
 import de.hdm.vocke.myContacts.shared.MyContactsAsync;
@@ -124,11 +118,11 @@ public class ContactForm extends VerticalPanel {
 			saveButton.setEnabled(true);
 			firstNameTextBox.setText(contactToDisplay.getFirstName());
 			lastNameTextBox.setText(contactToDisplay.getLastName());
-			phoneNumberTextBox.setText(contactToDisplay.getPhonenumber());
+			//phoneNumberTextBox.setText(contactToDisplay.getPhonenumber());
 			streetTextBox.setText(contactToDisplay.getStreet());
-			numberTextBox.setText(contactToDisplay.getNumber());
+			//numberTextBox.setText(contactToDisplay.getNumber());
 			cityTextBox.setText(contactToDisplay.getCity());
-			birthdayTextBox.setText(contactToDisplay.getBirthdate());
+			//birthdayTextBox.setText(contactToDisplay.getBirthdate());
 			idValueLabel.setText("Kontakt: " + Integer.toString(contactToDisplay.getId()));
 
 		} else {

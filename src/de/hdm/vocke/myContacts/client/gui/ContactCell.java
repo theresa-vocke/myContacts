@@ -31,19 +31,19 @@ public class ContactCell extends AbstractCell<Contact>{
       sb.appendEscaped(value.getFirstName());
       sb.appendHtmlConstant("</div>");
       sb.appendHtmlConstant(", ");
-      sb.appendEscaped(value.getPhonenumber());
+      //sb.appendEscaped(value.getPhonenumber());
       sb.appendHtmlConstant("</div>");
       sb.appendHtmlConstant(", ");
       sb.appendEscaped(value.getStreet());
       sb.appendHtmlConstant("</div>");
       sb.appendHtmlConstant(", ");
-      sb.appendEscaped(value.getNumber());
+      //sb.appendEscaped(value.getNumber());
       sb.appendHtmlConstant("</div>");
       sb.appendHtmlConstant(", ");
       sb.appendEscaped(value.getCity());
       sb.appendHtmlConstant("</div>");
       sb.appendHtmlConstant(", ");
-      sb.appendEscaped(value.getBirthdate());
+      //sb.appendEscaped(value.getBirthdate());
       sb.appendHtmlConstant("</div>");
       sb.appendHtmlConstant(", ");
     }
