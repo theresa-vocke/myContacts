@@ -24,7 +24,6 @@ import de.hdm.vocke.myContacts.client.gui.ContactListCell;
  * Die Klasse <code>ContactListTreeViewModel</code> dient zur Verwaltung
  * der Baumstruktur. Bei der Implementierung wurde sich an Professor Rathkes
  * Implementierung einer Baumstruktur aus dem Bankprojekt orientiert.
- *
  */
 
 public class ContactListTreeViewModel implements TreeViewModel {
@@ -42,36 +41,38 @@ public class ContactListTreeViewModel implements TreeViewModel {
 	private ListDataProvider<ContactList> contactListDataProvider = null;
 
 	/*
-	 * In dieser Map merken wir uns die ListDataProviders für die Kontaktlisten
-	 * der im Kontakt- und Kontaktlistenbaum expandierten Kontaktknoten.
+	 * Map --> was genau passiert hier? 
 	 */
 	private Map<ContactList, ListDataProvider<Contact>> contactDataProvider = null;
 	
 	/**
-	 * Bildet BusinessObjects auf eindeutige Zahlenobjekte ab, die als Schlüssel
-	 * für Baumknoten dienen. Dadurch werden im Selektionsmodell alle Objekte
-	 * mit derselben id selektiert, wenn eines davon selektiert wird. Der
-	 * Schlüssel für Kontaktlistenobjekte ist eine positive, der für Kontaktobjekte eine
-	 * negative Zahl, die sich jeweils aus der id des Objektes ergibt. Dadurch
-	 * können Kontaktlisten- von Kontaktobjekten unterschieden werden, auch wenn sie
-	 * dieselbe id haben.
+	 * Durch die Klasse BusinessObjectKeyProvider können Kontaktlisten- von Kontaktobjekten 
+	 * unterschieden werden, auch wenn sie dieselbe id haben.
+	 * 
+	 
+
 	 */
 	
 	private class BusinessObjectKeyProvider implements ProvidesKey<BusinessObject> {
 		
+		//von der getKey-Mehtode wird ein integer wert als Rückgabewert erwartet
+		//aus den Anwendungsobjekten muss ein eindeutiger Schlüssel erzeugt werden (durch ProvidesKey)
 		@Override
 		public Object getKey(BusinessObject bo) {
 			if (bo == null) {
 				return null;
 			}
+			// prüfen, ob bo ContactList ist, dann integer von id zurück geben 
 			if (bo instanceof ContactList) {
 				return new Integer(bo.getId());
 			} else {
+				// wenn bo keine ContactList, sondern dann Contact ist, negieren und negative id zurück geben
 				return new Integer(-bo.getId());
 			}
 		}
 
 	};
+	
 	
 	private BusinessObjectKeyProvider boKeyProvider = null;
 	private SingleSelectionModel<BusinessObject> selectionModel = null;
@@ -243,6 +244,7 @@ public class ContactListTreeViewModel implements TreeViewModel {
 		if (value instanceof ContactList) {
 
 			final ListDataProvider<Contact> contactProvider = new ListDataProvider<Contact>();
+			// was macht put und was wird im 1. Argument übergeben? 
 			contactDataProvider.put((ContactList) value, contactProvider);
 			int contactListId = ((ContactList) value).getId();
 			myContacts.findAllContactsByContactListId(contactListId, new AsyncCallback<Vector<Contact>>(){
