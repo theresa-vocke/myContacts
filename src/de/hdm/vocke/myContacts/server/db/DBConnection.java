@@ -28,8 +28,8 @@ public class DBConnection {
      * mitgegeben, um bei einer Veränderung dieser URL nicht die gesamte
      * Software neu komilieren zu müssen.
      */
-    private static String googleUrl = "jdbc:google:mysql://myContacts?user=jdbcg&password=Uvawevusa675";
-    private static String localUrl = "jdbc:mysql//localhost:3306/myContacts?user=ThersaVocke&password=theresa22";
+    private static String googleUrl = "";
+    private static String localUrl = "jdbc:mysql//localhost:3306/myContacts?user=root&password=root";
     /**
      * Diese statische Methode kann aufgrufen werden durch
      * <code>DBConnection.connection()</code>. Sie stellt die

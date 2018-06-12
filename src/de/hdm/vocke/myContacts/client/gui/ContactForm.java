@@ -118,11 +118,11 @@ public class ContactForm extends VerticalPanel {
 			saveButton.setEnabled(true);
 			firstNameTextBox.setText(contactToDisplay.getFirstName());
 			lastNameTextBox.setText(contactToDisplay.getLastName());
-			//phoneNumberTextBox.setText(contactToDisplay.getPhonenumber());
+			phoneNumberTextBox.setText(contactToDisplay.getPhonenumber());
 			streetTextBox.setText(contactToDisplay.getStreet());
-			//numberTextBox.setText(contactToDisplay.getNumber());
+			numberTextBox.setText(contactToDisplay.getNumber());
 			cityTextBox.setText(contactToDisplay.getCity());
-			//birthdayTextBox.setText(contactToDisplay.getBirthdate());
+			birthdayTextBox.setText(contactToDisplay.getBirthdate());
 			idValueLabel.setText("Kontakt: " + Integer.toString(contactToDisplay.getId()));
 
 		} else {

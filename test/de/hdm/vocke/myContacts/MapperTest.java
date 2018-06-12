@@ -23,7 +23,7 @@ public class MapperTest extends GWTTestCase {
 	c.setLastName("Vocke");
 	c.setStreet("StuttgarterStraﬂe");
 	c.setCity("Stuttgart");
-		
+
 	}
 	
 }

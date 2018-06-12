@@ -5,7 +5,13 @@ import java.util.Map;
 import java.util.Vector;
 
 import com.google.gwt.dev.util.collect.HashMap;
+import com.google.gwt.user.cellview.client.CellTree;
+import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.ProvidesKey;
 import com.google.gwt.view.client.SingleSelectionModel;
@@ -26,7 +32,7 @@ import de.hdm.vocke.myContacts.client.gui.ContactListCell;
  * Implementierung einer Baumstruktur aus dem Bankprojekt orientiert.
  */
 
-public class ContactListTreeViewModel implements TreeViewModel {
+public class ContactListTreeViewModel extends VerticalPanel implements TreeViewModel {
 
 	private ContactForm contactForm;
 	private ContactListForm contactListForm;
@@ -69,6 +75,33 @@ public class ContactListTreeViewModel implements TreeViewModel {
 		}
 
 	};
+	
+	private ContactListTreeViewModel contactTreeModel;
+	private CellTree navigationCellTree;
+	private ScrollPanel navigationTreePanel = new ScrollPanel();
+	private VerticalPanel treeContainer = new VerticalPanel();
+	private Label navigationHeadline = new Label("Kontaktlisten");
+	
+	protected void onLoad(){
+		super.onLoad();
+		
+		contactTreeModel = new ContactListTreeViewModel();
+		navigationCellTree = new CellTree(contactTreeModel, "Root");
+		
+		navigationCellTree.setAnimationEnabled(true);
+		navigationTreePanel.add(navigationCellTree);
+		
+		treeContainer.add(navigationHeadline);
+		navigationTreePanel.setStylePrimaryName("TreeContainerPanel");
+		navigationHeadline.setStylePrimaryName("NavigationPanelHeadline");
+		treeContainer.add(navigationTreePanel);
+		navigationCellTree.setKeyboardSelectionPolicy(KeyboardSelectionPolicy.ENABLED);
+		
+		RootPanel.get("Navigator").clear();
+		RootPanel.get("Navigator").add(treeContainer);
+		
+	}
+	
 	
 	
 	private BusinessObjectKeyProvider boKeyProvider = null;
