@@ -48,9 +48,6 @@ public class ContactListTreeViewModel implements TreeViewModel {
 	/**
 	 * Durch die Klasse BusinessObjectKeyProvider können Kontaktlisten- von Kontaktobjekten 
 	 * unterschieden werden, auch wenn sie dieselbe id haben.
-	 * 
-	 
-
 	 */
 	
 	private class BusinessObjectKeyProvider implements ProvidesKey<BusinessObject> {
@@ -244,7 +241,7 @@ public class ContactListTreeViewModel implements TreeViewModel {
 		if (value instanceof ContactList) {
 
 			final ListDataProvider<Contact> contactProvider = new ListDataProvider<Contact>();
-			// was macht put und was wird im 1. Argument übergeben? 
+			//was wird im 1. Argument übergeben?, hinzufügen von Elementen in Map?
 			contactDataProvider.put((ContactList) value, contactProvider);
 			int contactListId = ((ContactList) value).getId();
 			myContacts.findAllContactsByContactListId(contactListId, new AsyncCallback<Vector<Contact>>(){
