@@ -1,9 +1,9 @@
 package de.hdm.vocke.myContacts.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.RootPanel;
 
+import de.hdm.vocke.myContacts.client.gui.ContactListTreeViewModel;
 import de.hdm.vocke.myContacts.shared.MyContactsAsync;
 
 
@@ -12,17 +12,16 @@ import de.hdm.vocke.myContacts.shared.MyContactsAsync;
  */
 public class MyContactsEntryPoint implements EntryPoint {
 	
-	private static MyContactsAsync myContacts = ClientsideSettings.getMyContacts();
+	final MyContactsAsync myContacts = ClientsideSettings.getMyContacts();
 	ClientsideSettings clientsideSettings = new ClientsideSettings();
 	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
 		
-		VerticalPanel mainPanel = new VerticalPanel();
-		Button addContactButton = new Button("Add");
-		
-	    mainPanel.add(addContactButton);
+		ContactListTreeViewModel ctvm = new ContactListTreeViewModel();
+		RootPanel.get("Navigator").clear();
+		RootPanel.get("Navigator").add(ctvm);
 	    
 	    
 		
