@@ -149,11 +149,11 @@ public class ContactListTreeViewModel extends VerticalPanel implements TreeViewM
 					
 	}
 	
-	void setCustomerForm(ContactListForm clf) {
+	public void setContactListForm(ContactListForm clf) {
 		contactListForm = clf;
 	}
 
-	void setAccountForm(ContactForm cf) {
+	public void setContactForm(ContactForm cf) {
 		contactForm = cf;
 	}
 

@@ -16,7 +16,7 @@ public class ContactListForm extends VerticalPanel {
 
 	MyContactsAsync myContacts = ClientsideSettings.getMyContacts();
 	ContactList contactListToDisplay = null;
-	ContactListTreeViewModel cltvm = null;	
+	ContactListTreeViewModel ctvm= null;
 	/**
 	 * Anlegen der GUI Elemente 
 	 */
@@ -30,6 +30,7 @@ public class ContactListForm extends VerticalPanel {
 	Label idValueLabel = new Label("Kontaktliste: ");
 	Button deleteButton = new Button("Löschen");
 	Button saveButton = new Button("Speichern");
+
 	
 
 	/*
@@ -72,6 +73,10 @@ public class ContactListForm extends VerticalPanel {
 			// TODO Auto-generated method stub
 			
 		}
+	}
+	
+	public void setCtvm(ContactListTreeViewModel ctvm) {
+		this.ctvm = ctvm;
 	}
 	
 	/*

@@ -16,7 +16,7 @@ public class ContactForm extends VerticalPanel {
 	
 	MyContactsAsync myContacts = ClientsideSettings.getMyContacts();
 	Contact contactToDisplay = null;
-	ContactListTreeViewModel cltvm = null;	
+	ContactListTreeViewModel ctvm = null;	
 	/**
 	 * Anlegen der GUI Elemente 
 	 */
@@ -105,6 +105,10 @@ public class ContactForm extends VerticalPanel {
 		}
 	}
 
+	public void setCtvm(ContactListTreeViewModel ctvm) {
+		this.ctvm = ctvm;
+	}
+	
 	/*
 	 * Wenn der anzuzeigende Kontakt gesetzt bzw. gelöscht wird, werden die
 	 * zugehörenden Textfelder mit den Informationen aus dem Kontaktobjekt gefüllt
