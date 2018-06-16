@@ -28,7 +28,6 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	 */
 	private ContactListMapper clMapper = null; 
 	
-	
 	private ContactListContactMapper clcMapper = null;
 	/*
 	 * Initialisierung 
@@ -54,7 +53,6 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	 * Ende Initialisierung 
 	 * Anfang Methoden für Contact-Objekte
 	 */
-	
 	
 	public Contact createContact(String firstname, String lastname, int phonenumber, String street, int number, String city, Date birthdate) 
 			throws IllegalArgumentException {
