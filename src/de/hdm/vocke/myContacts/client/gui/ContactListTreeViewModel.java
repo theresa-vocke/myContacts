@@ -1,12 +1,14 @@
 package de.hdm.vocke.myContacts.client.gui;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
-import com.google.gwt.dev.util.collect.HashMap;
+
 import com.google.gwt.user.cellview.client.CellTree;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -40,6 +42,12 @@ public class ContactListTreeViewModel extends VerticalPanel implements TreeViewM
 	private Contact selectedContact = null;
 	private ContactList selectedContactList = null;
 	
+	private ContactListTreeViewModel contactTreeModel;
+	private CellTree navigationCellTree;
+	private ScrollPanel navigationTreePanel = new ScrollPanel();
+	private VerticalPanel treeContainer = new VerticalPanel();
+	private Label navigationHeadline = new Label("Kontaktlisten");
+	
 	private MyContactsAsync myContacts = null;
 	
 		
@@ -61,7 +69,7 @@ public class ContactListTreeViewModel extends VerticalPanel implements TreeViewM
 		//von der getKey-Mehtode wird ein integer wert als Rückgabewert erwartet
 		//aus den Anwendungsobjekten muss ein eindeutiger Schlüssel erzeugt werden (durch ProvidesKey)
 		@Override
-		public Object getKey(BusinessObject bo) {
+		public Integer getKey(BusinessObject bo) {
 			if (bo == null) {
 				return null;
 			}
@@ -76,11 +84,8 @@ public class ContactListTreeViewModel extends VerticalPanel implements TreeViewM
 
 	};
 	
-	private ContactListTreeViewModel contactTreeModel;
-	private CellTree navigationCellTree;
-	private ScrollPanel navigationTreePanel = new ScrollPanel();
-	private VerticalPanel treeContainer = new VerticalPanel();
-	private Label navigationHeadline = new Label("Kontaktlisten");
+	private BusinessObjectKeyProvider boKeyProvider = null;
+	private SingleSelectionModel<BusinessObject> selectionModel = null;
 	
 	protected void onLoad(){
 		super.onLoad();
@@ -104,8 +109,7 @@ public class ContactListTreeViewModel extends VerticalPanel implements TreeViewM
 	
 	
 	
-	private BusinessObjectKeyProvider boKeyProvider = null;
-	private SingleSelectionModel<BusinessObject> selectionModel = null;
+
 	
 	/**
 	 * Nested Class für die Reaktion auf Selektionsereignisse. Als Folge einer
@@ -244,6 +248,37 @@ public class ContactListTreeViewModel extends VerticalPanel implements TreeViewM
 		selectionModel.setSelected(contactList, true);
 	}
 	
+	void updateContact(Contact c) {
+		//myContacts.findContactListById(contactListId, callback);,
+				//new UpdateContactCallback(c));
+	}
+	
+//	private class UpdateContactCallback implements AsyncCallback<Contact> {
+//
+//		Contact contact = null;
+//
+//		UpdateContactCallback(Contact c) {
+//			contact = c;
+//		}
+//
+//		@Override
+//		public void onFailure(Throwable t) {
+//		}
+//
+//		@Override
+//		public void onSuccess(Contact result) {
+//			// TODO Auto-generated method stub
+//			List<Contact> contactList1 = contactDataProvider.get(contact)
+//					.getList();
+//			for (int i=0; i<contactList1.size(); i++) {
+//				if (contact.getId() == contactList1.get(i).getId()) {
+//					contactList1.set(i, contact);
+//					break;
+//				}
+//			}
+//		}
+//	}
+	
 	// Get the NodeInfo that provides the children of the specified value.
 	
 	@Override
@@ -281,7 +316,7 @@ public class ContactListTreeViewModel extends VerticalPanel implements TreeViewM
 
 				@Override
 				public void onFailure(Throwable caught) {
-
+						Window.alert("Fehler beim Laden" + caught.getMessage());
 				}
 
 				@Override

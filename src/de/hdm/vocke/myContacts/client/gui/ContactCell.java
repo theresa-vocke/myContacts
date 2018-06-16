@@ -25,27 +25,9 @@ public class ContactCell extends AbstractCell<Contact>{
         return;
       }
 
-      sb.appendHtmlConstant("<div>");
-      sb.appendEscaped(value.getLastName());
-      sb.appendHtmlConstant(", ");
-      sb.appendEscaped(value.getFirstName());
+      sb.appendHtmlConstant("<div>Kontakt: ");
+      sb.append(value.getId());
       sb.appendHtmlConstant("</div>");
-      sb.appendHtmlConstant(", ");
-//      sb.appendEscaped(value.getPhonenumber());
-      sb.appendHtmlConstant("</div>");
-      sb.appendHtmlConstant(", ");
-      sb.appendEscaped(value.getStreet());
-      sb.appendHtmlConstant("</div>");
-      sb.appendHtmlConstant(", ");
-//      sb.appendEscaped(value.getNumber());
-      sb.appendHtmlConstant("</div>");
-      sb.appendHtmlConstant(", ");
-      sb.appendEscaped(value.getCity());
-      sb.appendHtmlConstant("</div>");
-      sb.appendHtmlConstant(", ");
-//      sb.appendEscaped(value.getBirthdate());
-      sb.appendHtmlConstant("</div>");
-      sb.appendHtmlConstant(", ");
     }
 	
 }
