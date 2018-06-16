@@ -1,6 +1,7 @@
 package de.hdm.vocke.myContacts.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.cellview.client.CellTree;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import de.hdm.vocke.myContacts.client.gui.ContactListTreeViewModel;
@@ -11,6 +12,14 @@ import de.hdm.vocke.myContacts.shared.MyContactsAsync;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class MyContactsEntryPoint implements EntryPoint {
+	
+	static interface ContactTreeRecources extends CellTree.Resources {
+	    @Override
+		@Source("ContactCellTree.css")
+	    CellTree.Style cellTreeStyle(); 
+	}
+	
+	
 	
 	final MyContactsAsync myContacts = ClientsideSettings.getMyContacts();
 	ClientsideSettings clientsideSettings = new ClientsideSettings();
