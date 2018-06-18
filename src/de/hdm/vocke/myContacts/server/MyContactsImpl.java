@@ -210,11 +210,11 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	}
 	
 	
-	public ContactListContact createContactToContactList(int contactId, int contactListId) throws IllegalArgumentException {
+	public ContactListContact createContactToContactList(Contact contact, ContactList contactList) throws IllegalArgumentException {
 		ContactListContact clc = new ContactListContact();
 
-		clc.setContactId(contactId);
-		clc.setContactListId(contactListId);
+		clc.setContactId(contact.getId());
+		clc.setContactListId(contactList.getId());
 		
 		return this.clcMapper.addContactToContactList(clc);
 	}

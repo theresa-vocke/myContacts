@@ -65,7 +65,7 @@ public interface MyContactsAsync {
 	
 	void deleteContactListContact(ContactListContact clc, AsyncCallback<Void> callback);
 	
-	void  createContactToContactList(int contactId, int contactListId, AsyncCallback<ContactListContact> callback);
+	void createContactToContactList(Contact contact, ContactList contactList, AsyncCallback<ContactListContact> callback);
 	
 	void deleteContactListContactByContactId(int contactId, AsyncCallback<Void> callback);
 	

@@ -157,7 +157,7 @@ public class ContactListTreeViewModel extends VerticalPanel implements TreeViewM
 		contactForm = cf;
 	}
 
-	ContactList getSelectedCustomer() {
+	public ContactList getSelectedContactList() {
 		return selectedContactList;
 	}
 
@@ -168,7 +168,7 @@ public class ContactListTreeViewModel extends VerticalPanel implements TreeViewM
 		contactForm.setSelected(null);
 	}
 
-	Contact getSelectedContact() {
+	public Contact getSelectedContact() {
 		return selectedContact;
 	}
 	

@@ -1,6 +1,5 @@
 package de.hdm.vocke.myContacts.shared;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 
@@ -20,7 +19,7 @@ public interface MyContacts extends RemoteService {
 	/** 
 	 * initialisierung des Objektes 
 	 * Diese Methode ist vor dem Hintergrund von GWT RPC zusätzlich zum No Argument Constructor der 
-	 * implementierenden Klasse myContactsImpl notwendig. Diese Methode direkt nach der Instantiierung aufrufen
+	 * implementierenden Klacrsse myContactsImpl notwendig. Diese Methode direkt nach der Instantiierung aufrufen
 	 */
 	public void init () throws IllegalArgumentException;
 	
@@ -104,7 +103,7 @@ public interface MyContacts extends RemoteService {
 	
 	public void deleteContactListContact(ContactListContact clc) throws IllegalArgumentException;
 
-	public ContactListContact createContactToContactList(int contactId, int contactListId) throws IllegalArgumentException;
+	ContactListContact createContactToContactList(Contact contact, ContactList contactList);
 
 	public void deleteContactListContactByContactId(int contactId) throws IllegalArgumentException;
 

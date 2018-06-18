@@ -2,6 +2,8 @@ package de.hdm.vocke.myContacts.client.gui;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
@@ -11,6 +13,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm.vocke.myContacts.client.ClientsideSettings;
 import de.hdm.vocke.myContacts.shared.MyContactsAsync;
 import de.hdm.vocke.myContacts.shared.bo.Contact;
+import de.hdm.vocke.myContacts.shared.bo.ContactList;
 
 public class ContactForm extends VerticalPanel {
 	
@@ -78,7 +81,7 @@ public class ContactForm extends VerticalPanel {
 		contactGrid.setWidget(7, 0, birthdayLabel);
 		contactGrid.setWidget(7, 1, birthdayTextBox);
 		
-		deleteButton.addClickHandler(new CancelClickHandler());
+		deleteButton.addClickHandler(new DeleteClickHandler());
 		deleteButton.setEnabled(false);
 		contactGrid.setWidget(8, 0, deleteButton);
 		
@@ -90,20 +93,115 @@ public class ContactForm extends VerticalPanel {
 	}
 	
 	
-	private class CancelClickHandler implements ClickHandler{
+	private class DeleteClickHandler implements ClickHandler{
 		@Override
 		public void onClick(ClickEvent event) {
-						
+			if (contactToDisplay == null) {
+				Window.alert("keinen Kontakt ausgewählt");
+			} else {
+				myContacts.findContactById(contactToDisplay.getId(),
+						new useContactListForContactDeletionCallback(contactToDisplay));
+			}			
 		}
 	}
 
-	private class SaveClickHandler implements ClickHandler{
+	private class useContactListForContactDeletionCallback implements
+	AsyncCallback<Contact> {
+		
+		Contact contact = null;
+
+		useContactListForContactDeletionCallback(Contact c) {
+			contact = c;
+		}
+
 		@Override
-		public void onClick(ClickEvent event) {
-			// TODO Auto-generated method stub
-			
+		public void onFailure(Throwable caught) {
+		}
+
+		public void onSuccess(ContactList contactList) {
+			if (contactList != null && contact != null) {
+				myContacts.delete(contact, new deleteContactCallback(
+						contact, contactList));
+			}			
 		}
 	}
+	
+	/*
+	 * Da wir uns Kunde und Konto merken müssen, um den Kunden- und Kontobaum
+	 * nach erfolgter Kontolöschung zu aktualisieren, hat diese Callback-Klasse
+	 * private Attribute und einen Konstruktor, in dem diese Wert abgespeichert
+	 * bzw. übergeben werden.
+	 * 
+	 * Nach erfolgter Löschung werden diese Werte verwendet.
+	 */
+	private class deleteContactCallback implements AsyncCallback<Void> {
+
+		private ContactList contactList = null;
+		private Contact contact = null;
+
+		deleteContactCallback(Contact c, ContactList cl) {
+			contact = c;
+			contactList = cl;
+		}
+
+		@Override
+		public void onFailure(Throwable caught) {
+
+		}
+
+		@Override
+		public void onSuccess(Void result) {
+			setSelected(null);
+			if (contactList != null) {
+				ctvm.removeContactFromContactList(contact, contactList);
+			}
+		}
+	}
+	
+	
+	private class SaveClickHandler implements ClickHandler{
+		public void onClick(ClickEvent event) {
+			
+			ContactList selectedContactList = ctvm.getSelectedContactList();
+			Contact selectedContact = ctvm.getSelectedContact();
+			if (selectedContactList == null) {
+				Window.alert("keinen Kontakt ausgewählt");
+			} else {
+				myContacts.createContactToContactList(selectedContact, selectedContactList, 
+						new CreateContactCallback(selectedContactList));
+			}
+		}
+	}
+	
+	/*
+	 * Hier muss der Kontakt-und Kontaktlistenbaum aktualisiert werden, wenn ein Kontakt erzeugt wurde 
+	 * daher ein privates Attribu und der Konstruktor 
+	 * 
+	 * Wir benötigen hier nur einen Parameter für die Kontaktliste, da der Kontakt als
+	 * Ergebnis des asynchronen Aufrufs geliefert wird.
+	 */
+	
+	private class CreateContactCallback implements AsyncCallback<Contact> {
+	
+		ContactList contactList = null;
+	
+		CreateContactCallback(ContactList cl) {
+			contactList = cl;
+		}
+	
+		@Override
+		public void onFailure(Throwable caught) {
+			// this.showcase.append("Fehler bei der Abfrage " +
+			// caught.getMessage());
+		}
+	
+		@Override
+		public void onSuccess(Contact contact) {
+			if (contact != null && contactList != null) {
+				ctvm.addContactToContactList(contact, contactList);
+			}
+		}
+	}	
 
 	public void setCtvm(ContactListTreeViewModel ctvm) {
 		this.ctvm = ctvm;

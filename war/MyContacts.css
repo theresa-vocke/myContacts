@@ -1,7 +1,6 @@
 /** Add css rules here for your application. */
 
 
-/** Example rules used by the template application (remove for your app) */
 h1 {
   font-size: 2em;
   font-weight: bold;
@@ -10,6 +9,91 @@ h1 {
   text-align: center;
 }
 
+.myContacts-headline {
+  	font-size: 15pt;
+	font-weight: bold;
+	color: #7FFFd4;
+	margin: 0px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	text-align: left;
+}
+
+.myContacts-simpletext {
+	font-size: 100%;
+	font-weight: normal;
+	padding: 3px;
+}
+
+.myContacts-label {
+	font-size: 120%;
+	font-weight: bold;
+	font-style: italic;
+	color: #c0c0c0;
+	padding-bottom: 0.5em;
+	
+}
+
+.myContacts-textfield {
+	font-size: 100%;
+	font-weight: normal;
+	padding: 3px;
+	width: 15em;
+}
+
+.myContacts-menubutton {
+	font-size: 100%;
+	font-weight: bold;
+	width: 15em;
+	margin-bottom: 1em;
+}
+
+.myContacts-button {
+	font-size: 100%;
+	font-weight: bold;
+}
+
+div#TopLevelFrame {
+	width: 100%;
+	
+	text-align: center;
+	background: #F5FFFa;
+ }
+ 
+
+div#Header {
+	margin: 5px; 	
+	background: #CCCCFF;
+}
+
+div#Navigator {
+	max-height: 200px;
+	overflow:scroll;
+	padding: 1em 1em;
+	
+	background: #F5FFFa ;
+}
+
+div#Details {
+	padding: 4em 1em;
+	
+	background: #b7caca;
+}
+
+div#Trailer {
+	clear: both;
+	padding: 10px 0;
+	margin: 0 auto;      /* standardkonforme horizontale Zentrierung */
+	border-top: 1px dashed silver;
+	font-size: 80%;
+	text-align: center;
+	
+	background: #dddedf;
+}
+
+/**
+	Ab hier: Alte Deklarationen. Können ggf. gelöscht werden.
+*/
 .sendButton {
   display: block;
   font-size: 16pt;
@@ -25,7 +109,7 @@ h1 {
 }
 
 .serverResponseLabelError {
-  color: red;
+  color: #80ffff;
 }
 
 /** Set ids using widget.getElement().setId("idOfElement") */
