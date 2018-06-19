@@ -8,7 +8,7 @@ import de.hdm.vocke.myContacts.shared.bo.Contact;
 /**
 * Klasse zur Darstellung von Konto-Objekten.
 * Solche Erweiterungen von <code>AbstractCell<T></code> dienen zur Erzeugung von
-* HTML-Code für benutzerdefinierte Objekte. In diesem Fall wird die <code>id</code>
+* HTML-Code fï¿½r benutzerdefinierte Objekte. In diesem Fall wird die <code>id</code>
 * eines Kontoobjekts mit einem vorangestellten "Kontonnr. " in einem <code>div-</code>Element
 * erzeugt.
 * 
@@ -25,8 +25,10 @@ public class ContactCell extends AbstractCell<Contact>{
         return;
       }
 
-      sb.appendHtmlConstant("<div>Kontakt: ");
-      sb.append(value.getId());
+      sb.appendHtmlConstant("<div>");
+      sb.appendEscaped(value.getLastName());
+      sb.appendHtmlConstant(", ");
+      sb.appendEscaped(value.getFirstName());
       sb.appendHtmlConstant("</div>");
     }
 	

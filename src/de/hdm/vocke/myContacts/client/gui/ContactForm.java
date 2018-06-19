@@ -2,6 +2,8 @@ package de.hdm.vocke.myContacts.client.gui;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 //import com.google.gwt.user.client.Window;
 //import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
@@ -14,6 +16,7 @@ import de.hdm.vocke.myContacts.client.ClientsideSettings;
 import de.hdm.vocke.myContacts.shared.MyContactsAsync;
 import de.hdm.vocke.myContacts.shared.bo.Contact;
 //import de.hdm.vocke.myContacts.shared.bo.ContactList;
+import de.hdm.vocke.myContacts.shared.bo.ContactList;
 
 public class ContactForm extends VerticalPanel {
 	
@@ -35,6 +38,7 @@ public class ContactForm extends VerticalPanel {
 	TextBox adresseTextBox = new TextBox();
 	Label idValueLabel = new Label("Kontakt: ");
 	Button addButton = new Button ("Kontakt zu Kontaktliste hinzufügen");
+	Button newButton = new Button ("Als neuen Kontakt speichern");
 	Button deleteButton = new Button("Löschen");
 	Button saveButton = new Button("Speichern");
 	
@@ -50,7 +54,7 @@ public class ContactForm extends VerticalPanel {
 		
 		Grid contactGrid = new Grid(9, 2);
 		this.add(contactGrid);
-
+		
 		Label firstNameLabel = new Label("Vorname");
 		contactGrid.setWidget(1, 0, firstNameLabel);
 		contactGrid.setWidget(1, 1, firstNameTextBox);
@@ -70,6 +74,10 @@ public class ContactForm extends VerticalPanel {
 		addButton.addClickHandler(new AddClickHandler());
 		addButton.setEnabled(false);
 		contactGrid.setWidget(7, 0, addButton);
+		
+		newButton.addClickHandler(new NewClickHandler());
+		newButton.setEnabled(false);
+		contactGrid.setWidget(7, 1, newButton);
 		
 		deleteButton.addClickHandler(new DeleteClickHandler());
 		deleteButton.setEnabled(false);
@@ -93,6 +101,17 @@ public class ContactForm extends VerticalPanel {
 		}
 	}
 	
+	private class NewClickHandler implements ClickHandler{
+		@Override
+		public void onClick(ClickEvent event){
+//			if (contactToDisplay == null) {
+//				Window.alert("kineen Kontakt ausgewählt");
+//			} else {
+//				myContacts.createContact(firstname, lastname, callback);
+//			}
+		}
+	}
+	
 	private class DeleteClickHandler implements ClickHandler{
 		@Override
 		public void onClick(ClickEvent event) {
@@ -104,7 +123,7 @@ public class ContactForm extends VerticalPanel {
 //			}			
 		}
 	}
-
+	
 //	private class useContactListForContactDeletionCallback implements
 //	AsyncCallback<Contact> {
 //		
@@ -134,29 +153,29 @@ public class ContactForm extends VerticalPanel {
 	 * 
 	 * Nach erfolgter L�schung werden diese Werte verwendet.
 	 */
-//	private class deleteContactCallback implements AsyncCallback<Void> {
-//
-//		private ContactList contactList = null;
-//		private Contact contact = null;
-//
-//		deleteContactCallback(Contact c, ContactList cl) {
-//			contact = c;
-//			contactList = cl;
-//		}
-//
-//		@Override
-//		public void onFailure(Throwable caught) {
-//
-//		}
-//
-//		@Override
-//		public void onSuccess(Void result) {
-//			setSelected(null);
-//			if (contactList != null) {
-//				ctvm.removeContactFromContactList(contact, contactList);
-//			}
-//		}
-//	}
+	private class deleteContactCallback implements AsyncCallback<Void> {
+
+		private ContactList contactList = null;
+		private Contact contact = null;
+
+		deleteContactCallback(Contact c, ContactList cl) {
+			contact = c;
+			contactList = cl;
+		}
+
+		@Override
+		public void onFailure(Throwable caught) {
+
+		}
+
+		@Override
+		public void onSuccess(Void result) {
+			setSelected(null);
+			if (contactList != null) {
+				ctvm.removeContactFromContactList(contact, contactList);
+			}
+		}
+	}
 	
 	
 	private class SaveClickHandler implements ClickHandler{
@@ -167,8 +186,9 @@ public class ContactForm extends VerticalPanel {
 //			if (selectedContactList == null) {
 //				Window.alert("keinen Kontakt ausgew�hlt");
 //			} else {
-//				myContacts.createContactToContactList(selectedContact, selectedContactList, 
-//						new CreateContactCallback(selectedContactList));
+////				myContacts.createContactToContactList(selectedContact, selectedContactList, 
+////						new CreateContactCallback(selectedContactList));
+//				myContacts.save(selectedContact, new CreateContactCallback(selectedContactList);
 //			}
 		}
 	}

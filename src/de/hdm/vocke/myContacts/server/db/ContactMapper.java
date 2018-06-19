@@ -79,13 +79,13 @@ public class ContactMapper {
 				/**
 				 * jetzt erfolgt das tats�chliche Einf�gen des Contact-Objektes in die DB
 				 */
-				stmt.executeUpdate("INSERT INTO contacts (ID, firstname, lastname, telefonnummer, adresse)" 
+				stmt.executeUpdate("INSERT INTO contact (ID, firstname, lastname, telefonnummer, adresse)" 
 				 + "VALUES (" 
 				 + c.getId() 
 				 + "," 
-				 + c.getLastName() 
+				 + c.getFirstName() 
 				 + "," 
-				 + c.getFirstName()
+				 + c.getLastName()
 				 + "," 
 				 + c.getTelefonnummer() 
 				 + "," 
@@ -203,8 +203,7 @@ public class ContactMapper {
 			try{
 				Statement stmt = con.createStatement();
 				
-				ResultSet rs = stmt.executeQuery("SELECT ID, firstname, lastname, telefonnummer, adresse" 
-				+ "FROM contact" 
+				ResultSet rs = stmt.executeQuery("SELECT ID, firstname, lastname, telefonnummer, adresse FROM contact" 
 				+ "WHERE lastname LIKE '" + lastName + "ORDER BY lastname");
 				// f�r jeden Eintrag im Suchergebnis wird jetzt ein Contact-Objekt erzeugt
 				while (rs.next()){
@@ -248,7 +247,7 @@ public class ContactMapper {
 					Contact c = new Contact();
 					c.setId(rs.getInt("ID"));
 					c.setFirstName(rs.getString("firstname"));
-					c.setFirstName(rs.getString("lastname"));
+					c.setLastName(rs.getString("lastname"));
 					c.setTelefonnummer(rs.getString("telefonnummer"));
 					c.setAdresse(rs.getString("adresse"));
 					
@@ -285,7 +284,7 @@ public class ContactMapper {
 				Contact c = new Contact();
 				c.setId(rs.getInt("ID"));
 				c.setFirstName(rs.getString("firstname"));
-				c.setFirstName(rs.getString("lastname"));
+				c.setLastName(rs.getString("lastname"));
 				c.setTelefonnummer(rs.getString("telefonnummer"));
 				c.setAdresse(rs.getString("adresse"));
 				
@@ -370,7 +369,7 @@ public class ContactMapper {
 					Contact c = new Contact();
 					c.setId(rs.getInt("ID"));
 					c.setFirstName(rs.getString("firstname"));
-					c.setFirstName(rs.getString("lastname"));
+					c.setLastName(rs.getString("lastname"));
 					c.setTelefonnummer(rs.getString("telefonnummer"));
 					c.setAdresse(rs.getString("adresse"));
 					

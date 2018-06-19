@@ -25,7 +25,7 @@ public interface MyContactsAsync {
 
 	void getContactByLastname(String lastname, AsyncCallback<Vector<Contact>> callback);
 		
-	void findAllContactsByContactListId(int contactListId, AsyncCallback<Vector<Contact>> callback);
+	void findAllContactsByContactListId(ContactList cl, AsyncCallback<Vector<Contact>> callback);
 	
 	void delete(Contact c, AsyncCallback<Void> callback);
 	

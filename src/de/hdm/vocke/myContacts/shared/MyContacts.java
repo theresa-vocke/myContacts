@@ -9,7 +9,7 @@ import de.hdm.vocke.myContacts.shared.bo.Contact;
 import de.hdm.vocke.myContacts.shared.bo.ContactList;
 import de.hdm.vocke.myContacts.shared.bo.ContactListContact;
 /**
- * synchrone Schnittstelle für eine RPC-fähige Klasse zur Verwatlung von Kontakten und Kontaktlisten
+ * synchrone Schnittstelle fï¿½r eine RPC-fï¿½hige Klasse zur Verwatlung von Kontakten und Kontaktlisten
  * 
  * die Methoden werden hier umgesetzt, damit die Klassen nicht zu sehr aneinander gekoppelt werden
  * Das Wissen, wie die einzelnen Daten koexistieren wird also in der vorliegenden Klasse gekapselt 
@@ -23,7 +23,7 @@ public interface MyContacts extends RemoteService {
 	
 	/** 
 	 * initialisierung des Objektes 
-	 * Diese Methode ist vor dem Hintergrund von GWT RPC zusätzlich zum No Argument Constructor der 
+	 * Diese Methode ist vor dem Hintergrund von GWT RPC zusï¿½tzlich zum No Argument Constructor der 
 	 * implementierenden Klacrsse myContactsImpl notwendig. Diese Methode direkt nach der Instantiierung aufrufen
 	 */
 	public void init () throws IllegalArgumentException;
@@ -53,10 +53,10 @@ public interface MyContacts extends RemoteService {
 	 */
 	public Vector<Contact> getContactByFirstname (String firstname) throws IllegalArgumentException;
 	
-	public Vector<Contact> findAllContactsByContactListId(int contactListId) throws IllegalArgumentException;
+	public Vector<Contact> findAllContactsByContactListId(ContactList cl) throws IllegalArgumentException;
 	
 	/**
-	 * löschen des übergebenen Kontakt-Objektes
+	 * lï¿½schen des ï¿½bergebenen Kontakt-Objektes
 	 */
 	public void delete (Contact c) throws IllegalArgumentException;
 	
@@ -79,12 +79,12 @@ public interface MyContacts extends RemoteService {
 	public ContactList findContactListById(int contactListId);
 	
 	/**
-	 * sämtliche Kontaktlisten ausgeben
+	 * sï¿½mtliche Kontaktlisten ausgeben
 	 */
 	public Vector<ContactList> getAllContactLists () throws IllegalArgumentException;
 	
 	/**
-	 * löschen des übergebenen Kontaktlisten-Objektes
+	 * lï¿½schen des ï¿½bergebenen Kontaktlisten-Objektes
 	 */
 	public void delete (ContactList cl) throws IllegalArgumentException;
 	

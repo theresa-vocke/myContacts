@@ -285,7 +285,7 @@ public class ContactListTreeViewModel extends VerticalPanel implements TreeViewM
 	public <T> NodeInfo<?> getNodeInfo(T value) {
 		
 		if (value.equals("Root")) {
-
+			// Erzeugen eines ListDataProviders für die Kontaktdaten 
 			contactListDataProvider = new ListDataProvider<ContactList>();
 			myContacts.getAllContactLists(new AsyncCallback<Vector<ContactList>>() {
 
@@ -310,12 +310,13 @@ public class ContactListTreeViewModel extends VerticalPanel implements TreeViewM
 		}
 
 		if (value instanceof ContactList) {
-
+			//ListdataProvider erzeugen, in dem die Kontakt-Daten geladen werden 
 			final ListDataProvider<Contact> contactProvider = new ListDataProvider<Contact>();
 			contactDataProvider.put((ContactList) value, contactProvider);
-			int contactListId = ((ContactList) value).getId();
-			myContacts.findAllContactsByContactListId(contactListId, new AsyncCallback<Vector<Contact>>(){
-
+			
+			//myContacts.findAllContactsByContactListId(contactListId, new AsyncCallback<Vector<Contact>>(){
+			myContacts.findAllContactsByContactListId((ContactList) value, new AsyncCallback<Vector<Contact>>(){
+				
 				@Override
 				public void onFailure(Throwable caught) {
 						Window.alert("Fehler beim Laden" + caught.getMessage());

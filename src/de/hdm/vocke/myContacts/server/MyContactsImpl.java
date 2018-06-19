@@ -69,11 +69,7 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	}
 
 	
-	/**
-	 * speichern eines Kontaktlisten-Objektes
-	 */
-
-	@Override
+		@Override
 	public void save(Contact c) throws IllegalArgumentException {
 		cMapper.update(c);
 	}
@@ -107,8 +103,8 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	
 	
 	@Override
-	public Vector<Contact> findAllContactsByContactListId(int contactListId) throws IllegalArgumentException {
-		return this.cMapper.findAllContactsByContactListId(contactListId);
+	public Vector<Contact> findAllContactsByContactListId(ContactList cl) throws IllegalArgumentException {
+		return this.cMapper.findAllContactsByContactListId(cl.getId());
 	}
 	
 	/** 

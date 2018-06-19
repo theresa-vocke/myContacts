@@ -20,8 +20,8 @@ public class ContactListCell extends AbstractCell<ContactList> {
         return;
       }
 
-      sb.appendHtmlConstant("<div>Kontaktliste ");
-      sb.append(value.getId());
+      sb.appendHtmlConstant("<div>");
+      sb.appendEscaped(value.getName());
       sb.appendHtmlConstant("</div>");
     }
 	
