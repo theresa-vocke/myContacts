@@ -34,6 +34,7 @@ public class ContactForm extends VerticalPanel {
 	TextBox telefonnummerTextBox = new TextBox();
 	TextBox adresseTextBox = new TextBox();
 	Label idValueLabel = new Label("Kontakt: ");
+	Button addButton = new Button ("Kontakt zu Kontaktliste hinzufügen");
 	Button deleteButton = new Button("Löschen");
 	Button saveButton = new Button("Speichern");
 	
@@ -66,6 +67,10 @@ public class ContactForm extends VerticalPanel {
 		contactGrid.setWidget(4, 0, adresseLabel);
 		contactGrid.setWidget(4, 1, adresseTextBox);
 		
+		addButton.addClickHandler(new AddClickHandler());
+		addButton.setEnabled(false);
+		contactGrid.setWidget(7, 0, addButton);
+		
 		deleteButton.addClickHandler(new DeleteClickHandler());
 		deleteButton.setEnabled(false);
 		contactGrid.setWidget(8, 0, deleteButton);
@@ -81,7 +86,12 @@ public class ContactForm extends VerticalPanel {
 	 * Click-Handler
 	 */
 	
-	
+	private class AddClickHandler implements ClickHandler{
+		@Override
+		public void onClick(ClickEvent event){
+			
+		}
+	}
 	
 	private class DeleteClickHandler implements ClickHandler{
 		@Override
@@ -210,11 +220,8 @@ public class ContactForm extends VerticalPanel {
 			saveButton.setEnabled(true);
 			firstNameTextBox.setText(contactToDisplay.getFirstName());
 			lastNameTextBox.setText(contactToDisplay.getLastName());
-//			phoneNumberTextBox.setText(contactToDisplay.getPhonenumber());
-//			streetTextBox.setText(contactToDisplay.getStreet());
-//			numberTextBox.setText(contactToDisplay.getNumber());
-//			cityTextBox.setText(contactToDisplay.getCity());
-//			birthdayTextBox.setText(contactToDisplay.getBirthdate());
+			telefonnummerTextBox.setText(contactToDisplay.getTelefonnummer());
+			adresseTextBox.setText(contactToDisplay.getAdresse());
 			idValueLabel.setText("Kontakt: " + Integer.toString(contactToDisplay.getId()));
 
 		} else {
@@ -230,10 +237,4 @@ public class ContactForm extends VerticalPanel {
 		}
 	}
 
-
-	
-	
-	
-	
-	
 }

@@ -23,7 +23,7 @@ private static ContactListContactMapper contactListContactMapper = null;
 		return contactListContactMapper;
 	}
 	
-	
+	//wie createContactListContact
 	public ContactListContact addContactToContactList (ContactListContact contactListContact){
 		
 		Connection con = DBConnection.connection();
@@ -46,15 +46,7 @@ private static ContactListContactMapper contactListContactMapper = null;
 		catch(SQLException e2) {
 			e2.printStackTrace();
 		}
-		finally {	
-			if (con!=null) 
-				try {
-					con.close();
-				}
-				catch(SQLException e) {
-					e.printStackTrace();
-				}
-			}
+		
 		return contactListContact;
 		
 	}
@@ -85,7 +77,7 @@ private static ContactListContactMapper contactListContactMapper = null;
 			Statement stmt = con.createStatement();
 			
 			stmt.executeUpdate("DELETE FROM contactlistcontacts " + "WHERE contactId = " + contactId);
-			//prüfen, ob contactId als übergabeparameter passt 
+			//prï¿½fen, ob contactId als ï¿½bergabeparameter passt 
 			
 		}catch(SQLException e){
 			e.printStackTrace();
