@@ -77,7 +77,7 @@ public class ContactListMapper {
 				/**
 				 * jetzt erfolgt das tatsächliche Einfügen des Contact-Objektes in die DB
 				 */
-				stmt.executeUpdate("INSERT INTO contactlist (id, name) " + "VALUES" 
+				stmt.executeUpdate("INSERT INTO contactlist (id, titel) " + "VALUES" 
 				 + cl.getId() + "," + cl.getName ()+ ")" );
 			}
 		}
@@ -100,7 +100,7 @@ public class ContactListMapper {
 		try{
 			Statement stmt = con.createStatement();
 			
-			stmt.executeUpdate("UPDATE contactList " + " SET name =\"" + cl.getName() + "\" "
+			stmt.executeUpdate("UPDATE contactList " + " SET titel =\"" + cl.getName() + "\" "
 					+ "WHERE id=" + cl.getId());
 		}
 		catch (SQLException e2){
@@ -142,13 +142,13 @@ public class ContactListMapper {
 		try{
 			Statement stmt = con.createStatement();
 			
-			ResultSet rs = stmt.executeQuery("SELECT id, name " + "FROM contactList" + "ORDER BY name");
+			ResultSet rs = stmt.executeQuery("SELECT ID, titel FROM contactlist ORDER BY titel");
 			
 			// für jeden Eintrag im Suchergebnis wird nun ein Contact Objekt erstellt
 			while (rs.next()){
 				ContactList cl = new ContactList();
-				cl.setId(rs.getInt("id"));
-				cl.setName(rs.getString("name"));
+				cl.setId(rs.getInt("ID"));
+				cl.setName(rs.getString("titel"));
 				
 				// Hinzufügen eines neuen Objektes zum Ergebnisvektor
 				result.addElement(cl);
@@ -163,25 +163,25 @@ public class ContactListMapper {
 	}
 	
 	/**
-	 * Auslesen aller Kontakt-Objekten mit gegebenem Nachname
-	 * @param name
-	 * @return Vektor mit allen Contact-Objekten mit gesuchtem Nachname
+	 * Auslesen aller Kontakt-Objekten mit gegebenem Nachtitel
+	 * @param titel
+	 * @return Vektor mit allen Contact-Objekten mit gesuchtem Nachtitel
 	 */
 	
-	public Vector<ContactList> findByName(String name){
+	public Vector<ContactList> findByName(String titel){
 			Connection con = DBConnection.connection();
 			Vector<ContactList> result = new Vector<ContactList>();
 			
 			try{
 				Statement stmt = con.createStatement();
 				
-				ResultSet rs = stmt.executeQuery("SELECT id, name " + "FROM contactList" 
-				+ "WHERE name LIKE '" + name + "ORDER BY name");
+				ResultSet rs = stmt.executeQuery("SELECT id, titel " + "FROM contactList" 
+				+ "WHERE titel LIKE '" + titel + "ORDER BY titel");
 				// für jeden Eintrag im Suchergebnis wird jetzt ein Contact-Objekt erzeugt
 				while (rs.next()){
 					ContactList cl = new ContactList();
 					cl.setId(rs.getInt("id"));
-					cl.setName(rs.getString("name"));
+					cl.setName(rs.getString("titel"));
 					
 					//hinzufügen des neuen Objektes zum Ergebnisvektor
 					result.addElement(cl);

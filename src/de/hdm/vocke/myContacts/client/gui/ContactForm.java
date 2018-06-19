@@ -2,8 +2,8 @@ package de.hdm.vocke.myContacts.client.gui;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
+//import com.google.gwt.user.client.Window;
+//import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
@@ -13,7 +13,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm.vocke.myContacts.client.ClientsideSettings;
 import de.hdm.vocke.myContacts.shared.MyContactsAsync;
 import de.hdm.vocke.myContacts.shared.bo.Contact;
-import de.hdm.vocke.myContacts.shared.bo.ContactList;
+//import de.hdm.vocke.myContacts.shared.bo.ContactList;
 
 public class ContactForm extends VerticalPanel {
 	
@@ -24,7 +24,7 @@ public class ContactForm extends VerticalPanel {
 	 * Anlegen der GUI Elemente 
 	 */
 	
-	private VerticalPanel vpanel = new VerticalPanel();
+	//private VerticalPanel vpanel = new VerticalPanel();
 	
 	/*
 	 * Widgets, deren Inhalte variable sind, werden als Attribute angelegt.
@@ -89,87 +89,92 @@ public class ContactForm extends VerticalPanel {
 		saveButton.setEnabled(false);
 		contactGrid.setWidget(8, 1, saveButton);	
 		
-		this.vpanel.add(contactGrid);
+		//this.vpanel.add(contactGrid);
 	}
+	
+	/*
+	 * Click-Handler
+	 */
+	
 	
 	
 	private class DeleteClickHandler implements ClickHandler{
 		@Override
 		public void onClick(ClickEvent event) {
-			if (contactToDisplay == null) {
-				Window.alert("keinen Kontakt ausgewählt");
-			} else {
-				myContacts.findContactById(contactToDisplay.getId(),
-						new useContactListForContactDeletionCallback(contactToDisplay));
-			}			
+//			if (contactToDisplay == null) {
+//				Window.alert("keinen Kontakt ausgewählt");
+//			} else {
+//				myContacts.findContactById(contactToDisplay.getId(),
+//						new useContactListForContactDeletionCallback(contactToDisplay));
+//			}			
 		}
 	}
 
-	private class useContactListForContactDeletionCallback implements
-	AsyncCallback<Contact> {
-		
-		Contact contact = null;
-
-		useContactListForContactDeletionCallback(Contact c) {
-			contact = c;
-		}
-
-		@Override
-		public void onFailure(Throwable caught) {
-		}
-
-		public void onSuccess(ContactList contactList) {
-			if (contactList != null && contact != null) {
-				myContacts.delete(contact, new deleteContactCallback(
-						contact, contactList));
-			}			
-		}
-	}
+//	private class useContactListForContactDeletionCallback implements
+//	AsyncCallback<Contact> {
+//		
+//		Contact contact = null;
+//
+//		useContactListForContactDeletionCallback(Contact c) {
+//			contact = c;
+//		}
+//
+//		@Override
+//		public void onFailure(Throwable caught) {
+//		}
+//
+//		public void onSuccess(ContactList contactList) {
+//			if (contactList != null && contact != null) {
+//				myContacts.delete(contact, new deleteContactCallback(
+//						contact, contactList));
+//			}			
+//		}
+//	}
 	
 	/*
-	 * Da wir uns Kunde und Konto merken müssen, um den Kunden- und Kontobaum
-	 * nach erfolgter Kontolöschung zu aktualisieren, hat diese Callback-Klasse
+	 * Da wir uns Kontaktliste und Kontakt merken müssen, um den Kontaktlisen- und Kontaktbaum 
+	 * nach erfolgter Kontaktlöschung zu aktualisieren, hat diese Callback-Klasse
 	 * private Attribute und einen Konstruktor, in dem diese Wert abgespeichert
 	 * bzw. übergeben werden.
 	 * 
 	 * Nach erfolgter Löschung werden diese Werte verwendet.
 	 */
-	private class deleteContactCallback implements AsyncCallback<Void> {
-
-		private ContactList contactList = null;
-		private Contact contact = null;
-
-		deleteContactCallback(Contact c, ContactList cl) {
-			contact = c;
-			contactList = cl;
-		}
-
-		@Override
-		public void onFailure(Throwable caught) {
-
-		}
-
-		@Override
-		public void onSuccess(Void result) {
-			setSelected(null);
-			if (contactList != null) {
-				ctvm.removeContactFromContactList(contact, contactList);
-			}
-		}
-	}
+//	private class deleteContactCallback implements AsyncCallback<Void> {
+//
+//		private ContactList contactList = null;
+//		private Contact contact = null;
+//
+//		deleteContactCallback(Contact c, ContactList cl) {
+//			contact = c;
+//			contactList = cl;
+//		}
+//
+//		@Override
+//		public void onFailure(Throwable caught) {
+//
+//		}
+//
+//		@Override
+//		public void onSuccess(Void result) {
+//			setSelected(null);
+//			if (contactList != null) {
+//				ctvm.removeContactFromContactList(contact, contactList);
+//			}
+//		}
+//	}
 	
 	
 	private class SaveClickHandler implements ClickHandler{
 		public void onClick(ClickEvent event) {
 			
-			ContactList selectedContactList = ctvm.getSelectedContactList();
-			Contact selectedContact = ctvm.getSelectedContact();
-			if (selectedContactList == null) {
-				Window.alert("keinen Kontakt ausgewählt");
-			} else {
-				myContacts.createContactToContactList(selectedContact, selectedContactList, 
-						new CreateContactCallback(selectedContactList));
-			}
+//			ContactList selectedContactList = ctvm.getSelectedContactList();
+//			Contact selectedContact = ctvm.getSelectedContact();
+//			if (selectedContactList == null) {
+//				Window.alert("keinen Kontakt ausgewählt");
+//			} else {
+//				myContacts.createContactToContactList(selectedContact, selectedContactList, 
+//						new CreateContactCallback(selectedContactList));
+//			}
 		}
 	}
 	
@@ -181,27 +186,27 @@ public class ContactForm extends VerticalPanel {
 	 * Ergebnis des asynchronen Aufrufs geliefert wird.
 	 */
 	
-	private class CreateContactCallback implements AsyncCallback<Contact> {
-	
-		ContactList contactList = null;
-	
-		CreateContactCallback(ContactList cl) {
-			contactList = cl;
-		}
-	
-		@Override
-		public void onFailure(Throwable caught) {
-			// this.showcase.append("Fehler bei der Abfrage " +
-			// caught.getMessage());
-		}
-	
-		@Override
-		public void onSuccess(Contact contact) {
-			if (contact != null && contactList != null) {
-				ctvm.addContactToContactList(contact, contactList);
-			}
-		}
-	}	
+//	private class CreateContactCallback implements AsyncCallback<Contact> {
+//	
+//		ContactList contactList = null;
+//	
+//		CreateContactCallback(ContactList cl) {
+//			contactList = cl;
+//		}
+//	
+//		@Override
+//		public void onFailure(Throwable caught) {
+//			// this.showcase.append("Fehler bei der Abfrage " +
+//			// caught.getMessage());
+//		}
+//	
+//		@Override
+//		public void onSuccess(Contact contact) {
+//			if (contact != null && contactList != null) {
+//				ctvm.addContactToContactList(contact, contactList);
+//			}
+//		}
+//	}	
 
 	public void setCtvm(ContactListTreeViewModel ctvm) {
 		this.ctvm = ctvm;
@@ -221,9 +226,9 @@ public class ContactForm extends VerticalPanel {
 			firstNameTextBox.setText(contactToDisplay.getFirstName());
 			lastNameTextBox.setText(contactToDisplay.getLastName());
 //			phoneNumberTextBox.setText(contactToDisplay.getPhonenumber());
-			streetTextBox.setText(contactToDisplay.getStreet());
+//			streetTextBox.setText(contactToDisplay.getStreet());
 //			numberTextBox.setText(contactToDisplay.getNumber());
-			cityTextBox.setText(contactToDisplay.getCity());
+//			cityTextBox.setText(contactToDisplay.getCity());
 //			birthdayTextBox.setText(contactToDisplay.getBirthdate());
 			idValueLabel.setText("Kontakt: " + Integer.toString(contactToDisplay.getId()));
 

@@ -94,7 +94,13 @@ div#Trailer {
 /**
 	Ab hier: Alte Deklarationen. Können ggf. gelöscht werden.
 */
-.sendButton {
+.deleteButton {
+  display: block;
+  font-size: 16pt;
+}
+
+
+.saveButton {
   display: block;
   font-size: 16pt;
 }

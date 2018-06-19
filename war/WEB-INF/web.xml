@@ -8,12 +8,12 @@
   <!-- Servlets -->
   <servlet>
     <servlet-name>greetServlet</servlet-name>
-    <servlet-class>de.hdm.vocke.myContacts.server.GreetingServiceImpl</servlet-class>
+    <servlet-class>de.hdm.vocke.myContacts.server.MyContactsImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/mycontacts/greet</url-pattern>
+    <url-pattern>/mycontacts/kontaktverwaltung</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->

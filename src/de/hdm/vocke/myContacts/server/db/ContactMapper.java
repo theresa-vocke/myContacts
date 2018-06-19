@@ -79,23 +79,13 @@ public class ContactMapper {
 				/**
 				 * jetzt erfolgt das tatsächliche Einfügen des Contact-Objektes in die DB
 				 */
-				stmt.executeUpdate("INSERT INTO contacts (id, lastname, firstname, phonenumber, street, number, city, birthdate)" 
+				stmt.executeUpdate("INSERT INTO contacts (ID, firstname, lastname)" 
 				 + "VALUES (" 
 				 + c.getId() 
 				 + "," 
 				 + c.getLastName() 
 				 + "," 
 				 + c.getFirstName()
-				 + "," 
-				 + c.getPhonenumber() 
-				 + "," 
-				 + c.getStreet()
-				 + "," 
-				 + c.getNumber()
-				 + "," 
-				 + c.getCity()
-				 + "," 
-				 + c.getBirthdate()
 				 +")" );
 			}
 		}
@@ -122,16 +112,6 @@ public class ContactMapper {
 			+ c.getFirstName() +"\", "
 			+ "lastname=\"" 
 			+ c.getLastName() + "\", " 
-			+ "phonenumber=\"" 
-			+ c.getPhonenumber() + "\", "
-			+ "street=\"" 
-			+ c.getStreet() + "\", "
-			+ "number=\"" 
-			+ c.getNumber() + "\", "
-			+ "city=\"" 
-			+ c.getCity() + "\" " 
-			+ "birthdate=\"" 
-			+ c.getBirthdate() + "\" " 
 			+ "WHERE ID="
 			+ c.getId());
 			
@@ -153,7 +133,7 @@ public class ContactMapper {
 		try{
 			Statement stmt = con.createStatement();
 			
-			stmt.executeUpdate("DELETE FROM contacts " + "WHERE id=" + c.getId());
+			stmt.executeUpdate("DELETE FROM contact " + "WHERE ID=" + c.getId());
 		}
 		
 		catch (SQLException e2){
@@ -166,41 +146,41 @@ public class ContactMapper {
 	 * @return Vektor mit allen Contact-Objekten, die einen Kontakt repräsentieren 
 	 */
 	
-	public Vector<Contact> findAll(){
-		// Ergebnisvektor vorbereiten 
-		Vector<Contact> result = new Vector<Contact>();
-		
-		Connection con = DBConnection.connection();
-		
-		try{
-			Statement stmt = con.createStatement();
-			
-			ResultSet rs = stmt.executeQuery("SELECT id, firstname, lastname, phonenumber, street, number, city, birthdate " 
-			+ "FROM contacts" + "ORDER BY lastname");
-			
-			// für jeden Eintrag im Suchergebnis wird nun ein Contact Objekt erstellt
-			while (rs.next()){
-				Contact c = new Contact();
-				c.setId(rs.getInt("id"));
-				c.setFirstName(rs.getString("firstname"));
-				c.setLastName(rs.getString("lastname"));
-				c.setPhonenumber(rs.getInt("phonenumber"));
-				c.setStreet(rs.getString("street"));
-				c.setNumber(rs.getInt("number"));
-				c.setCity(rs.getString("city"));
-				c.setBirthdate(rs.getDate("birthdate"));
-								
-				// Hinzufügen eines neuen Objektes zum Ergebnisvektor
-				result.addElement(c);
-			}
-		}
-		
-		catch (SQLException e2){
-			e2.printStackTrace();
-		}
-		
-		return result; 
-	}
+//	public Vector<Contact> findAll(){
+//		// Ergebnisvektor vorbereiten 
+//		Vector<Contact> result = new Vector<Contact>();
+//		
+//		Connection con = DBConnection.connection();
+//		
+//		try{
+//			Statement stmt = con.createStatement();
+//			
+//			ResultSet rs = stmt.executeQuery("SELECT id, firstname, lastname, phonenumber, street, number, city, birthdate " 
+//			+ "FROM contacts" + "ORDER BY lastname");
+//			
+//			// für jeden Eintrag im Suchergebnis wird nun ein Contact Objekt erstellt
+//			while (rs.next()){
+//				Contact c = new Contact();
+//				c.setId(rs.getInt("id"));
+//				c.setFirstName(rs.getString("firstname"));
+//				c.setLastName(rs.getString("lastname"));
+//				c.setPhonenumber(rs.getString("phonenumber"));
+//				c.setStreet(rs.getString("street"));
+//				c.setNumber(rs.getInt("number"));
+//				c.setCity(rs.getString("city"));
+//				c.setBirthdate(rs.getDate("birthdate"));
+//								
+//				// Hinzufügen eines neuen Objektes zum Ergebnisvektor
+//				result.addElement(c);
+//			}
+//		}
+//		
+//		catch (SQLException e2){
+//			e2.printStackTrace();
+//		}
+//		
+//		return result; 
+//	}
 	
 	/**
 	 * Auslesen aller Kontakt-Objekten mit gegebenem Nachname
@@ -208,27 +188,22 @@ public class ContactMapper {
 	 * @return Vektor mit allen Contact-Objekten mit gesuchtem Nachname
 	 */
 	
-	public Vector<Contact> findByLastname(String lastname){
+	public Vector<Contact> findByLastname(String lastName){
 			Connection con = DBConnection.connection();
 			Vector<Contact> result = new Vector<Contact>();
 			
 			try{
 				Statement stmt = con.createStatement();
 				
-				ResultSet rs = stmt.executeQuery("SELECT id, lastname, firstname, phonenumber, street, number, city, birthdate " 
-				+ "FROM contacts" 
-				+ "WHERE lastname LIKE '" + lastname + "ORDER BY lastname");
+				ResultSet rs = stmt.executeQuery("SELECT ID, firstname, lastname " 
+				+ "FROM contact" 
+				+ "WHERE lastname LIKE '" + lastName + "ORDER BY lastname");
 				// für jeden Eintrag im Suchergebnis wird jetzt ein Contact-Objekt erzeugt
 				while (rs.next()){
 					Contact c = new Contact();
-					c.setId(rs.getInt("id"));
+					c.setId(rs.getInt("ID"));
 					c.setFirstName(rs.getString("firstname"));
 					c.setLastName(rs.getString("lastname"));
-					c.setPhonenumber(rs.getInt("phonenumber"));
-					c.setStreet(rs.getString("street"));
-					c.setNumber(rs.getInt("number"));
-					c.setCity(rs.getString("city"));
-					c.setBirthdate(rs.getDate("birthdate"));
 					
 					//hinzufügen des neuen Objektes zum Ergebnisvektor
 					result.addElement(c);
@@ -255,20 +230,15 @@ public class ContactMapper {
 			try{
 				Statement stmt = con.createStatement();
 				
-				ResultSet rs = stmt.executeQuery("SELECT id, lastname, firstname, phonenumber, street, number, city, birthdate " 
-				+ "FROM contacts" 
+				ResultSet rs = stmt.executeQuery("SELECT ID, firstname, lastname " 
+				+ "FROM contact" 
 				+ "WHERE firstname LIKE '" + firstname + "ORDER BY firstname");
 				// für jeden Eintrag im Suchergebnis wird jetzt ein Contact-Objekt erzeugt
 				while (rs.next()){
 					Contact c = new Contact();
-					c.setId(rs.getInt("id"));
+					c.setId(rs.getInt("ID"));
 					c.setFirstName(rs.getString("firstname"));
 					c.setFirstName(rs.getString("lastname"));
-					c.setPhonenumber(rs.getInt("phonenumber"));
-					c.setStreet(rs.getString("street"));
-					c.setNumber(rs.getInt("number"));
-					c.setCity(rs.getString("city"));
-					c.setBirthdate(rs.getDate("birthdate"));
 					
 					//hinzufügen des neuen Objektes zum Ergebnisvektor
 					result.addElement(c);
@@ -290,7 +260,7 @@ public class ContactMapper {
 
 		try {
 
-			PreparedStatement stmt = con.prepareStatement("SELECT * FROM contact WHERE `id` = ?");
+			PreparedStatement stmt = con.prepareStatement("SELECT ID, fistname, lastname FROM contact WHERE `ID` = ?");
 
 			stmt.setInt(1, contactId);
 			ResultSet rs = stmt.executeQuery();
@@ -301,14 +271,9 @@ public class ContactMapper {
 			 */
 			if (rs.next()) {
 				Contact c = new Contact();
-				c.setId(rs.getInt("id"));
+				c.setId(rs.getInt("ID"));
 				c.setFirstName(rs.getString("firstname"));
 				c.setFirstName(rs.getString("lastname"));
-				c.setPhonenumber(rs.getInt("phonenumber"));
-				c.setStreet(rs.getString("street"));
-				c.setNumber(rs.getInt("number"));
-				c.setCity(rs.getString("city"));
-				c.setBirthdate(rs.getDate("birthdate"));
 				
 				return c;
 			}
@@ -321,34 +286,31 @@ public class ContactMapper {
 	}
 	
 	
-		public Vector<Contact> findAllContacts (){
+		public Vector<Contact> findAllContacts(){
 			
 			/**
 			 * Verbindung zur DB Connection
 			 */		
-			Connection con = DBConnection.connection();
 			
 			Vector<Contact> result = new Vector<Contact>();
-					
+			
+			Connection con = DBConnection.connection();
+			
 			try {
 				
-				PreparedStatement stmt = con.prepareStatement("SELECT * FROM contact ORDER BY name ");
+				Statement stmt = con.createStatement();
 				
-				ResultSet rs = stmt.executeQuery();
+				ResultSet rs = stmt.executeQuery("SELECT ID, firstname, lastname FROM contact ");
 				
 				/**
 				 * Für jeden Eintrag im Suchergebnis wird nun ein Kontakt-Objekt erstellt.
 				 */			
 				while(rs.next()) {
 					Contact c = new Contact();
-					c.setId(rs.getInt("id"));
+					c.setId(rs.getInt("ID"));
 					c.setFirstName(rs.getString("firstname"));
-					c.setFirstName(rs.getString("lastname"));
-					c.setPhonenumber(rs.getInt("phonenumber"));
-					c.setStreet(rs.getString("street"));
-					c.setNumber(rs.getInt("number"));
-					c.setCity(rs.getString("city"));
-					c.setBirthdate(rs.getDate("birthdate"));
+					c.setLastName(rs.getString("lastname"));
+				
 					/**
 					 * Hinzufügen des neuen Objektes zum Ergebnisvektor
 					 */				
@@ -362,15 +324,6 @@ public class ContactMapper {
 			/**
 			 * Ergebnisvektor zurückgeben
 			 */		
-			finally {	
-				if (con!=null) 
-					try {
-						con.close();
-					}
-					catch(SQLException e) {
-						e.printStackTrace();
-					}
-				}
 			return result;
 			
 		}
@@ -386,10 +339,10 @@ public class ContactMapper {
 			Vector<Contact> result = new Vector<Contact>();
 
 			try {
-				PreparedStatement stmt = con.prepareStatement("SELECT `contact`.`id`, `contact`.`firstname`, `contact`.`lastname`, `contact`.`phonenumber`, `contact`.`street`, `contact`.`number`, `contact`.`city`, `contact`.`birthdate`, `contactList`.`id` "
-						+ "FROM `contactList` INNER JOIN `contactlistcontacts` "
-						+ "ON `contactlistcontacts`.`contactListId` = `contactList`.`id` INNER JOIN `contact` "
-						+ "ON `contactlistcontacts`.`contactId` = `contact`.`id` WHERE `contactList`.`id` = ?");
+				PreparedStatement stmt = con.prepareStatement("SELECT `contact`.`ID`, `contact`.`firstname`, `contact`.`lastname`, `contactList`.`ID` "
+						+ "FROM `contactlist` INNER JOIN `contactlistcontacts` "
+						+ "ON `contactlistcontacts`.`contactListId` = `contactlist`.`id` INNER JOIN `contact` "
+						+ "ON `contactlistcontacts`.`contactId` = `contact`.`ID` WHERE `contactList`.`ID` = ?");
 				
 				stmt.setInt(1, contactListId);
 				ResultSet rs = stmt.executeQuery();
@@ -399,14 +352,9 @@ public class ContactMapper {
 				 */
 				while(rs.next()) {
 					Contact c = new Contact();
-					c.setId(rs.getInt("id"));
+					c.setId(rs.getInt("ID"));
 					c.setFirstName(rs.getString("firstname"));
 					c.setFirstName(rs.getString("lastname"));
-					c.setPhonenumber(rs.getInt("phonenumber"));
-					c.setStreet(rs.getString("street"));
-					c.setNumber(rs.getInt("number"));
-					c.setCity(rs.getString("city"));
-					c.setBirthdate(rs.getDate("birthdate"));
 					
 					/**
 					 * Hinzufügen des neuen Objekts zum Ergebnisvektor
@@ -417,15 +365,6 @@ public class ContactMapper {
 			catch(SQLException e2) {
 				e2.printStackTrace();
 			}
-			finally {	
-				if (con!=null) 
-					try {
-						con.close();
-					}
-					catch(SQLException e) {
-						e.printStackTrace();
-					}
-				}
 			
 			/**
 			 * Ergebnisvektor zurückgeben

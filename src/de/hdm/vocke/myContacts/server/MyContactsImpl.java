@@ -1,6 +1,5 @@
 package de.hdm.vocke.myContacts.server;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
@@ -43,6 +42,7 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	/**
 	 * Initialisierungsmethode
 	 */
+	@Override
 	public void init () throws IllegalArgumentException{
 		this.cMapper = ContactMapper.contactMapper();
 		this.clMapper = ContactListMapper.contactListMapper();
@@ -53,17 +53,12 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	 * Ende Initialisierung 
 	 * Anfang Methoden für Contact-Objekte
 	 */
-	
-	public Contact createContact(String firstname, String lastname, int phonenumber, String street, int number, String city, Date birthdate) 
+	@Override
+	public Contact createContact(String firstname, String lastname) 
 			throws IllegalArgumentException {
 		Contact c = new Contact();
 		c.setFirstName(firstname);
 		c.setLastName(lastname);
-		c.setPhonenumber(phonenumber);
-		c.setStreet(street);
-		c.setNumber(number);
-		c.setCity(city);
-		c.setBirthdate(birthdate);
 		
 		// setzen der vorläufigen contact-Nummer, insert-Aufruf liefert dann Objekt, dessen 
 		// Nummer mit der DB konsistent ist 
@@ -83,10 +78,12 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 		cMapper.update(c);
 	}
 	
+	@Override
 	public Contact findContactById(int contactId) throws IllegalArgumentException {
 		return this.cMapper.findById(contactId);
 	}
 	
+	@Override
 	public Vector<Contact> findAllContacts() throws IllegalArgumentException {
 		return this.cMapper.findAllContacts();
 	}
@@ -109,7 +106,7 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	}
 	
 	
-	
+	@Override
 	public Vector<Contact> findAllContactsByContactListId(int contactListId) throws IllegalArgumentException {
 		return this.cMapper.findAllContactsByContactListId(contactListId);
 	}
@@ -117,6 +114,7 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	/** 
 	 * löschen eines Kontakt-Objektes
 	 */
+	@Override
 	public void delete(Contact c) throws IllegalArgumentException {
 		
 		List<ContactListContact> contactListContact = findContactListContactByContactId(c.getId());
@@ -149,7 +147,7 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	/**
 	 * erstellen einer Kontaktliste
 	 */
-
+	@Override
 	public ContactList createContactList (String name) throws IllegalArgumentException {
 		ContactList cl = new ContactList();
 		cl.setName(name);
@@ -167,12 +165,13 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	/**
 	 * ausgeben der Kontaktlsiten nach übergebenem Name
 	 */
+	@Override
 	public Vector<ContactList> getContactListByName(String name) throws IllegalArgumentException {
 		return this.clMapper.findByName(name);
 	}
 
 	
-	
+	@Override
 	public ContactList findContactListById(int contactListId) throws IllegalArgumentException {
 		return this.clMapper.findContactListById(contactListId);
 	}
@@ -204,12 +203,12 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	/*
 	 * Methoden für ContactListContact-Objekte
 	 */
-	
+	@Override
 	public void deleteContactListContact(ContactListContact clc) throws IllegalArgumentException {
 		this.clcMapper.deleteContactListContact(clc);
 	}
 	
-	
+	@Override
 	public ContactListContact createContactToContactList(Contact contact, ContactList contactList) throws IllegalArgumentException {
 		ContactListContact clc = new ContactListContact();
 
@@ -220,22 +219,22 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	}
 	
 	
-	
+	@Override
 	public void deleteContactListContactByContactId(int contactId) throws IllegalArgumentException {
 		this.clcMapper.deleteContactListContactByContactId(contactId);
 	}
 	
-	
+	@Override
 	public void deleteContactListContactByContactListId(int contactListId) throws IllegalArgumentException {
 		this.clcMapper.deleteContactListContactByContactListId(contactListId);
 	}
 	
-	
+	@Override
 	public Vector<ContactListContact> findContactListContactByContactListId (int contactListId) throws IllegalArgumentException {
 		return this.clcMapper.findContactListContactByContactListId(contactListId);
 	}
 	
-	
+	@Override
 	public Vector<ContactListContact> findContactListContactByContactId (int contactId) throws IllegalArgumentException {
 		return this.clcMapper.findContactListContactByContactId(contactId);
 	}

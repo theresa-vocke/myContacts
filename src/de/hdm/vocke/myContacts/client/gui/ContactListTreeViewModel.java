@@ -291,9 +291,12 @@ public class ContactListTreeViewModel extends VerticalPanel implements TreeViewM
 
 						@Override
 						public void onFailure(Throwable caught) {
+							Window.alert("Fehler: " + caught.getMessage());
+							
 						}
 
 						public void onSuccess(Vector<ContactList> result) {
+							Window.alert("------");
 							for (ContactList cl : result) {
 								contactListDataProvider.getList().add(cl);
 							}

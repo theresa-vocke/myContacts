@@ -1,9 +1,9 @@
 package de.hdm.vocke.myContacts.shared;
 
-import java.util.Date;
 import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import de.hdm.vocke.myContacts.shared.bo.Contact;
 import de.hdm.vocke.myContacts.shared.bo.ContactList;
@@ -14,6 +14,11 @@ import de.hdm.vocke.myContacts.shared.bo.ContactListContact;
  * die Methoden werden hier umgesetzt, damit die Klassen nicht zu sehr aneinander gekoppelt werden
  * Das Wissen, wie die einzelnen Daten koexistieren wird also in der vorliegenden Klasse gekapselt 
  */
+
+//----Wichtig----
+@RemoteServiceRelativePath("kontaktverwaltung")
+
+
 public interface MyContacts extends RemoteService {
 	
 	/** 
@@ -27,8 +32,7 @@ public interface MyContacts extends RemoteService {
 	 * ALLES ZU KONTAKT
 	 */
 	
-	public Contact createContact(String first, String last, int phonenumber, String street, int number, String city,
-			Date birthdate);
+	public Contact createContact(String firstname, String lastname);
 		
 	/**
 	 * speichern eines Kontakt-Objektes in der Datenbank
@@ -110,6 +114,8 @@ public interface MyContacts extends RemoteService {
 	public void deleteContactListContactByContactListId(int contactListId) throws IllegalArgumentException;
 
 	public Vector<ContactListContact> findContactListContactByContactListId(int contactListId) throws IllegalArgumentException;
+
+	Vector<ContactListContact> findContactListContactByContactId(int contactId) throws IllegalArgumentException;
 
 
 

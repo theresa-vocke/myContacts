@@ -1,7 +1,5 @@
 package de.hdm.vocke.myContacts.shared.bo;
 
-import java.util.Vector;
-
 public class ContactList extends BusinessObject {
 
 	/**
@@ -12,29 +10,16 @@ public class ContactList extends BusinessObject {
 	/**
 	 * Name der Kontaktliste
 	 */
-	private String name = " ";
+	private String name;
 
 	/**
 	 * Größe der Kontaktliste
 	 */
-	private float size = 100;
 	
 	private int contactId;
 	
 
-	
-	private Vector<Contact> contactsInList;
-	
-	
-	public float getSize() {
-		return size;
-	}
-
-
-	public void setSize(float size) {
-		this.size = size;
-	}
-	
+		
 	public int getContactId() {
 		return contactId;
 	}
@@ -52,15 +37,5 @@ public class ContactList extends BusinessObject {
 		this.name = name;
 	}
 
-
-	public Vector<Contact> getContactsInList() {
-		return contactsInList;
-	}
-
-
-	public void setContactsInList(Vector<Contact> contactsInList) {
-		this.contactsInList = contactsInList;
-	}
-	
 	
 }

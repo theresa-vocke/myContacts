@@ -26,7 +26,7 @@ public class ContactListForm extends VerticalPanel {
 	 * Anlegen der GUI Elemente 
 	 */
 	
-	private VerticalPanel vpanel = new VerticalPanel();
+	//private VerticalPanel vpanel = new VerticalPanel();
 	
 	/*
 	 * Widgets, deren Inhalte variable sind, werden als Attribute angelegt.
@@ -62,7 +62,7 @@ public class ContactListForm extends VerticalPanel {
 		saveButton.setEnabled(false);
 		contactListGrid.setWidget(2, 0, saveButton);	
 		
-		this.vpanel.add(contactListGrid);
+		//this.vpanel.add(contactListGrid);
 	}
 	
 	//Click Handler

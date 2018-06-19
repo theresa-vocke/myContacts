@@ -29,7 +29,7 @@ public class DBConnection {
      * Software neu komilieren zu müssen.
      */
     private static String googleUrl = "";
-    private static String localUrl = "jdbc:mysql//localhost:3306/myContacts?user=root&password=root";
+    private static String localUrl = "jdbc:mysql://localhost:3306/mycontacts?user=root&password=";
     /**
      * Diese statische Methode kann aufgrufen werden durch
      * <code>DBConnection.connection()</code>. Sie stellt die

@@ -1,7 +1,5 @@
 package de.hdm.vocke.myContacts.shared;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -10,15 +8,12 @@ import de.hdm.vocke.myContacts.shared.bo.Contact;
 import de.hdm.vocke.myContacts.shared.bo.ContactList;
 import de.hdm.vocke.myContacts.shared.bo.ContactListContact;
 
+
 public interface MyContactsAsync {
 
 	void init(AsyncCallback<Void> callback);
 	
-	/**
-	 * ALLES ZU KONTAKT
-	 */
-
-	void createContact(String first, String last, int phonenumber, String street, int number, String city, Date birthdate, AsyncCallback<Contact> callback);
+	void createContact(String firstname, String lastname, AsyncCallback<Contact> callback);
 
 	void save(Contact c, AsyncCallback<Void> callback);
 	
@@ -72,6 +67,8 @@ public interface MyContactsAsync {
 	void deleteContactListContactByContactListId(int contactListId, AsyncCallback<Void> callback);
 	
 	void findContactListContactByContactListId (int contactListId, AsyncCallback<Vector<ContactListContact>> callback);
+
+	void findContactListContactByContactId(int contactId, AsyncCallback<Vector<ContactListContact>> callback);
 	
 	
 }

@@ -3,6 +3,7 @@ package de.hdm.vocke.myContacts.client;
 import com.google.gwt.core.client.GWT;
 
 import de.hdm.vocke.myContacts.shared.CommonSettings;
+import de.hdm.vocke.myContacts.shared.MyContacts;
 import de.hdm.vocke.myContacts.shared.MyContactsAsync;
 
 public class ClientsideSettings extends CommonSettings {
@@ -32,7 +33,7 @@ public class ClientsideSettings extends CommonSettings {
 	    // Gab es bislang noch keine BankAdministration-Instanz, dann...
 	    if (myContacts == null) {
 	      // Zunächst instantiieren wir BankAdministration
-	      myContacts = GWT.create(MyContactsEntryPoint.class);
+	      myContacts = GWT.create(MyContacts.class);
 	    }
 
 	    // So, nun brauchen wir die BankAdministration nur noch zurückzugeben.
