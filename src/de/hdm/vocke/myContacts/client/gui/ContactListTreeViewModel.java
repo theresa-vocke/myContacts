@@ -51,7 +51,7 @@ public class ContactListTreeViewModel extends VerticalPanel implements TreeViewM
 	private MyContactsAsync myContacts = null;
 	
 		
-	// ListDataProvider gefüllt mit Kontaktlisten-Objekten
+	// ListDataProvider gefï¿½llt mit Kontaktlisten-Objekten
 	private ListDataProvider<ContactList> contactListDataProvider = null;
 
 	/*
@@ -60,24 +60,24 @@ public class ContactListTreeViewModel extends VerticalPanel implements TreeViewM
 	private Map<ContactList, ListDataProvider<Contact>> contactDataProvider = null;
 	
 	/**
-	 * Durch die Klasse BusinessObjectKeyProvider können Kontaktlisten- von Kontaktobjekten 
+	 * Durch die Klasse BusinessObjectKeyProvider kï¿½nnen Kontaktlisten- von Kontaktobjekten 
 	 * unterschieden werden, auch wenn sie dieselbe id haben.
 	 */
 	
 	private class BusinessObjectKeyProvider implements ProvidesKey<BusinessObject> {
 		
-		//von der getKey-Mehtode wird ein integer wert als Rückgabewert erwartet
-		//aus den Anwendungsobjekten muss ein eindeutiger Schlüssel erzeugt werden (durch ProvidesKey)
+		//von der getKey-Mehtode wird ein integer wert als Rï¿½ckgabewert erwartet
+		//aus den Anwendungsobjekten muss ein eindeutiger Schlï¿½ssel erzeugt werden (durch ProvidesKey)
 		@Override
 		public Integer getKey(BusinessObject bo) {
 			if (bo == null) {
 				return null;
 			}
-			// prüfen, ob bo ContactList ist, dann integer von id zurück geben 
+			// prï¿½fen, ob bo ContactList ist, dann integer von id zurï¿½ck geben 
 			if (bo instanceof ContactList) {
 				return new Integer(bo.getId());
 			} else {
-				// wenn bo keine ContactList, sondern dann Contact ist, negieren und negative id zurück geben
+				// wenn bo keine ContactList, sondern dann Contact ist, negieren und negative id zurï¿½ck geben
 				return new Integer(-bo.getId());
 			}
 		}
@@ -112,7 +112,7 @@ public class ContactListTreeViewModel extends VerticalPanel implements TreeViewM
 
 	
 	/**
-	 * Nested Class für die Reaktion auf Selektionsereignisse. Als Folge einer
+	 * Nested Class fï¿½r die Reaktion auf Selektionsereignisse. Als Folge einer
 	 * Baumknotenauswahl wird je nach Typ des Business-Objekts die
 	 * "selectedContactList" bzw. der "selectedContact" gesetzt.
 	 */
@@ -125,10 +125,10 @@ public class ContactListTreeViewModel extends VerticalPanel implements TreeViewM
 			
 			if (selection instanceof ContactList){
 				setSelectedContactList((ContactList) selection);
-				//nochmal prüfen 
+				//nochmal prï¿½fen 
 			} else if (selection instanceof Contact){
 				setSelectedContact((Contact) selection);
-				//nochmal prüfen
+				//nochmal prï¿½fen
 			}
 					
 		}
@@ -136,7 +136,7 @@ public class ContactListTreeViewModel extends VerticalPanel implements TreeViewM
 	}
 	
 	/*
-	 * Im Konstruktor werden die für den Kontaktlisten- und Kontaktbaum wichtigen lokalen
+	 * Im Konstruktor werden die fï¿½r den Kontaktlisten- und Kontaktbaum wichtigen lokalen
 	 * Variaben initialisiert.
 	 */
 	
@@ -173,7 +173,7 @@ public class ContactListTreeViewModel extends VerticalPanel implements TreeViewM
 	}
 	
 	/*
-	 * Wenn ein Kontakt ausgewählt wird, wird auch die ausgewählt Kontaktliste
+	 * Wenn ein Kontakt ausgewï¿½hlt wird, wird auch die ausgewï¿½hlt Kontaktliste
 	 * angepasst.
 	 */
 	void setSelectedContact(Contact c) {
@@ -312,7 +312,6 @@ public class ContactListTreeViewModel extends VerticalPanel implements TreeViewM
 		if (value instanceof ContactList) {
 
 			final ListDataProvider<Contact> contactProvider = new ListDataProvider<Contact>();
-			//was wird im 1. Argument übergeben?, hinzufügen von Elementen in Map?
 			contactDataProvider.put((ContactList) value, contactProvider);
 			int contactListId = ((ContactList) value).getId();
 			myContacts.findAllContactsByContactListId(contactListId, new AsyncCallback<Vector<Contact>>(){

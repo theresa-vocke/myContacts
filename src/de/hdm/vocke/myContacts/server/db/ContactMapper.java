@@ -13,15 +13,15 @@ import de.hdm.vocke.myContacts.shared.bo.Contact;
 public class ContactMapper {
 
 	/**
-	 * durch static ist diese Variable nur einmal für sämtliche eventuellen Instanzen dieser Klasse vorhanden
+	 * durch static ist diese Variable nur einmal fï¿½r sï¿½mtliche eventuellen Instanzen dieser Klasse vorhanden
 	 * diese Variable speichert die einzige Instanz dieser Klasse
 	 */
 	
 	public static ContactMapper contactMapper = null; 
 	
 	/**
-	 *  geschützter Konstruktor, damit nur eine Instanz dieser Klasse erstellt werden kann
-	 *  mit new können dann keine neuen Instanzen erstellt werden 
+	 *  geschï¿½tzter Konstruktor, damit nur eine Instanz dieser Klasse erstellt werden kann
+	 *  mit new kï¿½nnen dann keine neuen Instanzen erstellt werden 
 	 */
 	
 	protected ContactMapper(){
@@ -30,10 +30,10 @@ public class ContactMapper {
 	
 	/**
 	   * Diese statische Methode kann aufgerufen werden durch ContactMapper.contactMapper
-	   * stellt die Singleton- Eigenschaft sicher, indem sie dafür sorgt, dass nur eine einzige Instanz
+	   * stellt die Singleton- Eigenschaft sicher, indem sie dafï¿½r sorgt, dass nur eine einzige Instanz
 	   * von ContactMapper existiert
 	   * 
-	   * ContactMapper soltle nich mir new instantiiert werden sondern über den Aufruf dieser statischen Methode
+	   * ContactMapper soltle nich mir new instantiiert werden sondern ï¿½ber den Aufruf dieser statischen Methode
 	   * 
 	   * @return DAS <code>ContactMapper</code>-Objekt.
 	   * @see contactMapper
@@ -47,11 +47,11 @@ public class ContactMapper {
 	}
 
 	/**
-	   * Einfügen eines <code>Contact</code>-Objekts in die Datenbank
-	   * Der PK des übergebenen Objektes wird überprüft und wenn notwendig berichtigt  
+	   * Einfï¿½gen eines <code>Contact</code>-Objekts in die Datenbank
+	   * Der PK des ï¿½bergebenen Objektes wird ï¿½berprï¿½ft und wenn notwendig berichtigt  
 	   * 
 	   * @param c das zu speichernde Objekt
-	   * @return das bereits übergebene Objekt, jedoch mit ggf. korrigierter
+	   * @return das bereits ï¿½bergebene Objekt, jedoch mit ggf. korrigierter
 	   *         <code>id</code>.
 	   */
 	
@@ -63,29 +63,33 @@ public class ContactMapper {
 			Statement stmt = con.createStatement();
 			
 			/**
-			 * überprüfen, was der momentan höchste Primärschlussel - Wert ist 
+			 * ï¿½berprï¿½fen, was der momentan hï¿½chste Primï¿½rschlussel - Wert ist 
 			 */
-			ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid " + "FROM contacts ");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid " + "FROM contact ");
 			
-			// wenn wir etwas zurück erhalten, kann dies nur einzeilig sein 
+			// wenn wir etwas zurï¿½ck erhalten, kann dies nur einzeilig sein 
 			if (rs.next()){
 				/**
-				 * c erhält den bisher maximalen Primärschlüsselwert um 1 erhöht 
+				 * c erhï¿½lt den bisher maximalen Primï¿½rschlï¿½sselwert um 1 erhï¿½ht 
 				 */
 				c.setId(rs.getInt("maxid") +1);
 				
 				stmt = con.createStatement();
 				
 				/**
-				 * jetzt erfolgt das tatsächliche Einfügen des Contact-Objektes in die DB
+				 * jetzt erfolgt das tatsï¿½chliche Einfï¿½gen des Contact-Objektes in die DB
 				 */
-				stmt.executeUpdate("INSERT INTO contacts (ID, firstname, lastname)" 
+				stmt.executeUpdate("INSERT INTO contacts (ID, firstname, lastname, telefonnummer, adresse)" 
 				 + "VALUES (" 
 				 + c.getId() 
 				 + "," 
 				 + c.getLastName() 
 				 + "," 
 				 + c.getFirstName()
+				 + "," 
+				 + c.getTelefonnummer() 
+				 + "," 
+				 + c.getAdresse()
 				 +")" );
 			}
 		}
@@ -100,7 +104,7 @@ public class ContactMapper {
 	   * Wiederholtes Schreiben eines Objekts in die Datenbank.
 	   * 
 	   * @param c das Objekt, das in die DB geschrieben werden soll
-	   * @return das als Parameter übergebene Objekt
+	   * @return das als Parameter ï¿½bergebene Objekt
 	   */
 	public Contact update (Contact c){
 		Connection con = DBConnection.connection();
@@ -111,7 +115,11 @@ public class ContactMapper {
 			stmt.executeUpdate("UPDATE contact " + " SET firstname =\"" 
 			+ c.getFirstName() +"\", "
 			+ "lastname=\"" 
-			+ c.getLastName() + "\", " 
+			+ c.getLastName() + "\", "
+			+ "telefonnummer=\"" 
+			+ c.getTelefonnummer() + "\", "
+			+ "adresse=\"" 
+			+ c.getAdresse() + "\", "
 			+ "WHERE ID="
 			+ c.getId());
 			
@@ -123,8 +131,8 @@ public class ContactMapper {
 	}
 	
 	/**
-	 * löschen eines Contact-Objektes aus der DB
-	 * @param c das aus der DB zu löschende Objekt 
+	 * lï¿½schen eines Contact-Objektes aus der DB
+	 * @param c das aus der DB zu lï¿½schende Objekt 
 	 */
 	
 	public void delete (Contact c){
@@ -143,7 +151,7 @@ public class ContactMapper {
 	
 	/**
 	 * Auslesen aller Kontakte
-	 * @return Vektor mit allen Contact-Objekten, die einen Kontakt repräsentieren 
+	 * @return Vektor mit allen Contact-Objekten, die einen Kontakt reprï¿½sentieren 
 	 */
 	
 //	public Vector<Contact> findAll(){
@@ -158,7 +166,7 @@ public class ContactMapper {
 //			ResultSet rs = stmt.executeQuery("SELECT id, firstname, lastname, phonenumber, street, number, city, birthdate " 
 //			+ "FROM contacts" + "ORDER BY lastname");
 //			
-//			// für jeden Eintrag im Suchergebnis wird nun ein Contact Objekt erstellt
+//			// fï¿½r jeden Eintrag im Suchergebnis wird nun ein Contact Objekt erstellt
 //			while (rs.next()){
 //				Contact c = new Contact();
 //				c.setId(rs.getInt("id"));
@@ -170,7 +178,7 @@ public class ContactMapper {
 //				c.setCity(rs.getString("city"));
 //				c.setBirthdate(rs.getDate("birthdate"));
 //								
-//				// Hinzufügen eines neuen Objektes zum Ergebnisvektor
+//				// Hinzufï¿½gen eines neuen Objektes zum Ergebnisvektor
 //				result.addElement(c);
 //			}
 //		}
@@ -195,17 +203,19 @@ public class ContactMapper {
 			try{
 				Statement stmt = con.createStatement();
 				
-				ResultSet rs = stmt.executeQuery("SELECT ID, firstname, lastname " 
+				ResultSet rs = stmt.executeQuery("SELECT ID, firstname, lastname, telefonnummer, adresse" 
 				+ "FROM contact" 
 				+ "WHERE lastname LIKE '" + lastName + "ORDER BY lastname");
-				// für jeden Eintrag im Suchergebnis wird jetzt ein Contact-Objekt erzeugt
+				// fï¿½r jeden Eintrag im Suchergebnis wird jetzt ein Contact-Objekt erzeugt
 				while (rs.next()){
 					Contact c = new Contact();
 					c.setId(rs.getInt("ID"));
 					c.setFirstName(rs.getString("firstname"));
 					c.setLastName(rs.getString("lastname"));
+					c.setTelefonnummer(rs.getString("telefonnummer"));
+					c.setAdresse(rs.getString("adresse"));
 					
-					//hinzufügen des neuen Objektes zum Ergebnisvektor
+					//hinzufï¿½gen des neuen Objektes zum Ergebnisvektor
 					result.addElement(c);
 				}
 			}
@@ -230,17 +240,19 @@ public class ContactMapper {
 			try{
 				Statement stmt = con.createStatement();
 				
-				ResultSet rs = stmt.executeQuery("SELECT ID, firstname, lastname " 
+				ResultSet rs = stmt.executeQuery("SELECT ID, firstname, lastname, telefonnummer, adresse " 
 				+ "FROM contact" 
 				+ "WHERE firstname LIKE '" + firstname + "ORDER BY firstname");
-				// für jeden Eintrag im Suchergebnis wird jetzt ein Contact-Objekt erzeugt
+				// fï¿½r jeden Eintrag im Suchergebnis wird jetzt ein Contact-Objekt erzeugt
 				while (rs.next()){
 					Contact c = new Contact();
 					c.setId(rs.getInt("ID"));
 					c.setFirstName(rs.getString("firstname"));
 					c.setFirstName(rs.getString("lastname"));
+					c.setTelefonnummer(rs.getString("telefonnummer"));
+					c.setAdresse(rs.getString("adresse"));
 					
-					//hinzufügen des neuen Objektes zum Ergebnisvektor
+					//hinzufï¿½gen des neuen Objektes zum Ergebnisvektor
 					result.addElement(c);
 				}
 			}
@@ -260,13 +272,13 @@ public class ContactMapper {
 
 		try {
 
-			PreparedStatement stmt = con.prepareStatement("SELECT ID, fistname, lastname FROM contact WHERE `ID` = ?");
+			PreparedStatement stmt = con.prepareStatement("SELECT ID, fistname, lastname, telefonnummer, adresse FROM contact WHERE `ID` = ?");
 
 			stmt.setInt(1, contactId);
 			ResultSet rs = stmt.executeQuery();
 
 			/**
-			 * Für jeden Eintrag im Suchergebnis wird nun ein Kontakt-Objekt
+			 * Fï¿½r jeden Eintrag im Suchergebnis wird nun ein Kontakt-Objekt
 			 * erstellt.
 			 */
 			if (rs.next()) {
@@ -274,6 +286,8 @@ public class ContactMapper {
 				c.setId(rs.getInt("ID"));
 				c.setFirstName(rs.getString("firstname"));
 				c.setFirstName(rs.getString("lastname"));
+				c.setTelefonnummer(rs.getString("telefonnummer"));
+				c.setAdresse(rs.getString("adresse"));
 				
 				return c;
 			}
@@ -300,19 +314,21 @@ public class ContactMapper {
 				
 				Statement stmt = con.createStatement();
 				
-				ResultSet rs = stmt.executeQuery("SELECT ID, firstname, lastname FROM contact ");
+				ResultSet rs = stmt.executeQuery("SELECT ID, firstname, lastname, telefonnummer, adresse FROM contact ");
 				
 				/**
-				 * Für jeden Eintrag im Suchergebnis wird nun ein Kontakt-Objekt erstellt.
+				 * Fï¿½r jeden Eintrag im Suchergebnis wird nun ein Kontakt-Objekt erstellt.
 				 */			
 				while(rs.next()) {
 					Contact c = new Contact();
 					c.setId(rs.getInt("ID"));
 					c.setFirstName(rs.getString("firstname"));
 					c.setLastName(rs.getString("lastname"));
+					c.setTelefonnummer(rs.getString("telefonnummer"));
+					c.setAdresse(rs.getString("adresse"));
 				
 					/**
-					 * Hinzufügen des neuen Objektes zum Ergebnisvektor
+					 * Hinzufï¿½gen des neuen Objektes zum Ergebnisvektor
 					 */				
 					result.addElement(c);				
 				}
@@ -322,7 +338,7 @@ public class ContactMapper {
 			} 
 			
 			/**
-			 * Ergebnisvektor zurückgeben
+			 * Ergebnisvektor zurï¿½ckgeben
 			 */		
 			return result;
 			
@@ -339,25 +355,27 @@ public class ContactMapper {
 			Vector<Contact> result = new Vector<Contact>();
 
 			try {
-				PreparedStatement stmt = con.prepareStatement("SELECT `contact`.`ID`, `contact`.`firstname`, `contact`.`lastname`, `contactList`.`ID` "
+				PreparedStatement stmt = con.prepareStatement("SELECT `contact`.`ID`, `contact`.`firstname`, `contact`.`lastname`, `contact`.`telefonnummer`, `contact`.`adresse`, `contactList`.`ID` "
 						+ "FROM `contactlist` INNER JOIN `contactlistcontacts` "
-						+ "ON `contactlistcontacts`.`contactListId` = `contactlist`.`id` INNER JOIN `contact` "
+						+ "ON `contactlistcontacts`.`contactListId` = `contactlist`.`ID` INNER JOIN `contact` "
 						+ "ON `contactlistcontacts`.`contactId` = `contact`.`ID` WHERE `contactList`.`ID` = ?");
 				
 				stmt.setInt(1, contactListId);
 				ResultSet rs = stmt.executeQuery();
 				
 				/**
-				 * Für jeden Eintrag Kontakt ein Kontakt-Objekt erstellt.
+				 * Fï¿½r jeden Eintrag Kontakt ein Kontakt-Objekt erstellt.
 				 */
 				while(rs.next()) {
 					Contact c = new Contact();
 					c.setId(rs.getInt("ID"));
 					c.setFirstName(rs.getString("firstname"));
 					c.setFirstName(rs.getString("lastname"));
+					c.setTelefonnummer(rs.getString("telefonnummer"));
+					c.setAdresse(rs.getString("adresse"));
 					
 					/**
-					 * Hinzufügen des neuen Objekts zum Ergebnisvektor
+					 * Hinzufï¿½gen des neuen Objekts zum Ergebnisvektor
 					 */
 					result.addElement(c);
 				}
@@ -367,7 +385,7 @@ public class ContactMapper {
 			}
 			
 			/**
-			 * Ergebnisvektor zurückgeben
+			 * Ergebnisvektor zurï¿½ckgeben
 			 */
 			return result;
 		}

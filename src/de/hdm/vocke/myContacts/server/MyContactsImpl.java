@@ -51,7 +51,7 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	
 	/*
 	 * Ende Initialisierung 
-	 * Anfang Methoden für Contact-Objekte
+	 * Anfang Methoden fï¿½r Contact-Objekte
 	 */
 	@Override
 	public Contact createContact(String firstname, String lastname) 
@@ -60,7 +60,7 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 		c.setFirstName(firstname);
 		c.setLastName(lastname);
 		
-		// setzen der vorläufigen contact-Nummer, insert-Aufruf liefert dann Objekt, dessen 
+		// setzen der vorlï¿½ufigen contact-Nummer, insert-Aufruf liefert dann Objekt, dessen 
 		// Nummer mit der DB konsistent ist 
 		c.setId(1);
 		
@@ -89,7 +89,7 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	}
 	
 	/**
-	 * Auslesen aller Kontakte, die den übergebenen Nachnamen besitzen 
+	 * Auslesen aller Kontakte, die den ï¿½bergebenen Nachnamen besitzen 
 	 */
 	@Override
 	public Vector<Contact> getContactByLastname(String lastname) throws IllegalArgumentException {
@@ -98,7 +98,7 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 
 	
 	/**
-	 * Auslesen aller Kontakte, die den übergebenen Vornamen besitzen 
+	 * Auslesen aller Kontakte, die den ï¿½bergebenen Vornamen besitzen 
 	 */
 	@Override
 	public Vector<Contact> getContactByFirstname(String firstname) throws IllegalArgumentException {
@@ -112,7 +112,7 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	}
 	
 	/** 
-	 * löschen eines Kontakt-Objektes
+	 * lï¿½schen eines Kontakt-Objektes
 	 */
 	@Override
 	public void delete(Contact c) throws IllegalArgumentException {
@@ -141,7 +141,7 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	
 	
 	/*
-	 * Methoden für Kontaktlisten-Objekte
+	 * Methoden fï¿½r Kontaktlisten-Objekte
 	 */
 
 	/**
@@ -163,7 +163,7 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	}
 	
 	/**
-	 * ausgeben der Kontaktlsiten nach übergebenem Name
+	 * ausgeben der Kontaktlsiten nach ï¿½bergebenem Name
 	 */
 	@Override
 	public Vector<ContactList> getContactListByName(String name) throws IllegalArgumentException {
@@ -186,7 +186,7 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	}
 	
 	/**
-	 * löschen eines Kontaktlisten-Objektes 
+	 * lï¿½schen eines Kontaktlisten-Objektes 
 	 */
 	@Override
 	public void delete(ContactList cl) throws IllegalArgumentException {
@@ -201,7 +201,7 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	
 	
 	/*
-	 * Methoden für ContactListContact-Objekte
+	 * Methoden fï¿½r ContactListContact-Objekte
 	 */
 	@Override
 	public void deleteContactListContact(ContactListContact clc) throws IllegalArgumentException {

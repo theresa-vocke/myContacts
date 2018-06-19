@@ -11,15 +11,15 @@ import de.hdm.vocke.myContacts.shared.bo.ContactList;
 public class ContactListMapper {
 
 	/**
-	 * durch static ist diese Variable nur einmal für sämtliche eventuellen Instanzen dieser Klasse vorhanden
+	 * durch static ist diese Variable nur einmal fï¿½r sï¿½mtliche eventuellen Instanzen dieser Klasse vorhanden
 	 * diese Variable speichert die einzige Instanz dieser Klasse
 	 */
 	
 	public static ContactListMapper contactListMapper = null; 
 	
 	/**
-	 *  geschützter Konstruktor, damit nur eine Instanz dieser Klasse erstellt werden kann
-	 *  mit new können dann keine neuen Instanzen erstellt werden 
+	 *  geschï¿½tzter Konstruktor, damit nur eine Instanz dieser Klasse erstellt werden kann
+	 *  mit new kï¿½nnen dann keine neuen Instanzen erstellt werden 
 	 */
 	
 	protected ContactListMapper(){
@@ -28,10 +28,10 @@ public class ContactListMapper {
 	
 	/**
 	   * Diese statische Methode kann aufgerufen werden durch ContactMapper.contactMapper
-	   * stellt die Singleton- Eigenschaft sicher, indem sie dafür sorgt, dass nur eine einzige Instanz
+	   * stellt die Singleton- Eigenschaft sicher, indem sie dafï¿½r sorgt, dass nur eine einzige Instanz
 	   * von ContactMapper existiert
 	   * 
-	   * ContactMapper soltle nich mir new instantiiert werden sondern über den Aufruf dieser statischen Methode
+	   * ContactMapper soltle nich mir new instantiiert werden sondern ï¿½ber den Aufruf dieser statischen Methode
 	   * 
 	   * @return DAS <code>ContactMapper</code>-Objekt.
 	   * @see contactMapper
@@ -45,11 +45,11 @@ public class ContactListMapper {
 	}
 
 	/**
-	   * Einfügen eines <code>Contact</code>-Objekts in die Datenbank
-	   * Der PK des übergebenen Objektes wird überprüft und wenn notwendig berichtigt  
+	   * Einfï¿½gen eines <code>Contact</code>-Objekts in die Datenbank
+	   * Der PK des ï¿½bergebenen Objektes wird ï¿½berprï¿½ft und wenn notwendig berichtigt  
 	   * 
 	   * @param c das zu speichernde Objekt
-	   * @return das bereits übergebene Objekt, jedoch mit ggf. korrigierter
+	   * @return das bereits ï¿½bergebene Objekt, jedoch mit ggf. korrigierter
 	   *         <code>id</code>.
 	   */
 	
@@ -61,24 +61,24 @@ public class ContactListMapper {
 			Statement stmt = con.createStatement();
 			
 			/**
-			 * überprüfen, was der momentan höchste Primärschlussel - Wert ist 
+			 * ï¿½berprï¿½fen, was der momentan hï¿½chste Primï¿½rschlussel - Wert ist 
 			 */
 			ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid " + "FROM contactlist ");
 			
-			// wenn wir etwas zurück erhalten, kann dies nur einzeilig sein 
+			// wenn wir etwas zurï¿½ck erhalten, kann dies nur einzeilig sein 
 			if (rs.next()){
 				/**
-				 * c erhält den bisher maximalen Primärschlüsselwert um 1 erhöht 
+				 * c erhï¿½lt den bisher maximalen Primï¿½rschlï¿½sselwert um 1 erhï¿½ht 
 				 */
 				cl.setId(rs.getInt("maxid") +1);
 				
 				stmt = con.createStatement();
 				
 				/**
-				 * jetzt erfolgt das tatsächliche Einfügen des Contact-Objektes in die DB
+				 * jetzt erfolgt das tatsï¿½chliche Einfï¿½gen des Contact-Objektes in die DB
 				 */
 				stmt.executeUpdate("INSERT INTO contactlist (id, titel) " + "VALUES" 
-				 + cl.getId() + "," + cl.getName ()+ ")" );
+				 + cl.getId() + "," + cl.getName()+ ")" );
 			}
 		}
 		
@@ -92,7 +92,7 @@ public class ContactListMapper {
 	   * Wiederholtes Schreiben eines Objekts in die Datenbank.
 	   * 
 	   * @param c das Objekt, das in die DB geschrieben werden soll
-	   * @return das als Parameter übergebene Objekt
+	   * @return das als Parameter ï¿½bergebene Objekt
 	   */
 	public ContactList update (ContactList cl){
 		Connection con = DBConnection.connection();
@@ -100,8 +100,8 @@ public class ContactListMapper {
 		try{
 			Statement stmt = con.createStatement();
 			
-			stmt.executeUpdate("UPDATE contactList " + " SET titel =\"" + cl.getName() + "\" "
-					+ "WHERE id=" + cl.getId());
+			stmt.executeUpdate("UPDATE contactlist " + " SET titel =\"" + cl.getName() + "\" "
+					+ "WHERE ID=" + cl.getId());
 		}
 		catch (SQLException e2){
 			e2.printStackTrace();
@@ -110,8 +110,8 @@ public class ContactListMapper {
 	}
 	
 	/**
-	 * löschen eines Contact-Objektes aus der DB
-	 * @param c das aus der DB zu löschende Objekt 
+	 * lï¿½schen eines Contact-Objektes aus der DB
+	 * @param c das aus der DB zu lï¿½schende Objekt 
 	 */
 	
 	public void delete (ContactList cl){
@@ -120,7 +120,7 @@ public class ContactListMapper {
 		try{
 			Statement stmt = con.createStatement();
 			
-			stmt.executeUpdate("DELETE FROM contactList " + "WHERE id=" + cl.getId());
+			stmt.executeUpdate("DELETE FROM contactlist " + "WHERE ID=" + cl.getId());
 		}
 		
 		catch (SQLException e2){
@@ -130,7 +130,7 @@ public class ContactListMapper {
 	
 	/**
 	 * Auslesen aller Kontakte
-	 * @return Vektor mit allen Contact-Objekten, die einen Kontakt repräsentieren 
+	 * @return Vektor mit allen Contact-Objekten, die einen Kontakt reprï¿½sentieren 
 	 */
 	
 	public Vector<ContactList> findAll(){
@@ -144,13 +144,13 @@ public class ContactListMapper {
 			
 			ResultSet rs = stmt.executeQuery("SELECT ID, titel FROM contactlist ORDER BY titel");
 			
-			// für jeden Eintrag im Suchergebnis wird nun ein Contact Objekt erstellt
+			// fï¿½r jeden Eintrag im Suchergebnis wird nun ein Contact Objekt erstellt
 			while (rs.next()){
 				ContactList cl = new ContactList();
 				cl.setId(rs.getInt("ID"));
 				cl.setName(rs.getString("titel"));
 				
-				// Hinzufügen eines neuen Objektes zum Ergebnisvektor
+				// Hinzufï¿½gen eines neuen Objektes zum Ergebnisvektor
 				result.addElement(cl);
 			}
 		}
@@ -175,15 +175,15 @@ public class ContactListMapper {
 			try{
 				Statement stmt = con.createStatement();
 				
-				ResultSet rs = stmt.executeQuery("SELECT id, titel " + "FROM contactList" 
+				ResultSet rs = stmt.executeQuery("SELECT ID, titel " + "FROM contactlist" 
 				+ "WHERE titel LIKE '" + titel + "ORDER BY titel");
-				// für jeden Eintrag im Suchergebnis wird jetzt ein Contact-Objekt erzeugt
+				// fï¿½r jeden Eintrag im Suchergebnis wird jetzt ein Contact-Objekt erzeugt
 				while (rs.next()){
 					ContactList cl = new ContactList();
-					cl.setId(rs.getInt("id"));
+					cl.setId(rs.getInt("ID"));
 					cl.setName(rs.getString("titel"));
 					
-					//hinzufügen des neuen Objektes zum Ergebnisvektor
+					//hinzufï¿½gen des neuen Objektes zum Ergebnisvektor
 					result.addElement(cl);
 				}
 			}
@@ -200,13 +200,13 @@ public class ContactListMapper {
 		
 		try{
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT ID, title FROM contactlist "
+			ResultSet rs = stmt.executeQuery("SELECT ID, titel FROM contactlist "
           + "WHERE ID=" + id);
 			
 			if(rs.next()){
 				ContactList cl = new ContactList();
 				cl.setId(rs.getInt("ID"));
-				cl.setName(rs.getString("Titel"));
+				cl.setName(rs.getString("titel"));
 				return cl;
 			}
 		}

@@ -11,13 +11,25 @@ public class TestenKlasse {
 	
 	//final MyContactsImpl impl = null;
 	
+//	MyContactsImpl verwaltung = new MyContactsImpl();
+//	
+//	verwaltung.init();
+//	Vector<Contact> v = verwaltung.findAllContacts();
+//	
+//	for(Contact c : v){
+//	System.out.println(c.getLastName());
+//	}
+		
+	
 	MyContactsImpl verwaltung = new MyContactsImpl();
 	
 	verwaltung.init();
-	Vector<Contact> v = verwaltung.findAllContacts();
+	Vector<ContactListContact> v = verwaltung.createContactToContactList(contact, contactList);
 	
-	for(Contact c : v){
-	System.out.println(c.getLastName());
+	for (ContactListContact clc : v){
+		
 	}
+		
+		
 	}
 }

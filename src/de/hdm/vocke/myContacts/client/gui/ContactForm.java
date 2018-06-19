@@ -31,19 +31,16 @@ public class ContactForm extends VerticalPanel {
 	 */
 	TextBox firstNameTextBox = new TextBox();
 	TextBox lastNameTextBox = new TextBox();
-	TextBox phoneNumberTextBox = new TextBox();
-	TextBox streetTextBox = new TextBox();
-	TextBox numberTextBox = new TextBox();
-	TextBox cityTextBox = new TextBox();
-	TextBox birthdayTextBox = new TextBox();
+	TextBox telefonnummerTextBox = new TextBox();
+	TextBox adresseTextBox = new TextBox();
 	Label idValueLabel = new Label("Kontakt: ");
-	Button deleteButton = new Button("Löschen");
+	Button deleteButton = new Button("LÃ¶schen");
 	Button saveButton = new Button("Speichern");
 	
 
 	/*
 	 * Beim Anzeigen werden die anderen Widgets erzeugt. Alle werden in
-	 * einem Raster angeordnet, dessen Größe sich aus dem Platzbedarf
+	 * einem Raster angeordnet, dessen Grï¿½ï¿½e sich aus dem Platzbedarf
 	 * der enthaltenen Widgets bestimmt.
 	 */
 	
@@ -61,25 +58,13 @@ public class ContactForm extends VerticalPanel {
 		contactGrid.setWidget(2, 0, lastNameLabel);
 		contactGrid.setWidget(2, 1, lastNameTextBox);
 
-		Label phoneNumberLabel = new Label("Telefonnummer");
-		contactGrid.setWidget(3, 0, phoneNumberLabel);
-		contactGrid.setWidget(3, 1, phoneNumberTextBox);
+		Label telefonnummerLabel = new Label("Telefonnummer");
+		contactGrid.setWidget(3, 0, telefonnummerLabel);
+		contactGrid.setWidget(3, 1, telefonnummerTextBox);
 		
-		Label streetLabel = new Label("Straße");
-		contactGrid.setWidget(4, 0, streetLabel);
-		contactGrid.setWidget(4, 1, streetTextBox);
-		
-		Label numberLabel = new Label("Hausnummer");
-		contactGrid.setWidget(5, 0, numberLabel);
-		contactGrid.setWidget(5, 1, numberTextBox);
-		
-		Label cityLabel = new Label("Stadt");
-		contactGrid.setWidget(6, 0, cityLabel);
-		contactGrid.setWidget(6, 1, cityTextBox);
-		
-		Label birthdayLabel = new Label("Geburtstag");
-		contactGrid.setWidget(7, 0, birthdayLabel);
-		contactGrid.setWidget(7, 1, birthdayTextBox);
+		Label adresseLabel = new Label("Adresse");
+		contactGrid.setWidget(4, 0, adresseLabel);
+		contactGrid.setWidget(4, 1, adresseTextBox);
 		
 		deleteButton.addClickHandler(new DeleteClickHandler());
 		deleteButton.setEnabled(false);
@@ -102,7 +87,7 @@ public class ContactForm extends VerticalPanel {
 		@Override
 		public void onClick(ClickEvent event) {
 //			if (contactToDisplay == null) {
-//				Window.alert("keinen Kontakt ausgewählt");
+//				Window.alert("keinen Kontakt ausgewï¿½hlt");
 //			} else {
 //				myContacts.findContactById(contactToDisplay.getId(),
 //						new useContactListForContactDeletionCallback(contactToDisplay));
@@ -132,12 +117,12 @@ public class ContactForm extends VerticalPanel {
 //	}
 	
 	/*
-	 * Da wir uns Kontaktliste und Kontakt merken müssen, um den Kontaktlisen- und Kontaktbaum 
-	 * nach erfolgter Kontaktlöschung zu aktualisieren, hat diese Callback-Klasse
+	 * Da wir uns Kontaktliste und Kontakt merken mï¿½ssen, um den Kontaktlisen- und Kontaktbaum 
+	 * nach erfolgter Kontaktlï¿½schung zu aktualisieren, hat diese Callback-Klasse
 	 * private Attribute und einen Konstruktor, in dem diese Wert abgespeichert
-	 * bzw. übergeben werden.
+	 * bzw. ï¿½bergeben werden.
 	 * 
-	 * Nach erfolgter Löschung werden diese Werte verwendet.
+	 * Nach erfolgter Lï¿½schung werden diese Werte verwendet.
 	 */
 //	private class deleteContactCallback implements AsyncCallback<Void> {
 //
@@ -170,7 +155,7 @@ public class ContactForm extends VerticalPanel {
 //			ContactList selectedContactList = ctvm.getSelectedContactList();
 //			Contact selectedContact = ctvm.getSelectedContact();
 //			if (selectedContactList == null) {
-//				Window.alert("keinen Kontakt ausgewählt");
+//				Window.alert("keinen Kontakt ausgewï¿½hlt");
 //			} else {
 //				myContacts.createContactToContactList(selectedContact, selectedContactList, 
 //						new CreateContactCallback(selectedContactList));
@@ -182,7 +167,7 @@ public class ContactForm extends VerticalPanel {
 	 * Hier muss der Kontakt-und Kontaktlistenbaum aktualisiert werden, wenn ein Kontakt erzeugt wurde 
 	 * daher ein privates Attribu und der Konstruktor 
 	 * 
-	 * Wir benötigen hier nur einen Parameter für die Kontaktliste, da der Kontakt als
+	 * Wir benï¿½tigen hier nur einen Parameter fï¿½r die Kontaktliste, da der Kontakt als
 	 * Ergebnis des asynchronen Aufrufs geliefert wird.
 	 */
 	
@@ -213,9 +198,9 @@ public class ContactForm extends VerticalPanel {
 	}
 	
 	/*
-	 * Wenn der anzuzeigende Kontakt gesetzt bzw. gelöscht wird, werden die
-	 * zugehörenden Textfelder mit den Informationen aus dem Kontaktobjekt gefüllt
-	 * bzw. gelöscht. 
+	 * Wenn der anzuzeigende Kontakt gesetzt bzw. gelï¿½scht wird, werden die
+	 * zugehï¿½renden Textfelder mit den Informationen aus dem Kontaktobjekt gefï¿½llt
+	 * bzw. gelï¿½scht. 
 	 */
 	
 	void setSelected(Contact c) {
@@ -238,11 +223,8 @@ public class ContactForm extends VerticalPanel {
 			saveButton.setEnabled(false);
 			firstNameTextBox.setText("");
 			lastNameTextBox.setText("");
-			phoneNumberTextBox.setText("");
-			streetTextBox.setText("");
-			numberTextBox.setText("");
-			cityTextBox.setText("");
-			birthdayTextBox.setText("");
+			telefonnummerTextBox.setText("");
+			adresseTextBox.setText("");
 			this.idValueLabel.setText("Kontakt: ");
 			
 		}

@@ -17,6 +17,12 @@ public class Contact extends BusinessObject {
 	private String lastName = "";
 
 	
+	private String adresse = "";
+	
+
+	private String telefonnummer = ""; 
+	
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -36,5 +42,19 @@ public class Contact extends BusinessObject {
 
 	public void setContactListId(int contactListId) {
 		this.contactListId = contactListId;
+	}
+	
+	public String getAdresse() {
+		return adresse;
+	}
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
+	
+	public String getTelefonnummer() {
+		return telefonnummer;
+	}
+	public void setTelefonnummer(String telefonnummer) {
+		this.telefonnummer = telefonnummer;
 	}
 }

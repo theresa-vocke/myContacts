@@ -14,7 +14,7 @@ import de.hdm.vocke.myContacts.client.ClientsideSettings;
 import de.hdm.vocke.myContacts.shared.MyContactsAsync;
 import de.hdm.vocke.myContacts.shared.bo.ContactList;
 
-//Formular für die Darstellung von selektierten Kontaktlisten 
+//Formular fï¿½r die Darstellung von selektierten Kontaktlisten 
 
 public class ContactListForm extends VerticalPanel {
 
@@ -33,14 +33,14 @@ public class ContactListForm extends VerticalPanel {
 	 */
 	TextBox titleTextBox = new TextBox();
 	Label idValueLabel = new Label("Kontaktliste: ");
-	Button deleteButton = new Button("Löschen");
+	Button deleteButton = new Button("LÃ¶schen");
 	Button saveButton = new Button("Speichern");
 
 	
 
 	/*
 	 * Beim Anzeigen werden die anderen Widgets erzeugt. Alle werden in
-	 * einem Raster angeordnet, dessen Größe sich aus dem Platzbedarf
+	 * einem Raster angeordnet, dessen Grï¿½ï¿½e sich aus dem Platzbedarf
 	 * der enthaltenen Widgets bestimmt.
 	 */
 	
@@ -73,7 +73,7 @@ public class ContactListForm extends VerticalPanel {
 		@Override
 		public void onClick(ClickEvent event) {
 			if (contactListToDisplay == null) {
-				Window.alert("keine Kontaktliste ausgewählt");
+				Window.alert("keine Kontaktliste ausgewÃ¤hlt");
 			} else {
 				myContacts.delete(contactListToDisplay,
 						new deleteContactListCallback(contactListToDisplay));
@@ -91,7 +91,7 @@ public class ContactListForm extends VerticalPanel {
 
 		@Override
 		public void onFailure(Throwable caught) {
-			Window.alert("Das Löschen des Kunden ist fehlgeschlagen!");
+			Window.alert("Das LÃ¶schen des Kunden ist fehlgeschlagen!");
 		}
 
 		@Override
@@ -104,8 +104,8 @@ public class ContactListForm extends VerticalPanel {
 	}
 
 	/*
-	 * Die Änderung einer Kontaktliste bezieht sich auf den Titel 
-	 * Die Änderung erfolgt direkt im Textfeld
+	 * Die ï¿½nderung einer Kontaktliste bezieht sich auf den Titel 
+	 * Die ï¿½nderung erfolgt direkt im Textfeld
 	 * erfolgt durch die Service-Methode save
 	 */
 	
@@ -116,7 +116,7 @@ public class ContactListForm extends VerticalPanel {
 				contactListToDisplay.setName(titleTextBox.getText());
 				myContacts.save(contactListToDisplay, new SaveCallback());
 			} else {
-				Window.alert("keinen Kontakt ausgewählt");
+				Window.alert("keinen Kontakt ausgewï¿½hlt");
 			}
 		}
 	}
@@ -124,12 +124,12 @@ public class ContactListForm extends VerticalPanel {
 	private class SaveCallback implements AsyncCallback<Void> {
 		@Override
 		public void onFailure(Throwable caught) {
-			Window.alert("Die Namensänderung ist fehlgeschlagen!");
+			Window.alert("Die Namensï¿½nderung ist fehlgeschlagen!");
 		}
 
 		@Override
 		public void onSuccess(Void result) {
-			// Die Änderung wird zum Kunden- und Kontenbaum propagiert.
+			// Die ï¿½nderung wird zum Kunden- und Kontenbaum propagiert.
 			ctvm.updateContactList(contactListToDisplay);
 		}
 	}
@@ -139,9 +139,9 @@ public class ContactListForm extends VerticalPanel {
 	}
 	
 	/*
-	 * Wenn die anzuzeigende Kontaktliste gesetzt bzw. gelöscht wird, werden die
-	 * zugehörenden Textfelder mit den Informationen aus dem KontaktlistenObjekt
-	 * gefüllt bzw. gelöscht.
+	 * Wenn die anzuzeigende Kontaktliste gesetzt bzw. gelï¿½scht wird, werden die
+	 * zugehï¿½renden Textfelder mit den Informationen aus dem KontaktlistenObjekt
+	 * gefï¿½llt bzw. gelï¿½scht.
 	 */
 	void setSelected(ContactList cl) {
 		if (cl != null) {
