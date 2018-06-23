@@ -84,7 +84,17 @@ public class ContactListTreeViewModel extends VerticalPanel implements TreeViewM
 
 	};
 	
+	/*
+	 * Die lokal definierte Klasse BusinessObjectKeyProvider wird nun als 
+	 * Variable der Klasse ContactListTreeViewModel hinzugefügt
+	 */
+	
 	private BusinessObjectKeyProvider boKeyProvider = null;
+	
+	/*
+	 * das SingleSelectionObject wird von GWT vordefiniert
+	 * Beschreibt die Auswahl von Objekten im Baum 
+	 */
 	private SingleSelectionModel<BusinessObject> selectionModel = null;
 	
 	protected void onLoad(){
@@ -125,10 +135,8 @@ public class ContactListTreeViewModel extends VerticalPanel implements TreeViewM
 			
 			if (selection instanceof ContactList){
 				setSelectedContactList((ContactList) selection);
-				//nochmal pr�fen 
 			} else if (selection instanceof Contact){
 				setSelectedContact((Contact) selection);
-				//nochmal pr�fen
 			}
 					
 		}
@@ -201,7 +209,7 @@ public class ContactListTreeViewModel extends VerticalPanel implements TreeViewM
 	}
 	
 	/*
-	 * Wenn eine Kontaktliste neu erzeugt wurde, wird er selektiert.
+	 * Wenn eine Kontaktliste neu erzeugt wurde, wird diese selektiert.
 	 */
 	
 	void addContatList(ContactList contactList) {
@@ -249,35 +257,34 @@ public class ContactListTreeViewModel extends VerticalPanel implements TreeViewM
 	}
 	
 	void updateContact(Contact c) {
-		//myContacts.findContactListById(contactListId, callback);,
-				//new UpdateContactCallback(c));
+		myContacts.findContactById(c.getId(), new UpdateContactCallback(c));
 	}
 	
-//	private class UpdateContactCallback implements AsyncCallback<Contact> {
-//
-//		Contact contact = null;
-//
-//		UpdateContactCallback(Contact c) {
-//			contact = c;
-//		}
-//
-//		@Override
-//		public void onFailure(Throwable t) {
-//		}
-//
-//		@Override
-//		public void onSuccess(Contact result) {
-//			// TODO Auto-generated method stub
-//			List<Contact> contactList1 = contactDataProvider.get(contact)
-//					.getList();
-//			for (int i=0; i<contactList1.size(); i++) {
-//				if (contact.getId() == contactList1.get(i).getId()) {
-//					contactList1.set(i, contact);
-//					break;
-//				}
-//			}
-//		}
-//	}
+	private class UpdateContactCallback implements AsyncCallback<Contact> {
+
+		Contact contact = null;
+
+		UpdateContactCallback(Contact c) {
+			contact = c;
+		}
+
+		@Override
+		public void onFailure(Throwable t) {
+		}
+
+		@Override
+		public void onSuccess(Contact result) {
+			// TODO Auto-generated method stub
+			List<Contact> contactList1 = contactDataProvider.get(contact)
+					.getList();
+			for (int i=0; i<contactList1.size(); i++) {
+				if (contact.getId() == contactList1.get(i).getId()) {
+					contactList1.set(i, contact);
+					break;
+				}
+			}
+		}
+	}
 	
 	// Get the NodeInfo that provides the children of the specified value.
 	

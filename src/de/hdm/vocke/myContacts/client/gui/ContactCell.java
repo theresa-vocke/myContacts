@@ -6,13 +6,11 @@ import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import de.hdm.vocke.myContacts.shared.bo.Contact;
 
 /**
-* Klasse zur Darstellung von Konto-Objekten.
-* Solche Erweiterungen von <code>AbstractCell<T></code> dienen zur Erzeugung von
-* HTML-Code f�r benutzerdefinierte Objekte. In diesem Fall wird die <code>id</code>
-* eines Kontoobjekts mit einem vorangestellten "Kontonnr. " in einem <code>div-</code>Element
-* erzeugt.
-* 
-* @author rathke
+*
+* Darstellung von Kontakt-Objekten 
+* für die Objekte wird hier ein HTML Code erzeugt, wir holen uns den Nachnamen und den Vornamen und trennen beide 
+* Objekte durch ein Komma voneinadner
+* --> das ist die Darstellung im Baum
 *
 */
 
@@ -24,8 +22,9 @@ public class ContactCell extends AbstractCell<Contact>{
       if (value == null) {
         return;
       }
-
+      // durch das div Element wird ein Bereich erzeugt, in dem ich etwas anzeigen kann 
       sb.appendHtmlConstant("<div>");
+      // hier appendEscaped, da für den Datentyp String. nur append für int zb
       sb.appendEscaped(value.getLastName());
       sb.appendHtmlConstant(", ");
       sb.appendEscaped(value.getFirstName());

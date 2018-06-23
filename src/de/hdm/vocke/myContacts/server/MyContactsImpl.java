@@ -166,12 +166,10 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 		return this.clMapper.findByName(name);
 	}
 
-	
 	@Override
 	public ContactList findContactListById(int contactListId) throws IllegalArgumentException {
 		return this.clMapper.findContactListById(contactListId);
 	}
-	
 	
 	/**
 	 * auslesen aller Kontaktlisten 

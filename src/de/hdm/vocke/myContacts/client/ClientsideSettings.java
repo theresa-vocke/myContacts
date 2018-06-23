@@ -12,7 +12,7 @@ public class ClientsideSettings extends CommonSettings {
 	   * Remote Service Proxy zur Verbindungsaufnahme mit dem Server-seitgen Dienst
 	   * namens <code>MyContacts</code>.
 	   */
-	
+	// Instanz von MyContactsAsync anlegen 
 	private static MyContactsAsync myContacts = null;
 	
 	/**
@@ -20,7 +20,7 @@ public class ClientsideSettings extends CommonSettings {
 	   * Anlegen und Auslesen der applikationsweit eindeutigen myContacts-Adiministration. Diese
 	   * Methode erstellt myContacts, sofern sie noch nicht existiert. Bei
 	   * wiederholtem Aufruf dieser Methode wird stets das bereits zuvor angelegte
-	   * Objekt zurückgegeben.
+	   * Objekt zurï¿½ckgegeben.
 	   * </p>
 	   * 
 	   * <p>
@@ -29,14 +29,18 @@ public class ClientsideSettings extends CommonSettings {
 	   * .
 	   * </p>
 	   */
+	// Async ist auf der Clientseite
+	
 	  public static MyContactsAsync getMyContacts() {
-	    // Gab es bislang noch keine BankAdministration-Instanz, dann...
+	    // Gab es bislang noch keine myContact-Instanz, dann...
 	    if (myContacts == null) {
-	      // Zunächst instantiieren wir BankAdministration
+	      // ZunÃ¤chst instantiieren wir myContacts 
+	    	// GWT.create(MyContacts.class) --> Proxy-Objket wird erstellt 
+	    	//myContacts dient dann dazu, dass die Verbingund zwischen Client und Server hergestellt wrid. 
 	      myContacts = GWT.create(MyContacts.class);
 	    }
 
-	    // So, nun brauchen wir die BankAdministration nur noch zurückzugeben.
+	    // So, nun brauchen wir myContacts nur noch zurï¿½ckzugeben.
 	    return myContacts;
 	  }
 	

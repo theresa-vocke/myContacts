@@ -1,7 +1,5 @@
 package de.hdm.vocke.myContacts.client;
 
-import java.util.Vector;
-
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.cellview.client.CellTree;
@@ -27,7 +25,7 @@ public class MyContactsEntryPoint implements EntryPoint {
 	    public Style contactCellTreeStyle();
 	}
 		
-	private static MyContactsAsync myContacts = ClientsideSettings.getMyContacts();
+	//private static MyContactsAsync myContacts = ClientsideSettings.getMyContacts();
 ////	ClientsideSettings clientsideSettings = new ClientsideSettings();
 //	/**
 //	 * This is the entry point method.
@@ -47,7 +45,7 @@ public class MyContactsEntryPoint implements EntryPoint {
 		cf.setCtvm(ctvm);
 		
 		/*
-		 * Die Panels und der CellTree werden erzeugt und angeordnet und in das RootPanel eingefügt.
+		 * Die Panels und der CellTree werden erzeugt und angeordnet und in das RootPanel eingefï¿½gt.
 		 */
 		VerticalPanel detailsPanel = new VerticalPanel();
 		detailsPanel.add(cf);

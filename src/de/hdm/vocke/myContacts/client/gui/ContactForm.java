@@ -4,8 +4,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-//import com.google.gwt.user.client.Window;
-//import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
@@ -15,19 +13,21 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm.vocke.myContacts.client.ClientsideSettings;
 import de.hdm.vocke.myContacts.shared.MyContactsAsync;
 import de.hdm.vocke.myContacts.shared.bo.Contact;
-//import de.hdm.vocke.myContacts.shared.bo.ContactList;
 import de.hdm.vocke.myContacts.shared.bo.ContactList;
 
 public class ContactForm extends VerticalPanel {
 	
+	// myContacts wird immer genutzt, wenn ich eine Methode in der Impl aufrufe 
 	MyContactsAsync myContacts = ClientsideSettings.getMyContacts();
+	// Instanz von Contact anlegen 
 	Contact contactToDisplay = null;
+	// Instanz von TeeViewModel anlegen 
 	ContactListTreeViewModel ctvm = null;	
+	
 	/**
 	 * Anlegen der GUI Elemente 
 	 */
-	
-	//private VerticalPanel vpanel = new VerticalPanel();
+
 	
 	/*
 	 * Widgets, deren Inhalte variable sind, werden als Attribute angelegt.
@@ -54,6 +54,8 @@ public class ContactForm extends VerticalPanel {
 		
 		Grid contactGrid = new Grid(9, 2);
 		this.add(contactGrid);
+		
+		contactGrid.setWidget(0, 0, idValueLabel);
 		
 		Label firstNameLabel = new Label("Vorname");
 		contactGrid.setWidget(1, 0, firstNameLabel);
@@ -87,40 +89,59 @@ public class ContactForm extends VerticalPanel {
 		saveButton.setEnabled(false);
 		contactGrid.setWidget(8, 1, saveButton);	
 		
-		//this.vpanel.add(contactGrid);
 	}
 	
 	/*
 	 * Click-Handler
 	 */
-	
+	// privat, weil sie nur in ContactForm aufgerufen werden 
+	// hier soll ein Kontakt zu einer Kontaktliste hinzugefügt werden 
 	private class AddClickHandler implements ClickHandler{
 		@Override
 		public void onClick(ClickEvent event){
-			
+			if (contactToDisplay == null) {
+				Window.alert("keinen Kontakt ausgewählt");
+			} else {
+				// hier muss die Dialogbox aufgerufen werden 
+			}
 		}
 	}
+	
+	/*
+	 * Ein vorhandenes Kontakt Objekt wird ausgewählt und daran werden Änderungen vorgenommen
+	 * Das Objekt wird nicht geupdatet sondern hieraus wird ein neues Kontakt-Objekt erzeugt
+	 */
 	
 	private class NewClickHandler implements ClickHandler{
 		@Override
 		public void onClick(ClickEvent event){
-//			if (contactToDisplay == null) {
-//				Window.alert("kineen Kontakt ausgewählt");
-//			} else {
-//				myContacts.createContact(firstname, lastname, callback);
-//			}
+			if (contactToDisplay == null) {
+				Window.alert("keinen Kontakt ausgewählt");
+			} else {
+//
+//				String newFirstName = firstNameTextBox.getText();
+//				String newLastName = lastNameTextBox.getText();
+//
+//				myContacts.createContact(newFirstName, newLastName, new NewContactCallback);
+			}
 		}
 	}
+	
+	
+	
+	/*
+	 * Ein ausgewähltes Konakt-Objekt wird gelöscht
+	 */
 	
 	private class DeleteClickHandler implements ClickHandler{
 		@Override
 		public void onClick(ClickEvent event) {
-//			if (contactToDisplay == null) {
-//				Window.alert("keinen Kontakt ausgew�hlt");
-//			} else {
+			if (contactToDisplay == null) {
+				Window.alert("keinen Kontakt ausgewählt");
+			} else {
 //				myContacts.findContactById(contactToDisplay.getId(),
 //						new useContactListForContactDeletionCallback(contactToDisplay));
-//			}			
+			}			
 		}
 	}
 	
@@ -133,25 +154,25 @@ public class ContactForm extends VerticalPanel {
 //			contact = c;
 //		}
 //
-//		@Override
+//		
 //		public void onFailure(Throwable caught) {
 //		}
-//
+//		
+//		@Override
 //		public void onSuccess(ContactList contactList) {
 //			if (contactList != null && contact != null) {
 //				myContacts.delete(contact, new deleteContactCallback(
 //						contact, contactList));
-//			}			
+//			}
 //		}
 //	}
 	
 	/*
-	 * Da wir uns Kontaktliste und Kontakt merken m�ssen, um den Kontaktlisen- und Kontaktbaum 
-	 * nach erfolgter Kontaktl�schung zu aktualisieren, hat diese Callback-Klasse
-	 * private Attribute und einen Konstruktor, in dem diese Wert abgespeichert
-	 * bzw. �bergeben werden.
+	 * Kontaktliste und Kontakte müssen gemerkt werden, um den baum nach Kontaktlöschung zu aktualisiern 
+	 * Deshalb hat die Callback-Klasse private Attribute und einen Konstruktor, in dem diese Werte abgespeichert 
+	 * und somit übergeben werden können.
 	 * 
-	 * Nach erfolgter L�schung werden diese Werte verwendet.
+	 * Wenn die Lösschung erfolgt ist, werden diese Werte verwendet
 	 */
 	private class deleteContactCallback implements AsyncCallback<Void> {
 
@@ -181,15 +202,14 @@ public class ContactForm extends VerticalPanel {
 	private class SaveClickHandler implements ClickHandler{
 		public void onClick(ClickEvent event) {
 			
-//			ContactList selectedContactList = ctvm.getSelectedContactList();
-//			Contact selectedContact = ctvm.getSelectedContact();
-//			if (selectedContactList == null) {
-//				Window.alert("keinen Kontakt ausgew�hlt");
-//			} else {
-////				myContacts.createContactToContactList(selectedContact, selectedContactList, 
-////						new CreateContactCallback(selectedContactList));
-//				myContacts.save(selectedContact, new CreateContactCallback(selectedContactList);
-//			}
+			ContactList selectedContactList = ctvm.getSelectedContactList();
+			Contact selectedContact = ctvm.getSelectedContact();
+			if (selectedContactList == null) {
+				Window.alert("keinen Kontakt ausgew�hlt");
+			} else {
+//				myContacts.createContactToContactList(selectedContact, selectedContactList, 
+//						new SaveContactCallback(selectedContactList));
+			}
 		}
 	}
 	
@@ -201,27 +221,25 @@ public class ContactForm extends VerticalPanel {
 	 * Ergebnis des asynchronen Aufrufs geliefert wird.
 	 */
 	
-//	private class CreateContactCallback implements AsyncCallback<Contact> {
-//	
-//		ContactList contactList = null;
-//	
-//		CreateContactCallback(ContactList cl) {
-//			contactList = cl;
-//		}
-//	
-//		@Override
-//		public void onFailure(Throwable caught) {
-//			// this.showcase.append("Fehler bei der Abfrage " +
-//			// caught.getMessage());
-//		}
-//	
-//		@Override
-//		public void onSuccess(Contact contact) {
-//			if (contact != null && contactList != null) {
-//				ctvm.addContactToContactList(contact, contactList);
-//			}
-//		}
-//	}	
+	private class SaveContactCallback implements AsyncCallback<Contact> {
+	
+		ContactList contactList = null;
+	
+		SaveContactCallback(ContactList cl) {
+			contactList = cl;
+		}
+	
+		@Override
+		public void onFailure(Throwable caught) {
+		}
+	
+		@Override
+		public void onSuccess(Contact contact) {
+			if (contact != null && contactList != null) {
+				ctvm.updateContact(contact);
+			}
+		}
+	}	
 
 	public void setCtvm(ContactListTreeViewModel ctvm) {
 		this.ctvm = ctvm;
@@ -252,9 +270,9 @@ public class ContactForm extends VerticalPanel {
 			lastNameTextBox.setText("");
 			telefonnummerTextBox.setText("");
 			adresseTextBox.setText("");
-			this.idValueLabel.setText("Kontakt: ");
+//			this.idValueLabel.setText("Kontakt: ");
 			
 		}
 	}
 
-}
+	}

@@ -76,7 +76,7 @@ public interface MyContacts extends RemoteService {
 	 */
 	public Vector<ContactList> getContactListByName (String name) throws IllegalArgumentException;
 	
-	public ContactList findContactListById(int contactListId);
+	public ContactList findContactListById(int contactListId) throws IllegalArgumentException;
 	
 	/**
 	 * s�mtliche Kontaktlisten ausgeben
@@ -115,7 +115,9 @@ public interface MyContacts extends RemoteService {
 
 	public Vector<ContactListContact> findContactListContactByContactListId(int contactListId) throws IllegalArgumentException;
 
-	Vector<ContactListContact> findContactListContactByContactId(int contactId) throws IllegalArgumentException;
+	public Vector<ContactListContact> findContactListContactByContactId(int contactId) throws IllegalArgumentException;
+
+
 
 
 

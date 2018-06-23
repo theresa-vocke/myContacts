@@ -129,7 +129,7 @@ public class ContactListForm extends VerticalPanel {
 
 		@Override
 		public void onSuccess(Void result) {
-			// Die �nderung wird zum Kunden- und Kontenbaum propagiert.
+			// Die Änderung wird zum Kontaktlisten- und Kontaktbaum propagiert.
 			ctvm.updateContactList(contactListToDisplay);
 		}
 	}

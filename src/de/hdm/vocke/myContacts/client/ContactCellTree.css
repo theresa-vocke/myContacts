@@ -75,7 +75,7 @@
 
 @sprite .cellTreeSelectedItem {
   gwt-image: 'cellTreeSelectedBackground';
-  background-color: #628cd5;
+  background-color: #8080c0;
   color: white;
   height: auto;
   overflow: visible;
