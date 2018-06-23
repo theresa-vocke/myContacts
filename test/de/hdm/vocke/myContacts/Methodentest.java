@@ -1,7 +1,5 @@
 package de.hdm.vocke.myContacts;
 
-
-
 import org.junit.Test;
 
 import com.google.gwt.junit.client.GWTTestCase;
