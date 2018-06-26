@@ -55,10 +55,6 @@ public class MyContactsEntryPoint implements EntryPoint {
 		CellTree cellTree = new CellTree(ctvm, "Root", contactTreeResource);
 		cellTree.setAnimationEnabled(true);
 		
-//		RootPanel.get("Navigator").clear();
-//		RootPanel.get("Navigator").add(ctvm);	
-//		RootPanel.get("Details").clear();
-//		RootPanel.get("Details").add(ctvm);
 		
 		RootPanel.get("Navigator").add(cellTree);
 		RootPanel.get("Details").add(detailsPanel);

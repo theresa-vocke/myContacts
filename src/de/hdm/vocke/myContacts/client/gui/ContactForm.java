@@ -119,14 +119,12 @@ public class ContactForm extends VerticalPanel {
 				Window.alert("keinen Kontakt ausgewählt");
 			} else {
 //
-//				String newFirstName = firstNameTextBox.getText();
-//				String newLastName = lastNameTextBox.getText();
-//
-//				myContacts.createContact(newFirstName, newLastName, new NewContactCallback);
+				//myContacts.createContact(firstNameTextBox.getText(), lastNameTextBox.getText(), telefonnummerTextBox.getText(),
+				//adresseTextBox.getText(), new AsyncCallback<Contact>);
 			}
 		}
 	}
-	
+
 	
 	
 	/*

@@ -35,6 +35,7 @@ public class ContactListForm extends VerticalPanel {
 	Label idValueLabel = new Label("Kontaktliste: ");
 	Button deleteButton = new Button("Löschen");
 	Button saveButton = new Button("Speichern");
+	Button newButton = new Button("Als neue Kontaktliste speichern");
 
 	
 
@@ -47,7 +48,7 @@ public class ContactListForm extends VerticalPanel {
 	public void onLoad() {
 		super.onLoad();
 		
-		Grid contactListGrid = new Grid(3, 2);
+		Grid contactListGrid = new Grid(4, 2);
 		this.add(contactListGrid);
 
 		Label titleLabel = new Label("Bezeichnung");
@@ -62,11 +63,44 @@ public class ContactListForm extends VerticalPanel {
 		saveButton.setEnabled(false);
 		contactListGrid.setWidget(2, 0, saveButton);	
 		
+		newButton.addClickHandler(new NewClickHandler());
+		newButton.setEnabled(false);
+		contactListGrid.setWidget(3, 0, newButton);
+		
+		
 		//this.vpanel.add(contactListGrid);
 	}
 	
 	//Click Handler
 	
+	private class NewClickHandler implements ClickHandler{
+		@Override
+		public void onClick(ClickEvent event) {
+			if (contactListToDisplay == null) {
+				Window.alert("keine Kontaktliste ausgewählt");
+			} else {
+				myContacts.createContactList(titleTextBox.getText(), new newContactListCallback());
+			}
+		}
+	}
+	
+	class newContactListCallback implements AsyncCallback<ContactList> {
+
+		ContactList contactList = null;
+		
+		@Override
+		public void onFailure(Throwable caught) {
+			Window.alert("Das Hinzufügen ist fehlgeschlagen!");
+		}
+
+		@Override
+		public void onSuccess(ContactList result) {
+			if (contactList != null) {
+				setSelected(null);
+				ctvm.addContatList(contactList);;
+			}
+		}
+	}
 	
 	
 	private class DeleteClickHandler implements ClickHandler{
@@ -91,7 +125,7 @@ public class ContactListForm extends VerticalPanel {
 
 		@Override
 		public void onFailure(Throwable caught) {
-			Window.alert("Das Löschen des Kunden ist fehlgeschlagen!");
+			Window.alert("Das Löschen der Kontaktliste ist fehlgeschlagen!");
 		}
 
 		@Override

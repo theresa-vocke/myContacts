@@ -181,7 +181,7 @@ public class ContactListTreeViewModel extends VerticalPanel implements TreeViewM
 	}
 	
 	/*
-	 * Wenn ein Kontakt ausgew�hlt wird, wird auch die ausgew�hlt Kontaktliste
+	 * Wenn ein Kontakt ausgewählt wird, wird auch die ausgew�hlt Kontaktliste
 	 * angepasst.
 	 */
 	void setSelectedContact(Contact c) {
@@ -303,7 +303,6 @@ public class ContactListTreeViewModel extends VerticalPanel implements TreeViewM
 						}
 
 						public void onSuccess(Vector<ContactList> result) {
-							Window.alert("------");
 							for (ContactList cl : result) {
 								contactListDataProvider.getList().add(cl);
 							}

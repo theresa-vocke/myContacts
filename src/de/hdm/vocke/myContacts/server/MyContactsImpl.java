@@ -54,11 +54,13 @@ public class MyContactsImpl extends RemoteServiceServlet implements MyContacts{
 	 * Anfang Methoden f�r Contact-Objekte
 	 */
 	@Override
-	public Contact createContact(String firstname, String lastname) 
+	public Contact createContact(String firstname, String lastname, String phonenumber, String adresse) 
 			throws IllegalArgumentException {
 		Contact c = new Contact();
 		c.setFirstName(firstname);
 		c.setLastName(lastname);
+		c.setTelefonnummer(phonenumber);
+		c.setAdresse(adresse);
 		
 		// setzen der vorl�ufigen contact-Nummer, insert-Aufruf liefert dann Objekt, dessen 
 		// Nummer mit der DB konsistent ist 
